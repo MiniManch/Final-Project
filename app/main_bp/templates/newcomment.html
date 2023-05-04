@@ -1,0 +1,16 @@
+{% extends 'partials/base.html' %}
+
+{% block content %}
+{% include "partials/navbar.html" %}
+
+<form class='form' method="POST" action="#">
+
+<h1>{{title}}</h1>
+    {{ form.hidden_tag()}}
+    {{ form.subject.label(class="form-label")}}{{form.subject(class='form-control')}}
+    <br>
+    {{ form.body.label(class="form-label")}}{{form.body(class='form-control')}}
+    <br>
+    {{form.submit(class="btn btn-success")}}
+</form>
+{% endblock %}

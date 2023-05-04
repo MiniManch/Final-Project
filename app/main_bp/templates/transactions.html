@@ -1,0 +1,41 @@
+{% extends 'partials/base.html' %}
+
+{% block content %}
+{% include "partials/navbar.html" %}
+
+<!--add new post button-->
+<!--<a href="{{url_for('main_bp.newpost')}}">-->
+<!--    <button class="btn  btn-primary btn-block"><span class="bg-float"></span><span class="text">Add new post!</span></button>-->
+<!--</a>-->
+
+<!--title if no posts-->
+{% if transactions|length < 1 %}
+<h3> We have no transactions to show yet! </h3>
+{% endif %}
+
+<!--transactions-->
+<div id='post_container' class="row mb-2">
+{% for trans in transactions%}
+    {% set card = cards.query.filter_by(id=trans.card).first()%}
+    <div class="col-md-6 post">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 ">{{users.query.filter_by(id=trans.author).first().username}}</strong>
+          <div class="col-md-4 ">
+          <div class="card poke {{card.type}}">
+            <div class="card-block m-2">
+              <img class='pokecard-image' src="{{card.image}}" alt="#">
+              <h4 class="mb-0">{{card.name}}</h3>
+              <h6 class="card-subtitle text-muted">{{card.type}}</h6>
+              <p class="card-text p-y-1">Attack: {{card.attack}} <br> Health:{{card.health}}</p>
+              <p class="card-text p-y-1 rarity">Rarity: {{card.rarity}}</p>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+{% endfor %}
+</div>
+
+{% endblock %}

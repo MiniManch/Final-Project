@@ -1,0 +1,13 @@
+{% extends 'partials/base.html' %}
+{% block content %}
+{% include "partials/navbar.html" %}
+<div class="form">
+  <h1>{{current_user.username}}</h1>
+  <p>your email: {{current_user.email}}</p>
+  <ul>
+    <li>
+      <a href="{{url_for('accounts_bp.logout')}}">Log Out</a>
+    </li>
+  </ul>
+{% endblock %}
+

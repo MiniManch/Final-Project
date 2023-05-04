@@ -1,0 +1,15 @@
+email_validator==2.0.0.post2
+Flask==2.2.3
+Flask_Login==0.6.2
+Flask-Mail==0.9.1
+Flask_Migrate==4.0.4
+flask_sqlalchemy==3.0.3
+Flask_WTF==1.1.1
+requests==2.28.2
+Werkzeug==2.2.3
+WTForms==3.0.1
+gunicorn
+pyjwt
+pymysql
+cryptography
+uuid

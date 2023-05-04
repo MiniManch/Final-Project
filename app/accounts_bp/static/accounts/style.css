@@ -1,0 +1,103 @@
+.form{
+width : 50vw;
+margin:auto;
+}
+
+#post_container{
+    margin:auto;
+    width:85vw;
+}
+
+#post_page{
+    margin:auto;
+    width:85vw;
+    height:80vh;
+}
+.btn-block{
+    width:100%;
+}
+
+.pokecard-image{
+    height:200px;
+    width:200px;
+}
+
+
+.card{
+	border: 8px solid;
+}
+
+.normal{
+    border-color:RGB(167 167 120);
+}
+
+.fire{
+    border-color:RGB(240 128 48);
+}
+
+.water{
+    border-color: RGB(104 144 240);
+}
+
+.grass{
+   border-color: RGB(120 200 80);
+}
+
+.electric{
+    border-color: rgb(248, 233, 93);
+}
+
+.ice{
+    border-color: rgb(152,216,216);
+}
+
+.fighting{
+    border-color: RGB(192 48 40);
+}
+
+.poison{
+    border-color: RGB(160 64 160);
+}
+
+.ground{
+    border-color:RGB(224 192 104);
+}
+
+.flying{
+    border-color:rgb(167,143,239);
+}
+
+.psychic{
+    border-color:RGB(248 88 136);
+}
+
+.bug{
+    border-color:RGB(168 184 32);
+}
+
+.rock{  
+    border-color:RGB(184 160 56);
+}
+
+
+.ghost{
+    border-color:RGB(112 88 152);
+}
+
+.dark{
+    border-color:RGB(112 88 72);
+}
+
+.dragon{
+    border-color:RGB(112 56 248);
+}
+
+.steel{
+    border-color:RGB(184 184 208);
+}
+
+.fairy{
+    border-color:RGB(240 182 188);
+}
+
+
