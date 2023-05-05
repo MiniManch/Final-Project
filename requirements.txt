@@ -13,3 +13,5 @@ pyjwt
 pymysql
 cryptography
 uuid
+cloudinary
+python-dotenv

@@ -37,4 +37,5 @@ flask_app.register_blueprint(accounts_bp, url_prefix="/accounts")
 flask_app.register_blueprint(main_bp)
 
 with flask_app.app_context():
+	# db.drop_all()
 	db.create_all()

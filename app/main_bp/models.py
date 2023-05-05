@@ -1,36 +1,42 @@
 from app import db
 
-#
-# class Card(db.Model):
-#     populate = False
-#     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-#     image = db.Column(db.String(200))
-#     type  = db.Column(db.String(100))
-#     name = db.Column(db.String(100))
-#     ability = db.Column(db.String(100))
-#     attack = db.Column(db.Integer)
-#     health = db.Column(db.Integer)
-#     rarity = db.Column(db.Integer)
-#     price = db.Column(db.Integer)
-#     transaction = db.relationship('Transaction', backref='card-to-trade',uselist=False)
-
+step_tool = db.Table(
+	'step_tool',
+	db.Column('step_id', db.Integer, db.ForeignKey('step.id')),
+	db.Column('tool_id', db.Integer, db.ForeignKey('tool.id'))
+)
 
 class Guide(db.Model):
     id = db.Column(db.Integer,primary_key=True, autoincrement=True)
     author = db.Column(db.Integer,db.ForeignKey('user.id'))
     subject = db.Column(db.String(100))
     content = db.Column(db.String(200))
-    comments = db.relationship('Comment', backref='post')
+    image   = db.Column(db.String(200))
+    steps = db.relationship('Step', backref='its_guide')
 
 
-class Comment(db.Model):
+class Step(db.Model):
     id = db.Column(db.Integer,primary_key=True, autoincrement=True)
-    author = db.Column(db.Integer, db.ForeignKey('user.id'))
     subject = db.Column(db.String(50))
     content = db.Column(db.String(200))
-    thread =  db.Column(db.Integer, db.ForeignKey('post.id'))
+    image   = db.Column(db.String(100))
+    guide =  db.Column(db.Integer, db.ForeignKey('guide.id'))
+    tools = db.relationship('Tool', secondary=step_tool, backref=db.backref('Steps', uselist=True))
 
-# each transaction can have, a card, an offer and cash offer.
-# who posted the transaction, user_id foreign key
-# offer- offer model, can be coin or can be another card and a coin
-# accepted bool
+
+class Rating(db.Model):
+    id = db.Column(db.Integer,primary_key=True, autoincrement=True)
+    author = db.Column(db.Integer,db.ForeignKey('user.id'))
+    subject = db.Column(db.String(100))
+    content = db.Column(db.String(200))
+    rate    = db.Column(db.Integer)
+
+
+class Tool(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    author = db.Column(db.Integer, db.ForeignKey('user.id'))
+    name = db.Column(db.String(100))
+    image   = db.Column(db.String(100))
+    usage = db.Column(db.String(100))
+    steps_using_this_tool = db.relationship('Step', secondary=step_tool, backref=db.backref('Tools', uselist=True))
+

@@ -1,4 +1,6 @@
 {% extends 'partials/base.html' %}
+{% load cloudinary %}
+{% load url from future %}
 {% block content %}
 {% include "partials/navbar.html" %}
 <div class="form">
@@ -8,6 +10,9 @@
     <li>
       <a href="{{url_for('accounts_bp.logout')}}">Log Out</a>
     </li>
+
+
+    {% cloudinary current_user.image format="jpg" width=120 height=80 crop="fill" %}
   </ul>
 {% endblock %}
 

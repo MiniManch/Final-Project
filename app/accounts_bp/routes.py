@@ -5,17 +5,18 @@ from .forms import User_Form
 from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 import random
-from werkzeug.security import secure_filename
-import uuid
 
 @accounts_bp.route("/signup", methods=['GET', 'POST'])
 def signup():
     form = User_Form()
     if form.validate_on_submit():
-        if models.User.query.filter_by(email=form.email.data).first() is None:
+        email = models.User.query.filter_by(email=form.email.data).first()
+        username = models.User.query.filter_by(username=form.username.data).first()
+        if email is None and username is None:
             new_user = models.User(email=form.email.data,
                                    password=generate_password_hash(form.password.data, method='sha256'),
                                    username=form.username.data,
+                                   image = 'default_user_image.png'
                                    )
             db.session.add(new_user)
             db.session.commit()
