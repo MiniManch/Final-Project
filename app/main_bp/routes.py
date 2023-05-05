@@ -5,7 +5,6 @@ from app import db
 import app.main_bp.models as models
 from app.main_bp.forms import Post_Form
 from app.accounts_bp.models import User
-
 @main_bp.route("/")
 @main_bp.route("/homepage")
 def index():

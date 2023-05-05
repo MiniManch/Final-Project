@@ -27,3 +27,5 @@ def get_image(image_id):
 	image_info = cloudinary.api.resource(image_id)
 	return image_info
 
+# bkttyjvmzhznyva2e4y2
+# print(upload_image('download.jfif'))

@@ -5,6 +5,7 @@ from .forms import User_Form
 from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 import random
+from app.utils import get_image,upload_image
 
 @accounts_bp.route("/signup", methods=['GET', 'POST'])
 def signup():
@@ -58,7 +59,7 @@ def logout():
 @accounts_bp.route('/profile')
 @login_required
 def profile():
-    return flask.render_template('profile.html')
+    return flask.render_template('profile.html', get_image=get_image)
 
 
 

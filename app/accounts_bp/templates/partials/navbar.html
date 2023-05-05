@@ -13,14 +13,32 @@
         <li class="nav-item">
           <a class="nav-link" href="{{url_for('main_bp.forum')}}">Forum</a>
         </li>
-        {% endif %}
+        <li>
+          <a class="nav-link" href="{{url_for('accounts_bp.logout')}}">Log Out</a>
+        </li>
+        {% else %}
+         <li class="nav-item">
+          <a class="nav-link" href="{{url_for('accounts_bp.login')}}">Log In</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" href="{{url_for('accounts_bp.signup')}}">Signup</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{url_for('accounts_bp.login')}}">Log In</a>
-        </li>
+        {% endif %}
+
+
+
       </ul>
     </div>
   </div>
 </nav>
+
+{% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{message}}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+        {% endif %}
+    {% endwith %}

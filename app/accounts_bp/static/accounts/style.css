@@ -17,87 +17,44 @@ margin:auto;
     width:100%;
 }
 
-.pokecard-image{
-    height:200px;
-    width:200px;
+.form-control:focus {
+    box-shadow: none;
+    border-color: #BA68C8
 }
 
-
-.card{
-	border: 8px solid;
+.profile-button {
+    background: rgb(99, 39, 120);
+    box-shadow: none;
+    border: none
 }
 
-.normal{
-    border-color:RGB(167 167 120);
+.profile-button:hover {
+    background: #682773
 }
 
-.fire{
-    border-color:RGB(240 128 48);
+.profile-button:focus {
+    background: #682773;
+    box-shadow: none
 }
 
-.water{
-    border-color: RGB(104 144 240);
+.profile-button:active {
+    background: #682773;
+    box-shadow: none
 }
 
-.grass{
-   border-color: RGB(120 200 80);
+.back:hover {
+    color: #682773;
+    cursor: pointer
 }
 
-.electric{
-    border-color: rgb(248, 233, 93);
+.labels {
+    font-size: 11px
 }
 
-.ice{
-    border-color: rgb(152,216,216);
+.add-experience:hover {
+    background: #BA68C8;
+    color: #fff;
+    cursor: pointer;
+    border: solid 1px #BA68C8
 }
-
-.fighting{
-    border-color: RGB(192 48 40);
-}
-
-.poison{
-    border-color: RGB(160 64 160);
-}
-
-.ground{
-    border-color:RGB(224 192 104);
-}
-
-.flying{
-    border-color:rgb(167,143,239);
-}
-
-.psychic{
-    border-color:RGB(248 88 136);
-}
-
-.bug{
-    border-color:RGB(168 184 32);
-}
-
-.rock{  
-    border-color:RGB(184 160 56);
-}
-
-
-.ghost{
-    border-color:RGB(112 88 152);
-}
-
-.dark{
-    border-color:RGB(112 88 72);
-}
-
-.dragon{
-    border-color:RGB(112 56 248);
-}
-
-.steel{
-    border-color:RGB(184 184 208);
-}
-
-.fairy{
-    border-color:RGB(240 182 188);
-}
-
 
