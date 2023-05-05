@@ -1,0 +1,52 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{{url_for('main_bp.index')}}">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        {% if current_user.is_authenticated%}
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('accounts_bp.profile')}}">Profile</a>
+        </li>
+
+        <li>
+          <a class="nav-link" href="{{url_for('accounts_bp.logout')}}">Log Out</a>
+        </li>
+
+        {% else %}
+         <li class="nav-item">
+          <a class="nav-link" href="{{url_for('accounts_bp.login')}}">Log In</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('accounts_bp.signup')}}">Signup</a>
+        </li>
+        {% endif %}
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('main_bp.guides')}}">Guides</a>
+        </li>
+      </ul>
+    </div>
+{% if current_user.is_authenticated%}
+
+  </div>
+        <span class=" user_image d-flex flex-column align-items-center text-center p-3 py-5">
+            <a href="{{url_for('accounts_bp.profile')}}">
+                <img class="rounded-circle  " width="50px" src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{current_user.image}}">
+            </a>
+        </span>
+        <span class="font-weight-bold username_nav ">{{current_user.username}}</span>
+{% endif %}
+</nav>
+
+{% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                {{message}}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+        {% endif %}
+    {% endwith %}

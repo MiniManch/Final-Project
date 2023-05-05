@@ -5,6 +5,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Config:
 	SECRET_KEY = os.environ['SECRET_KEY']
+	UPLOAD_FOLDER = 'static/uploaded_images'
 	SQLALCHEMY_DATABASE_URI = f'mysql+pymysql://{os.environ["MYSQL_USER"]}:{os.environ["MYSQL_PASSWORD"]}@{os.environ["MYSQL_DATABASE"]}?charset=utf8mb4'
 	SQLALCHEMY_TRACK_MODIFICATIONS = False
 	MAIL_SERVER = 'smtp.gmail.com'

@@ -10,12 +10,11 @@
         <li class="nav-item">
           <a class="nav-link" href="{{url_for('accounts_bp.profile')}}">Profile</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{url_for('main_bp.forum')}}">Forum</a>
-        </li>
+
         <li>
           <a class="nav-link" href="{{url_for('accounts_bp.logout')}}">Log Out</a>
         </li>
+
         {% else %}
          <li class="nav-item">
           <a class="nav-link" href="{{url_for('accounts_bp.login')}}">Log In</a>
@@ -24,12 +23,21 @@
           <a class="nav-link" href="{{url_for('accounts_bp.signup')}}">Signup</a>
         </li>
         {% endif %}
-
-
-
+        <li class="nav-item">
+          <a class="nav-link" href="{{url_for('main_bp.guides')}}">Guides</a>
+        </li>
       </ul>
     </div>
+{% if current_user.is_authenticated%}
+
   </div>
+        <span class=" user_image d-flex flex-column align-items-center text-center p-3 py-5">
+            <a href="{{url_for('accounts_bp.profile')}}">
+                <img class="rounded-circle  " width="50px" src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{current_user.image}}">
+            </a>
+        </span>
+        <span class="font-weight-bold username_nav ">{{current_user.username}}</span>
+{% endif %}
 </nav>
 
 {% with messages = get_flashed_messages() %}
