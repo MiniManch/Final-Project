@@ -21,9 +21,13 @@ def guides():
 @login_required
 def newguide():
 	form = New_Guide()
-	if form.validate_on_submit():
+	if flask.request.method == 'POST':
+		print(form.image.data)
+		print('d',form.description.data)
+		print('s',form.subject.data)
+		print(flask.request.args)
 		try:
-			pass
+			return('Hello')
 		except Exception as e:
 			print(e)
 			flask.flash('Error has occurred')
