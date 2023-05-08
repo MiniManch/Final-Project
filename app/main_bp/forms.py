@@ -10,3 +10,11 @@ class New_Guide(FlaskForm):
 	image               = FileField('Image')
 	submit           = SubmitField('Submit')
 
+
+class New_Tool(FlaskForm):
+	name            = StringField('Name', validators=[InputRequired(),Length(min=10)], render_kw={"placeholder": 'Hammer! Screwdriver! '})
+	usage         = StringField('Main Usage', validators=[InputRequired()])
+	image               = FileField('Image')
+	submit           = SubmitField('Submit')
+
+

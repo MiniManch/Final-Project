@@ -3,21 +3,8 @@
 {% block content %}
 {% include "partials/main/navbar.html" %}
 
-<!--add new post button-->
-{% if current_user.is_authenticated %}
-<a href="{{url_for('main_bp.newguide')}}">
-    <button class="btn  btn-primary btn-block"><span class="bg-float"></span><span class="text">Add new post!</span></button>
-</a>
-{% endif %}
-<!--title if no posts-->
-{% if guides|length < 1 %}
-<h3> no guides yet! </h3>
-
-<!--posts-->
 <div class="container">
   <div class="row">
-      {% else %}
-      {% for guide in guides%}
       <div class="col-md-4">
         <div class="blog-card blog-card-blog">
           <div class="blog-card-image">
@@ -25,26 +12,20 @@
               <div class="ripple-cont"></div>
           </div>
           <div class="blog-table">
-              <h6 class="blog-category blog-text-success"><i class="far fa-newspaper"></i> <a href="{{url_for('main_bp.guide',guide_id=guide.id)}}">{{guide.subject}}</a></h6>
+              <h6 class="blog-category blog-text-success"><i class="far fa-newspaper"></i> {{guide.subject}}</h6>
               <h4 class="blog-card-caption">
-                  {{guide.content[0:20]}}...
+                  <a href="#">Lorem Ipsum is simply dummy text of the printing and</a>
               </h4>
+              <p class="blog-card-description">{{guide.content[0:20]}}...</p>
               <div class="ftr">
                   <div class="author">
                       <a href="#"> <img src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{users.query.filter_by(id=guide.author).first().image}}" alt="..." class="avatar img-raised"> </a>
                   </div>
               </div>
-              {% if not guide.accepted%}
-              <div>
-                  Not accepted by Admin yet!
-              </div>
-              {% endif %}
           </div>
         </div>
     </div>
-      {% endfor %}
   </div>
 </div>
-{% endif %}
 
 {% endblock %}

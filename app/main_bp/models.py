@@ -13,6 +13,7 @@ class Guide(db.Model):
     content = db.Column(db.String(200))
     image   = db.Column(db.String(200))
     steps = db.relationship('Step', backref='its_guide')
+    accepted = db.Column(db.Boolean, nullable=False)
 
 
 class Step(db.Model):
@@ -21,7 +22,9 @@ class Step(db.Model):
     content = db.Column(db.String(200))
     image   = db.Column(db.String(100))
     guide =  db.Column(db.Integer, db.ForeignKey('guide.id'))
-    tools = db.relationship('Tool', secondary=step_tool, backref=db.backref('Steps', uselist=True))
+    tools = db.relationship('Tool', secondary=step_tool, back_populates='steps')
+    accepted = db.Column(db.Boolean, nullable=False)
+
 
 
 class Rating(db.Model):
@@ -30,6 +33,8 @@ class Rating(db.Model):
     subject = db.Column(db.String(100))
     content = db.Column(db.String(200))
     rate    = db.Column(db.Integer)
+    accepted = db.Column(db.Boolean, nullable=False)
+
 
 
 class Tool(db.Model):
@@ -38,5 +43,7 @@ class Tool(db.Model):
     name = db.Column(db.String(100))
     image   = db.Column(db.String(100))
     usage = db.Column(db.String(100))
-    steps_using_this_tool = db.relationship('Step', secondary=step_tool, backref=db.backref('Tools', uselist=True))
+    steps = db.relationship('Step', secondary=step_tool, back_populates='tools')
+    accepted = db.Column(db.Boolean, nullable=False)
+
 

@@ -14,7 +14,9 @@
         <li>
           <a class="nav-link" href="{{url_for('accounts_bp.logout')}}">Log Out</a>
         </li>
-
+        <li>
+          <a class="nav-link" href="{{url_for('main_bp.my_guides')}}">My Guides</a>
+        </li>
         {% else %}
          <li class="nav-item">
           <a class="nav-link" href="{{url_for('accounts_bp.login')}}">Log In</a>
@@ -28,6 +30,7 @@
         </li>
       </ul>
     </div>
+
 {% if current_user.is_authenticated%}
 
   </div>

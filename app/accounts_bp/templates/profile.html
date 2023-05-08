@@ -8,6 +8,7 @@
             <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{current_user.image}}">
                 <span class="font-weight-bold">{{current_user.username}}</span><span class="text-black-50">{{current_user.email}}</span>
             </div>
+            <a href="{{url_for('main_bp.my_guides')}}"><button class="btn btn-primary">My Guides</button></a>
         </div>
         <div class="col-md-5 border-right">
             <div class="p-3 py-5">
