@@ -1,11 +1,12 @@
 import flask
-from app.accounts_bp import accounts_bp,models
+from app.accounts_bp import accounts_bp, models
 from app import db
-from .forms import User_Form,Update_User
+from .forms import User_Form, Update_User
 from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 import random
-from app.utils import get_image,upload_image
+from app.utils import get_image, upload_image
+
 
 @accounts_bp.route("/signup", methods=['GET', 'POST'])
 def signup():

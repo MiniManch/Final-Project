@@ -1,0 +1,35 @@
+{% extends 'partials/main/base.html' %}
+
+{% block content %}
+{% include "partials/main/navbar.html" %}
+
+<!--add new tool button-->
+{% if current_user.is_authenticated %}
+<a href="{{url_for('main_bp.newtool')}}">
+    <button class="btn  btn-primary btn-block"><span class="bg-float"></span><span class="text">Add new Tool!</span></button>
+</a>
+
+<!--tools-->
+<div class="container">
+  <div class="row">
+      {% for tool in tools%}
+    <div class="col-md-4">
+        <div class="blog-card blog-card-blog">
+              <div class="blog-card-image">
+                  <img class="img" src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{tool.image}}">
+                  <div class="ripple-cont"></div>
+              </div>
+              <div class="blog-table">
+                  <h6 class="blog-category blog-text-success">{{tool.name}}</h6>
+                  <h4 class="blog-card-caption">
+                      {{tool.usage}}
+                  </h4>
+              </div>
+            </div>
+    </div>
+      {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+{% endblock %}

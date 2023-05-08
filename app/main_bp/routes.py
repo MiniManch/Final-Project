@@ -76,7 +76,7 @@ def guide(guide_id):
 
 
 # TOOLS
-@main_bp.route('/new_guide', methods=['GET', 'POST'])
+@main_bp.route('/new_tool', methods=['GET', 'POST'])
 @login_required
 def newtool():
 	form = New_Tool()
@@ -88,12 +88,12 @@ def newtool():
 			else:
 				image = upload_image(image)
 
-			tool = models.Guide(
+			tool = models.Tool(
 				author=current_user.id,
 				name=form.name.data,
 				usage=form.usage.data,
 				image=image,
-				accepted=False
+				accepted=True
 			)
 			db.session.add(tool)
 			db.session.commit()
@@ -105,6 +105,11 @@ def newtool():
 			return flask.redirect(flask.url_for('main_bp.index'))
 	return flask.render_template('new_tool.html', form=form, title="New Tool")
 
+
+@main_bp.route("/tools")
+def tools():
+	tools_list = list(models.Tool.query.filter_by(accepted=True))
+	return flask.render_template('tools.html', tools=tools_list, style='main/guide.css' )
 
 
 # Admin routes
