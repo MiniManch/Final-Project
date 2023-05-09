@@ -35,9 +35,15 @@
                   </div>
               </div>
               {% if not guide.accepted%}
-              <div>
-                  Not accepted by Admin yet!
-              </div>
+                  {% if accepting %}
+                      <div>
+                          <a href="{{url_for('main_bp.accept',what='guide',its_id=guide.id)}}">To Accept</a>
+                      </div>
+                  {% else %}
+                      <div>
+                          Not accepted by Admin yet!
+                      </div>
+                  {% endif %}
               {% endif %}
           </div>
         </div>

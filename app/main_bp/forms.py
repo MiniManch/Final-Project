@@ -12,9 +12,14 @@ class New_Guide(FlaskForm):
 
 
 class New_Tool(FlaskForm):
-	name            = StringField('Name', validators=[InputRequired(),Length(min=10)], render_kw={"placeholder": 'Hammer! Screwdriver! '})
+	name            = StringField('Name', validators=[InputRequired()], render_kw={"placeholder": 'Hammer! Screwdriver! '})
 	usage         = StringField('Main Usage', validators=[InputRequired()])
 	image               = FileField('Image')
 	submit           = SubmitField('Submit')
 
 
+class New_Step(FlaskForm):
+	subject            = StringField('Subject', validators=[InputRequired()], render_kw={"placeholder": 'Title of this step'})
+	content         = StringField('Content', validators=[InputRequired()])
+	image               = FileField('Image')
+	submit           = SubmitField('Submit')

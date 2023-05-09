@@ -1,0 +1,33 @@
+{% extends 'partials/main/base.html' %}
+
+{% block content %}
+{% include "partials/main/navbar.html" %}
+
+<div class="container">
+      <div class="col-md-2 guide-card ">
+        <div class="blog-card blog-card-blog">
+          <div class="blog-card-image">
+              <img class="img" src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{step.image}}">
+              <div class="ripple-cont"></div>
+          </div>
+          <div class="blog-table">
+              <h6 class="blog-category blog-text-success"><i class="far fa-newspaper"></i> {{step.subject}}</h6>
+              <h4 class="blog-card-caption">
+                  <a href="#">Lorem Ipsum is simply dummy text of the printing and</a>
+              </h4>
+              <p class="blog-card-description">{{step.content[0:20]}}...</p>
+              <div class="ftr">
+                  <div class="author">
+                      <a href="#"> <img src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{guide.image}}" alt="..." class="avatar img-raised"> </a>
+                  </div>
+              </div>
+          </div>
+        </div>
+    </div>
+</div>
+{% if not step.accepted and current_user.username == 'admin' %}
+<a href="{{url_for('main_bp.accept',what='step',its_id=step.id)}}">
+    <button class="btn  btn-primary "><span class="bg-float"></span><span class="text">Accept this step!</span></button>
+</a>
+{% endif %}
+{% endblock %}

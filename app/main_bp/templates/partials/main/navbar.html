@@ -21,6 +21,7 @@
         <li>
           <a class="nav-link" href="{{url_for('main_bp.newtool')}}">Create a new Tool! </a>
         </li>
+
         {% else %}
          <li class="nav-item">
           <a class="nav-link" href="{{url_for('accounts_bp.login')}}">Log In</a>
@@ -28,6 +29,7 @@
         <li class="nav-item">
           <a class="nav-link" href="{{url_for('accounts_bp.signup')}}">Signup</a>
         </li>
+
         {% endif %}
         <li class="nav-item">
           <a class="nav-link" href="{{url_for('main_bp.guides')}}">Guides</a>
