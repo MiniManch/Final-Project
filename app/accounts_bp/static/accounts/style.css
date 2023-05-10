@@ -1,3 +1,10 @@
+body{
+    z-index:1;
+}
+nav{
+    z-index:2;
+}
+
 .form{
 width : 50vw;
 margin:auto;

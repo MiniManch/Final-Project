@@ -2,24 +2,17 @@
 
 {% block content %}
 {% include "partials/main/navbar.html" %}
-<div class="p-5 text-center bg-image rounded-3" style="
-    background-image: url('https://assetsio.reedpopcdn.com/pokemon-cards-fan-hand.jpeg?width=848&quality=80&format=jpg&dpr=2&auto=webp');
-    height: 100vh;
-    background-repeat: no-repeat;
-    background-size: cover;
-
-  ">
-  <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
-    <div class="d-flex justify-content-center align-items-center h-100">
-      <div class="text-white">
-        <h1 class="mb-3 a123 ">Welcome to my Pokemon trading game!</h1>
-
-        {% if current_user.is_authenticated %}
-            <a class="btn btn-outline-light btn-lg" href="">Link to game</a>
-        {% else %}
-            <a class="btn btn-outline-light btn-lg" href="{{url_for('accounts_bp.signup')}}">Sign up to play!</a>
-        {% endif %}
-      </div>
-    </div>
+<div class="row homepage">
+  <div class="col-lg-4">
+    <video autoplay muted loop id="myVideo">
+      <source src="https://res.cloudinary.com/drzcke4vu/video/upload/v1683715736/landing-page-video.mp4" type="video/mp4">
+    </video>
   </div>
+  <div class="col-lg-8 homepage-text">
+    <h2>DO IT YOURSELF!</h2>
+    <h4>WE WILL PROVIDE THE HOW</h4>
+  </div>
+</div>
+
+
 {% endblock %}

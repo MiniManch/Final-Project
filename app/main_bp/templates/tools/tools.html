@@ -2,12 +2,34 @@
 
 {% block content %}
 {% include "partials/main/navbar.html" %}
-
 <!--add new tool button-->
 {% if current_user.is_authenticated %}
 <a href="{{url_for('main_bp.newtool')}}">
     <button class="btn  btn-primary btn-block"><span class="bg-float"></span><span class="text">Add new Tool!</span></button>
 </a>
+{% endif %}
+
+<!--Search Bar-->
+<div class="row mb-5">
+    <div class="col-lg-8 mx-auto ">
+        <div class="bg-white p-1 rounded shadow">
+        <!-- Custom rounded search bars with input group -->
+            <form class='form' method="POST" action="#" >
+            {{ form.hidden_tag()}}
+                    <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
+                        <div class="input-group">
+                        {{form.text(class="form-control border-0 bg-light",id='name' ,**{'placeholder':"What're you searching for?", 'aria-describedby':"button-addon1"})}}
+
+                        <div class="input-group-append">
+                        <button id="button-addon3" type="submit" class="btn btn-link text-success"><img src="https://img.icons8.com/fluency-systems-regular/48/null/search--v1.png"/></button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        <!-- End -->
+        </div>
+    </div>
+</div>
 
 <!--tools-->
 <div class="container">
@@ -30,6 +52,5 @@
       {% endfor %}
   </div>
 </div>
-{% endif %}
 
 {% endblock %}

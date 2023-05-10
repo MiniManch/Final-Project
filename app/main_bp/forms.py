@@ -23,3 +23,9 @@ class New_Step(FlaskForm):
 	content         = StringField('Content', validators=[InputRequired()])
 	image               = FileField('Image')
 	submit           = SubmitField('Submit')
+
+
+class Search(FlaskForm):
+	text = StringField('Search', validators=[InputRequired()])
+	submit           = SubmitField('<i class="fa fa-search"></i>')
+
