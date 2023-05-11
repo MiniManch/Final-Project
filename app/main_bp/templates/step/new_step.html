@@ -12,7 +12,15 @@
           <i id="next-btn" class="fas fa-arrow-right"></i>
           {{form.subject(class="form-control active first",id='name')}}
           {{form.content(class="form-control disabled second",placeholder='content',id='usage')}}
+          {% if edit %}
+          <h3>edit</h3>
+          {{form.image(class="form-control disabled third",id='image',value=edit)}}
+          {% else %}
           {{form.image(class="form-control disabled third",id='image')}}
+
+          {% endif %}
+
+
           {{form.submit(class="btn btn-success disabled",id='submit')}}
           <div id="progress-bar"></div>
       </div>
@@ -24,5 +32,30 @@
 
 <script>
 
+
+function loadURLToInputFiled(url){
+  getImgURL(url, (imgBlob)=>{
+    // Load img blob to input
+    // WIP: UTF8 character error
+    let fileName = 'Your Profile Picture.jpg'
+    let file = new File([imgBlob], fileName,{type:"image/jpeg", lastModified:new Date().getTime()}, 'utf-8');
+    let container = new DataTransfer();
+    container.items.add(file);
+    document.querySelector('#image').files = container.files;
+
+  })
+}
+// xmlHTTP return blob respond
+function getImgURL(url, callback){
+  var xhr = new XMLHttpRequest();
+  xhr.onload = function() {
+      callback(xhr.response);
+  };
+  xhr.open('GET', url);
+  xhr.responseType = 'blob';
+  xhr.send();
+}
+
+loadURLToInputFiled('{{edit}}')
 </script>
 {% endblock %}

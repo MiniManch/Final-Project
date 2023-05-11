@@ -3,7 +3,8 @@
 body{
     z-index:1;
 }
-nav{
+
+nav,.alert{
     z-index:2;
 }
 .form{
