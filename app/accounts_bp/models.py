@@ -12,6 +12,7 @@ class User(UserMixin, db.Model):
 	ratings   = db.relationship('Rating', backref='rater')
 	image    = db.Column(db.String(100))
 	tools   = db.relationship('Tool', backref='tool-creator')
+	items_on_sale = db.relationship('Item', backref='items')
 
 
 # from app.main_bp.models import Card

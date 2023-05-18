@@ -1,14 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300&display=swap');
+
 body{
     z-index:1;
-}
-nav{
-    z-index:2;
+    width:100%;
 }
 
+nav,.alert{
+    z-index:2;
+}
 .form{
 width : 50vw;
 margin:auto;
 }
+
 
 #post_container{
     margin:auto;
@@ -26,7 +30,7 @@ margin:auto;
 
 .form-control:focus {
     box-shadow: none;
-    border-color: #BA68C8
+    border-color: #BA68C8;
 }
 
 .profile-button {
@@ -65,13 +69,120 @@ margin:auto;
     border: solid 1px #BA68C8
 }
 
-.user_image{
-    padding:0 !important;
-    margin-right:1vw !important;
-}
 
 .username_nav{
     padding-right:1vw;
 }
 
-/* New Guide */
+/* Create New Guide Part */
+
+input.disabled,select.disabled,div.disabled,ul.disabled{
+  display: none !important;
+}
+
+.disabled{
+    visibility:hidden;
+
+}
+
+#progress-bar {
+  position: absolute;
+  background: #b9d4ec;
+  height: 10px !important;
+  width: 0;
+  transition: width 0.5s ease-in-out;
+}
+
+
+#regForm{
+  width:50vw;
+}
+
+/* Style for homepage video */
+
+/* Style the video: 100% width and height to cover the entire window */
+#myVideo {
+  position: relative;
+  left: 0;
+  top: -5vh;
+  width: fit-content;
+  height: 110vh;
+}
+
+.homepage{
+    font-family: 'Assistant', sans-serif;
+}
+
+.homepage-text{
+    position:relative;
+    left:10vw;
+    top:30vh;
+}
+
+.homepage-text>h2{
+     font-size: 40px;
+}
+
+.homepage-text>h4{
+    position:relative;
+    left:5vw;
+}
+
+
+
+main{
+    text-align: center;
+    margin:auto;
+    margin-top:15vh;
+    width:50vw;
+    height:60vh;
+}
+
+#form-container>input,#form-container>select{
+    width:80%;
+    margin-left:5vw;
+    margin-top:3vh;
+}
+
+
+#prev-btn,#next-btn{
+    height:7vh;
+    width:3vw;
+    position:relative;
+}
+
+#next-btn{
+    top:17vh;
+    right:-20vw;
+}
+
+#prev-btn{
+    top:17vh;
+    left:-20vw;
+}
+
+#form-container{
+    margin-top:3vh;
+    z-index:2;
+}
+/*Navbar*/
+
+#logo{
+    height:8vh;
+    width:4vw;
+    paddding:0;
+    display: inline-block;
+    position: absolute;
+    top:2vh;
+    left:35vw;
+}
+
+
+nav{
+  width:100vw;
+}
+
+.user_image{
+  padding:0 !important;
+  margin-left: 2vw;
+}

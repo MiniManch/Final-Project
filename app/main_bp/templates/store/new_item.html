@@ -2,31 +2,36 @@
 
 {% block content %}
 {% include "partials/main/navbar.html" %}
-<!--    {{form.subject(class='form-control')}}-->
 
-<main  class="col-md-8 shadow bg-white rounded">
-      <img id='prev-btn' class='disabled' src="https://img.icons8.com/glyph-neue/64/back.png" alt="back"/>
-      <img id='next-btn' src="https://img.icons8.com/glyph-neue/64/forward--v1.png" alt="back"/>
-    <form id="regForm" class='form' method="POST" action="#" enctype="multipart/form-data">
-    {{ form.hidden_tag()}}
-      <div id="form-container">
+<div class="col-md-8">
+  <form id="regForm" class='form' method="POST" action="#" enctype="multipart/form-data">
+  {{ form.hidden_tag()}}
+      <div id="container">
           <h1 class="title">{{title}}</h1>
+          <i id="prev-btn" class="fas fa-arrow-left"></i>
+          <i id="next-btn" class="fas fa-arrow-right"></i>
+          {{form.name(class="form-control active",id='name')}}
+          {{form.description(class="form-control disabled",placeholder='description',id='description')}}
 
-          {{form.subject(class="form-control active first",id='subject')}}
-          {{form.description(class="form-control disabled second",id='description',placeholder='This is a basic description of your Guide!')}}
-          {{form.category(class="form-control disabled second")}}
+          {% if edit %}
           {{form.image(class="form-control disabled third",id='image')}}
+
+          {% else %}
+          {{form.image(class="form-control disabled third",id='image')}}
+          {% endif %}
+          {{form.price(class="form-control disabled",placeholder='100$',id='price')}}
+          {{form.price(class="form-control disabled",placeholder='100$',id='price')}}
+
+
           {{form.submit(class="btn btn-success disabled",id='submit')}}
           <div id="progress-bar"></div>
       </div>
-    </form>
-</main>
+  </form>
+</div>
 
 
-<!--Perhaps create a div for each of the inputs, like i did in the active disabled thingi-->
+<script src="{{url_for('main_bp.static',filename='main/scripts/new_tool.js')}}"></script>
 
-<script src="{{url_for('main_bp.static',filename='main/scripts/trial.js')}}"></script>
-{% if edit %}
 <script>
 
 
@@ -53,9 +58,6 @@ function getImgURL(url, callback){
   xhr.send();
 }
 
-if(edit){
-    loadURLToInputFiled('{{edit}}')
-}
+loadURLToInputFiled('{{edit}}')
 </script>
-{% endif %}
 {% endblock %}

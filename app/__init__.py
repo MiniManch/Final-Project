@@ -3,7 +3,9 @@ import flask_mail
 from flask_sqlalchemy import SQLAlchemy
 import flask_migrate
 from flask_login import LoginManager
+import app.utils
 from app.config import Config
+
 
 flask_app = flask.Flask(__name__)
 flask_app.config.from_object(Config)
@@ -20,7 +22,7 @@ login_manager.login_view = 'accounts_bp.login'
 login_manager.init_app(flask_app)
 
 from app.accounts_bp.models import User
-
+from app.main_bp.models import Category
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -39,3 +41,4 @@ flask_app.register_blueprint(main_bp)
 with flask_app.app_context():
 	# db.drop_all()
 	db.create_all()
+	# app.utils.populate_categories(database=db,model=Category)

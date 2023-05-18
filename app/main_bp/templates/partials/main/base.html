@@ -12,15 +12,16 @@
 <!--    if special style-->
     {% if style %}
     <link rel="stylesheet" href="{{url_for('main_bp.static',filename=style)}}">
-
     {% endif %}
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   </head>
   <body>
-  <!--Flash message-->
   {% block content %}
 
   {% endblock %}
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="{{url_for('main_bp.static',filename='main/scripts/base.js')}}"></script>
+
+
   </body>
 </html>

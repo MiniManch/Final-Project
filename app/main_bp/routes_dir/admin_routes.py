@@ -58,6 +58,7 @@ def accept(what, its_id):
 			to_accept.accepted = True
 			db.session.commit()
 			flask.flash('Tool was accepted successfully!')
+			print('Yello')
 			return flask.redirect(flask.url_for('main_bp.tool', step_id=to_accept.id))
 
 	except Exception as e:

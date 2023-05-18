@@ -1,25 +1,73 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="{{url_for('main_bp.index')}}">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        {% if current_user.is_authenticated%}
-        <li class="nav-item">
-          <a class="nav-link" href="{{url_for('accounts_bp.profile')}}">Profile</a>
-        </li>
+<img id='logo' src="https://img.icons8.com/external-photo3ideastudio-lineal-photo3ideastudio/64/external-tool-box-home-tools-photo3ideastudio-lineal-photo3ideastudio.png" alt="external-tool-box-home-tools-photo3ideastudio-lineal-photo3ideastudio"/>
 
-        <li>
-          <a class="nav-link" href="{{url_for('accounts_bp.logout')}}">Log Out</a>
-        </li>
-        </li>
-        <li>
-          <a class="nav-link" href="{{url_for('main_bp.my_guides')}}">My Guides</a>
-        </li>
-        <li>
-          <a class="nav-link" href="{{url_for('main_bp.newtool')}}">Create a new Tool! </a>
+<nav class="navbar navbar-expand-sm   navbar-light bg-light d-flex justify-content-center ">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ">
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('main_bp.index')}}">Home <span class="sr-only">(current)</span></a>
+          </li>
+
+          <!-- dropdown start -->
+          <li class="nav-item dropdown dmenu">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+              Guides & More!
+            </a>
+            <div class="dropdown-menu sm-menu">
+
+              <!-- start of dropend -->
+              <div class="btn-group dropend">
+                <a type="button" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  Guides
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="nav-link" href="{{url_for('main_bp.my_guides')}}">My Guides</a>
+                  </li>
+                  <li>
+                    <a class="nav-link" href="{{url_for('main_bp.guides')}}">All Guides</a>
+                  </li>
+                  <li>
+                    <a class="nav-link" href="{{url_for('main_bp.newguide')}}">Create a Guide!</a>
+                  </li>
+                </ul>
+              </div>
+              <!-- end of dropend -->
+
+              <br>
+
+              <!-- start of dropend -->
+              <div class="btn-group dropend">
+                <a type="button" class=" dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  Tools
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="nav-link" href="{{url_for('main_bp.tools')}}">Tools</a>
+                  </li>
+                  <li>
+                    <a class="nav-link" href="{{url_for('main_bp.newtool')}}">Create a Tool!</a>
+                  </li>
+                </ul>
+              </div>
+              <!-- end of dropend -->
+
+            </div>
+          </li>
+          <!-- dropdown end -->
+        {% if current_user.is_authenticated%}
+        <li class="nav-item dropdown dmenu">
+          <a class=" user_image nav-link dropdown-toggle" href="{{url_for('accounts_bp.profile')}}"  data-toggle="dropdown">
+            <img class="rounded-circle  " width="40px" src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{current_user.image}}">
+          </a>
+
+          <div class="dropdown-menu sm-menu">
+            <a class="nav-link" href="{{url_for('accounts_bp.profile')}}">Profile</a>
+            <a class="nav-link" href="{{url_for('accounts_bp.logout')}}">Log Out</a>
+          </div>
         </li>
 
         {% else %}
@@ -29,35 +77,19 @@
         <li class="nav-item">
           <a class="nav-link" href="{{url_for('accounts_bp.signup')}}">Signup</a>
         </li>
-
         {% endif %}
-        <li class="nav-item">
-          <a class="nav-link" href="{{url_for('main_bp.guides')}}">Guides</a>
-        </li>
-         <li>
-          <a class="nav-link" href="{{url_for('main_bp.tools')}}">Tools! </a>
-        </li>
-      </ul>
-    </div>
-{% if current_user.is_authenticated%}
-
+           
+    </ul>
+    
   </div>
-        <span class=" user_image d-flex flex-column align-items-center text-center p-3 py-5">
-            <a href="{{url_for('accounts_bp.profile')}}">
-                <img class="rounded-circle  " width="50px" src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{current_user.image}}">
-            </a>
-        </span>
-        <span class="font-weight-bold username_nav ">{{current_user.username}}</span>
-{% endif %}
 </nav>
-
 {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                {{message}}
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        {% endfor %}
-        {% endif %}
-    {% endwith %}
+  {% if messages %}
+  {% for message in messages %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          {{message}}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+  {% endfor %}
+  {% endif %}
+{% endwith %}

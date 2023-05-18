@@ -2,6 +2,7 @@
 
 body{
     z-index:1;
+    width:100%;
 }
 
 nav,.alert{
@@ -11,6 +12,7 @@ nav,.alert{
 width : 50vw;
 margin:auto;
 }
+
 
 #post_container{
     margin:auto;
@@ -28,7 +30,7 @@ margin:auto;
 
 .form-control:focus {
     box-shadow: none;
-    border-color: #BA68C8
+    border-color: #BA68C8;
 }
 
 .profile-button {
@@ -67,10 +69,6 @@ margin:auto;
     border: solid 1px #BA68C8
 }
 
-.user_image{
-    padding:0 !important;
-    margin-right:1vw !important;
-}
 
 .username_nav{
     padding-right:1vw;
@@ -78,10 +76,14 @@ margin:auto;
 
 /* Create New Guide Part */
 
-.disabled{
+input.disabled,select.disabled,div.disabled,ul.disabled{
   display: none !important;
 }
 
+.disabled{
+    visibility:hidden;
+
+}
 
 #progress-bar {
   position: absolute;
@@ -124,4 +126,68 @@ margin:auto;
 .homepage-text>h4{
     position:relative;
     left:5vw;
+}
+
+
+
+main{
+    text-align: center;
+    margin:auto;
+    margin-top:15vh;
+    width:50vw;
+    height:60vh;
+}
+
+#form-container>input,#form-container>select{
+    width:80%;
+    margin-left:5vw;
+    margin-top:3vh;
+}
+
+
+#prev-btn,#next-btn{
+    height:7vh;
+    width:3vw;
+    position:relative;
+}
+
+#next-btn{
+    top:17vh;
+    right:-20vw;
+}
+
+#prev-btn{
+    top:17vh;
+    left:-20vw;
+}
+
+#form-container{
+    margin-top:3vh;
+    z-index:2;
+}
+/*Navbar*/
+
+#logo{
+    height:8vh;
+    width:4vw;
+    paddding:0;
+    display: inline-block;
+    position: absolute;
+    top:2vh;
+    left:35vw;
+}
+
+
+nav{
+  width:100vw;
+}
+
+.user_image{
+  padding:0 !important;
+  margin-left: 2vw;
+}
+
+
+.tool_added{
+    border:1px solid blue;
 }

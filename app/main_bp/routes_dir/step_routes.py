@@ -3,7 +3,7 @@ from app.main_bp import main_bp
 from flask_login import current_user, login_required
 from app import db
 import app.main_bp.models as models
-from app.main_bp.forms import  New_Step
+from app.main_bp.forms import  New_Step, Search
 from app.accounts_bp.models import User
 from app.utils import get_image, upload_image
 import requests
@@ -13,13 +13,18 @@ import requests
 @main_bp.route('/new_step/<int:guide_id>', methods=['GET', 'POST'])
 @login_required
 def newstep(guide_id):
-	is_admin = current_user.username == 'admin'
 	guide = models.Guide.query.filter_by(id=guide_id).first()
-	if current_user.id != guide.author or is_admin:
+
+	is_author = guide.author == current_user.id
+	is_admin = current_user.username == 'admin'
+
+	if not is_author and not is_admin:
 		flask.flash('You cannot change this guide.')
 		return flask.redirect(flask.url_for('main_bp.index'))
 
 	form = New_Step()
+	search = Search()
+
 	if flask.request.method == 'POST':
 		try:
 			image = form.image.data
@@ -28,13 +33,17 @@ def newstep(guide_id):
 			else:
 				image = upload_image(image)
 
+			tools = []
+			for tool in form.tools.data.split(','):
+				tools.append(models.Tool.query.filter_by(id=int(tool)).first())
+
 			step = models.Step(
 				subject=form.subject.data,
 				content=form.content.data,
 				image=image,
 				guide=guide.id,
-				accepted=is_admin
-
+				accepted=is_admin,
+				tools=tools
 			)
 			db.session.add(step)
 			db.session.commit()
@@ -44,7 +53,13 @@ def newstep(guide_id):
 			print(e)
 			flask.flash('Error has occurred')
 			return flask.redirect(flask.url_for('main_bp.index'))
-	return flask.render_template('/step/new_step.html', form=form, title="New Step")
+	tools=[]
+	for tool in models.Tool.query.filter_by(accepted=True):
+		t_dict = tool.__dict__
+		t_dict.pop('_sa_instance_state')
+		tools.append(t_dict)
+
+	return flask.render_template('/step/new_step.html', form=form, tools=tools, style='main/guides.css', search=search, title="New Step")
 
 
 @main_bp.route('/step/<int:step_id>', methods=['GET', 'POST'])
@@ -64,7 +79,8 @@ def step(step_id):
 		return flask.redirect(flask.url_for('main_bp.index'))
 
 
-@main_bp.route('/edit/step/<int:step_id>', methods=['GET', 'POST'])
+@main_bp.route('/step/edit/<int:step_id>', methods=['GET', 'POST'])
+@login_required
 def editstep(step_id):
 	try:
 		form = New_Step()
@@ -73,9 +89,9 @@ def editstep(step_id):
 		this_guide = models.Guide.query.filter_by(id=this_step.guide).first()
 
 		is_author = this_guide.author == current_user.id
-		is_admin = User.query.filter_by(id=current_user.id).first().username == 'admin'
+		is_admin = current_user.username == 'admin'
 
-		if not is_admin or is_author:
+		if not is_admin or not is_author:
 			flask.flash('You cannot change this step.')
 			return flask.redirect(flask.url_for('main_bp.index'))
 

@@ -3,41 +3,84 @@
 {% block content %}
 {% include "partials/main/navbar.html" %}
 
-<div class="col-md-8">
-  <form id="regForm" class='form' method="POST" action="#" enctype="multipart/form-data">
-  {{ form.hidden_tag()}}
-      <div id="container">
-          <h1 class="title">Form</h1>
-          <i id="prev-btn" class="fas fa-arrow-left"></i>
-          <i id="next-btn" class="fas fa-arrow-right"></i>
-          {{form.subject(class="form-control active first",id='name')}}
-          {{form.content(class="form-control disabled second",placeholder='content',id='usage')}}
-          {% if edit %}
-          <h3>edit</h3>
-          {{form.image(class="form-control disabled third",id='image',value=edit)}}
-          {% else %}
+<main  class="col-md-8 shadow bg-white rounded">
+      <img id='prev-btn' class='disabled' src="https://img.icons8.com/glyph-neue/64/back.png" alt="back"/>
+      <img id='next-btn' src="https://img.icons8.com/glyph-neue/64/forward--v1.png" alt="back"/>
+    <form id="regForm" class='form' method="POST" action="#" enctype="multipart/form-data">
+    {{ form.hidden_tag()}}
+      <div id="form-container">
+          <div id="progress-bar"></div>
+
+          <h1 class="title">{{title}}</h1>
+
+
+          {{form.subject(class="form-control active",id='subject')}}
+          {{form.content(class="form-control disabled",id='content',placeholder='This is the content of this step!')}}
+
+          <div id="tools" class='disabled'>
+              <!-- Tools Search Bar-->
+              <div class="row mb-5">
+                <div class="col-lg-8 mx-auto ">
+                    <div class="bg-white p-1 rounded shadow">
+                    <!-- Custom rounded search bars with input group -->
+                        <form class='form' method="POST"  onsubmit="event.preventDefault();" action="#" >
+                        {{ search.hidden_tag()}}
+                                <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
+                                    <div class="input-group">
+                                    {{search.text(class="form-control border-0 bg-light",id='search' ,**{'placeholder':"What're you searching for?", 'aria-describedby':"button-addon1"})}}
+                                    <div class="input-group-append">
+                                    <div id="button-addon3"  class="btn btn-link text-success"><img src="https://img.icons8.com/fluency-systems-regular/48/null/search--v1.png"/></div>
+                                    </div>
+                                    <div  id='reset_button' class="btn btn-link text-success"><img src="https://img.icons8.com/ios/50/recurring-appointment.png"/></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Search Bar -->
+
+            <!--Tool Cards -->
+              <div class="row all_tools">
+                  {% for tool in tools %}
+                <div class="col-md-4 tool-container">
+                    <div class="blog-card blog-card-blog">
+                      <div class="blog-card-image">
+                          <img class="img" src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{tool.image}}">
+                          <div class="ripple-cont"></div>
+                      </div>
+                      <div class="blog-table">
+                          <h6 class="blog-category blog-text-success tool-name">{{tool.name}}</h6>
+                          <h4 class="blog-card-caption ">
+                              {{tool.usage}}
+                          </h4>
+                          <div  class="btn btn-link text-success add_button"><img src="https://img.icons8.com/ios/50/add--v1.png"/><span class="disabled tool_id">{{tool.id}}</span></div>
+                          
+                      </div>
+                    </div>
+                </div>
+                  {% endfor %}
+              </div>
+          </div>
+          {{form.tools(style='display:none;', id='tools_input')}}
           {{form.image(class="form-control disabled third",id='image')}}
 
-          {% endif %}
-
-
           {{form.submit(class="btn btn-success disabled",id='submit')}}
-          <div id="progress-bar"></div>
       </div>
-  </form>
-</div>
+    </form>
+</main>
 
-
-<script src="{{url_for('main_bp.static',filename='main/scripts/new_tool.js')}}"></script>
+<script src="{{url_for('main_bp.static',filename='main/scripts/new_newtool.js')}}"></script>
 
 <script>
 
+// re enters image into image input if its edit
 
 function loadURLToInputFiled(url){
   getImgURL(url, (imgBlob)=>{
     // Load img blob to input
     // WIP: UTF8 character error
-    let fileName = 'Your Profile Picture.jpg'
+    let fileName = 'Your  Picture.jpg'
     let file = new File([imgBlob], fileName,{type:"image/jpeg", lastModified:new Date().getTime()}, 'utf-8');
     let container = new DataTransfer();
     container.items.add(file);
@@ -56,6 +99,118 @@ function getImgURL(url, callback){
   xhr.send();
 }
 
-loadURLToInputFiled('{{edit}}')
+if ('{{edit}}' !== ''){
+    loadURLToInputFiled('{{edit}}');
+}
+
+
+// Search of tools
+
+// Selecting
+const tools_db_dict = {{tools|tojson}};
+const search_submit_button = document.querySelector('#button-addon3');
+const search_form          = document.querySelector('#search');
+const tool_cards           = document.querySelectorAll('.tool-container');
+const tool_names           = document.querySelectorAll('.tool-name');
+const reset_button         = document.querySelector('#reset_button');
+const add_buttons          = document.querySelectorAll('.add_button');
+const tools_form_input     = document.querySelector('#tools_input');
+var tools_to_submit        = [];
+
+const plus = 'https://img.icons8.com/ios/50/add--v1.png';
+const minus = 'https://img.icons8.com/ios/50/minus.png';
+
+
+// Functions
+function getSearchInfo(){
+    return search.value.toLowerCase();
+}
+
+function getParents(element){
+    var els = [];
+    while (element) {
+      if(element.tagName == undefined){
+        break;
+      }
+      els.push(element);
+      element = element.parentNode;
+  }
+  return els;
+}
+
+function filterTools(){
+  user_input = getSearchInfo();
+  if(user_input === ''){
+    console.log('heyo');
+    return false;
+  };
+
+  // Get Matches
+  matches = [];
+  for (var tool of tool_names){
+    tool_text = tool.innerHTML
+    if (tool_text.toLowerCase() === user_input){
+      matches.push(tool);
+    }
+  }
+
+  // If no results, dont disable anything and just alert
+  if (matches.length === 0){
+    alert('No matches were found for what you searched!');
+    search.value = '';
+    return false;
+  }
+
+  // Disable all that dont match
+  for (var tool of tool_names){
+    if(!matches.includes(tool)){
+      itsParents = getParents(tool);
+      for (var parent of itsParents){
+        if(parent.classList.contains('tool-container')){
+          parent.classList.add('disabled');
+        }
+      }
+    }
+  }
+}
+
+function unFilterTools(){
+  for(var tool of tool_cards){
+    tool.classList.remove('disabled');
+  }
+}
+
+function getToolId(tool){
+  console.log('getid',tool.children[1].innerHTML);
+  return tool.children[1].innerHTML;
+}
+
+function addOrRemoveTool(){
+  parents = getParents(this);
+  for(var parent of parents){
+    if(parent.classList.contains('blog-card')){
+      parent.classList.toggle('tool_added');
+      if (this.children[0].src == plus){
+        tools_to_submit.push(getToolId(this));  
+        this.children[0].setAttribute('src',minus);
+        tools_form_input.value = tools_to_submit.toString();
+      }else if(this.children[0].src == minus){
+        tools_to_submit.pop(getToolId(this));  
+        this.children[0].setAttribute('src',plus);
+        tools_form_input.value = tools_to_submit.toString();
+      }
+    }
+  }
+}
+
+// Assinging events
+search_submit_button.addEventListener('click',filterTools);
+reset_button.addEventListener('click',unFilterTools);
+
+for(var button of add_buttons){
+  button.addEventListener('click',addOrRemoveTool);
+}
+
+
 </script>
 {% endblock %}

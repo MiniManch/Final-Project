@@ -3,23 +3,54 @@
 {% block content %}
 {% include "partials/main/navbar.html" %}
 
-<div class="col-md-8">
-  <form id="regForm" class='form' method="POST" action="#" enctype="multipart/form-data">
-  {{ form.hidden_tag()}}
-      <div id="container">
-          <h1 class="title">Form</h1>
-          <i id="prev-btn" class="fas fa-arrow-left"></i>
-          <i id="next-btn" class="fas fa-arrow-right"></i>
-          {{form.name(class="form-control active first",id='name')}}
-          {{form.usage(class="form-control disabled second",id='usage')}}
-          {{form.image(class="form-control disabled third",id='image')}}
-          {{form.submit(class="btn btn-success disabled",id='submit')}}
+<main  class="col-md-8 shadow bg-white rounded">
+      <img id='prev-btn' class='disabled' src="https://img.icons8.com/glyph-neue/64/back.png" alt="back"/>
+      <img id='next-btn' src="https://img.icons8.com/glyph-neue/64/forward--v1.png" alt="back"/>
+    <form id="regForm" class='form' method="POST" action="#" enctype="multipart/form-data">
+    {{ form.hidden_tag()}}
+      <div id="form-container">
           <div id="progress-bar"></div>
+          <h1 class="title">{{title}}</h1>
+
+          {{form.name(class="form-control active first",id='name')}}
+          {{form.usage(class="form-control disabled second",id='usage',placeholder='To nail stuff to other stuff')}}
+          {{form.image(class="form-control disabled",id='image')}}
+          {{form.submit(class="btn btn-success disabled",id='submit')}}
+
       </div>
-  </form>
-</div>
+    </form>
+</main>
 
 
 <script src="{{url_for('main_bp.static',filename='main/scripts/new_tool.js')}}"></script>
+<script>
 
+
+function loadURLToInputFiled(url){
+  getImgURL(url, (imgBlob)=>{
+    // Load img blob to input
+    // WIP: UTF8 character error
+    let fileName = 'Your  Picture.jpg'
+    let file = new File([imgBlob], fileName,{type:"image/jpeg", lastModified:new Date().getTime()}, 'utf-8');
+    let container = new DataTransfer();
+    container.items.add(file);
+    document.querySelector('#image').files = container.files;
+
+  })
+}
+// xmlHTTP return blob respond
+function getImgURL(url, callback){
+  var xhr = new XMLHttpRequest();
+  xhr.onload = function() {
+      callback(xhr.response);
+  };
+  xhr.open('GET', url);
+  xhr.responseType = 'blob';
+  xhr.send();
+}
+
+if(edit){
+    loadURLToInputFiled('{{edit}}')
+}
+</script>
 {% endblock %}

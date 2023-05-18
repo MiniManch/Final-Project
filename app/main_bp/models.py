@@ -14,6 +14,8 @@ class Guide(db.Model):
     image   = db.Column(db.String(200))
     steps = db.relationship('Step', backref='its_guide')
     accepted = db.Column(db.Boolean, nullable=False)
+    category = db.Column(db.Integer,db.ForeignKey('category.id'))
+    items   =  db.relationship('Item', backref='guide_fixed_with')
 
 
 class Step(db.Model):
@@ -47,3 +49,19 @@ class Tool(db.Model):
     accepted = db.Column(db.Boolean, nullable=False)
 
 
+class Category(db.Model):
+    id = db.Column(db.Integer,primary_key=True, autoincrement=True)
+    name = db.Column(db.String(200))
+    image   = db.Column(db.String(200))
+    guides = db.relationship('Guide', backref='its_category')
+
+
+class Item(db.Model):
+    id = db.Column(db.Integer,primary_key=True, autoincrement=True)
+    seller = db.Column(db.Integer, db.ForeignKey('user.id'))
+    name = db.Column(db.String(200))
+    guide =  db.Column(db.Integer, db.ForeignKey('guide.id'))
+    fixed = db.Column(db.Boolean)
+    price = db.Column(db.Integer)
+    sold  = db.Column(db.Boolean)
+    image = db.Column(db.String(200))

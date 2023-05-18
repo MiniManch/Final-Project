@@ -12,16 +12,16 @@ var position = 0;
 const inputs  = document.querySelectorAll('#container>input');
 const progress = document.querySelector('#progress-bar');
 
-
 // FUNCTIONS
 function nextQuestion(){
-  console.log(position,inputs.length);
   if ((position+1) != inputs.length){
-    let questions = document.querySelectorAll('input.disabled');
+    let questions = document.querySelectorAll('input.disabled,div.disabled');
     let active    = document.querySelector('.active');
 
     // Here should be a data checker, if empty/data doesn't fit
     if (dataValidator()){
+        prevBtn.classList.remove('disabled');
+
         // Disabling what was the active question
         active.classList.toggle('active');
         active.classList.toggle('disabled');
@@ -48,8 +48,12 @@ function nextQuestion(){
 
 
 function prevQuestion(){
+  if (position ==1){
+    prevBtn.classList.add('disabled');
+  }
+
   if (position != 0){
-    let questions = document.querySelectorAll('input.disabled');
+    let questions = document.querySelectorAll('input.disabled,div.disabled');
     let active    = document.querySelector('.active');
 
     // Here should be a data checker, if empty/data doesn't fit
