@@ -1,11 +1,10 @@
-<img id='logo' src="https://img.icons8.com/external-photo3ideastudio-lineal-photo3ideastudio/64/external-tool-box-home-tools-photo3ideastudio-lineal-photo3ideastudio.png" alt="external-tool-box-home-tools-photo3ideastudio-lineal-photo3ideastudio"/>
 
-<nav class="navbar navbar-expand-sm   navbar-light bg-light d-flex justify-content-center ">
+<nav class="navbar navbar-expand-sm   navbar-light bg-light  ">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarTogglerDemo03">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ">
           <li class="nav-item">
             <a class="nav-link" href="{{url_for('main_bp.index')}}">Home <span class="sr-only">(current)</span></a>
@@ -54,7 +53,24 @@
                 </ul>
               </div>
               <!-- end of dropend -->
-
+              {% if current_user.username == 'admin' %}
+              <!-- start of dropend -->
+              <br>
+              <div class="btn-group dropend">
+                <a type="button" class=" dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  Admin Links
+                </a>
+                <ul class="dropdown-menu">
+                  <li>
+                    <a class="nav-link" href="{{url_for('main_bp.tools_to_accept')}}">Tools to accept</a>
+                  </li>
+                  <li>
+                    <a class="nav-link" href="{{url_for('main_bp.guides_to_accept')}}">Guides to accept</a>
+                  </li>
+                </ul>
+              </div>
+              {% endif %}
+              <!-- end of dropend -->
             </div>
           </li>
           <!-- dropdown end -->

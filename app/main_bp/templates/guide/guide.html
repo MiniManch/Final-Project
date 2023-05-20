@@ -3,7 +3,7 @@
 {% block content %}
 {% include "partials/main/navbar.html" %}
 
-<div class="container">
+<!-- <div class="container">
       <div class="col-md-2 guide-card ">
         <div class="blog-card blog-card-blog">
           <div class="blog-card-image">
@@ -29,10 +29,115 @@
     </div>
 </div>
 
-{% for step in guide.steps %}
-<h4>
-    <a href="{{url_for('main_bp.step',step_id=step.id)}}">step! {{loop.index}}</a>
-</h4>
-{% endfor %}
+ -->
+
+ <div id='guide-container' class="row" >
+
+    <!-- Guide part -->
+   <div class='col-12'>
+
+     <div class="row">
+
+        <div class="col-8 " >
+          <h1 id='guide-title'>{{guide.subject}}</h1>
+          <h2 id="guide-content">{{guide.content}}</h2>
+        </div>
+
+        <div class="col-4">
+          <img id='guide-image' src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{guide.image}}" alt="#">  
+        </div>
+
+      </div>
+
+   </div>
+   <!-- Guide part END -->
+
+   <!-- Steps part -->
+   {% for step in guide.steps %}
+   <div class='col-12 step-container'>
+
+      <div class="row" >
+
+        <div class="col-5">
+          <div class="step-image-container">
+            <img src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{step.image}}" alt="">  
+          </div>
+        </div>
+
+        <div class="col-7 step-info-container">
+          <h2>{{step.subject}}</h2>
+          <h4> {{step.content}}</h4>  
+
+           <!-- Tools -->
+        {% if step.tools|length > 0 %}
+            <div class="dropdown">
+
+              <button class="button-paper" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Tools List!
+              </button>
+
+              <ul class="dropdown-menu tools-dropdown">
+                <!-- Dropdown menu links -->
+                  {% for tool in step.tools%}
+                    <li class="d-flex justifiy-content-between tools-dropdown">
+                      <img src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{tool.image}}" class='tool-image' alt="">
+                      <h6><a href="{{url_for('main_bp.tool',tool_id=tool.id)}}" style='text-decoration:none; color:black;'>{{tool.name}}</a></h6>
+                    </li>
+
+                  {% endfor %}
+
+              </ul>
+
+            </div>
+        <!-- End of tools -->
+        {% endif %}
+         </div>  
+      </div>
+   </div>
+   {% endfor %}
+   <!-- Steps part END -->
+
+
+   <!-- Footer -->
+  <div class="row" id="guide-footer">
+
+    <div class="col-6" id='author'>
+
+      <a href="#"> <img src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{users.query.filter_by(id=guide.author).first().image}}" alt="..." class="avatar img-raised"></a>
+      <h6 id='author-name'>{{users.query.filter_by(id=guide.author).first().username}}</h6>
+    </div>
+
+    <div id='reputation' class="col-6">
+
+      <div class="d-flex justify-content-between align-items-center">
+            <div class="ratings">
+                {% if guide.rating == 0 %}
+
+                <a href="{{url_for('main_bp.rate',guide_id=guide.id,num_of_stars=1)}}"><i class="fa-regular fa-star no-color"></i></a>
+                <a href="{{url_for('main_bp.rate',guide_id=guide.id,num_of_stars=2)}}"><i class="fa-regular fa-star no-color"></i></a>
+                <a href="{{url_for('main_bp.rate',guide_id=guide.id,num_of_stars=3)}}"><i class="fa-regular fa-star no-color"></i></a>
+                <a href="{{url_for('main_bp.rate',guide_id=guide.id,num_of_stars=4)}}"><i class="fa-regular fa-star no-color"></i></a>
+                <a href="{{url_for('main_bp.rate',guide_id=guide.id,num_of_stars=5)}}"><i class="fa-regular fa-star no-color"></i></a>
+
+                {% else %}
+                <!-- Get the full numbers by moduling, if not whole number, add half star with label of how much the difference is -->
+                  {% for x in range(0,guide.rating|int) %}
+                  <a href="{{url_for('main_bp.rate',guide_id=guide.id,num_of_stars=1)}}"><i class="fa-regular fa-star rating-color"></i></a>
+
+                  {% endfor%}
+                  {% for x in range(0,5 - guide.rating|int ) %}
+                  <a href="{{url_for('main_bp.rate',guide_id=guide.id,num_of_stars=1)}}"><i class="fa-regular fa-star no-color"></i></a>
+
+                  {% endfor %}
+                {% endif %}
+            </div>
+            <h5 class="review-count">{{guide.num_of_ratings}} Reviews</h5>
+      </div>
+
+    </div>
+    
+  </div>
+   <!-- Footer End -->
+ </div>
 
 {% endblock %}

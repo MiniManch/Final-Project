@@ -12,7 +12,10 @@ class Guide(db.Model):
     subject = db.Column(db.String(100))
     content = db.Column(db.String(200))
     image   = db.Column(db.String(200))
+    rating = db.Column(db.Float)
+    num_of_ratings = db.Column(db.Integer)
     steps = db.relationship('Step', backref='its_guide')
+    reviews = db.relationship('Rating', backref='ratings')
     accepted = db.Column(db.Boolean, nullable=False)
     category = db.Column(db.Integer,db.ForeignKey('category.id'))
     items   =  db.relationship('Item', backref='guide_fixed_with')
@@ -28,15 +31,12 @@ class Step(db.Model):
     accepted = db.Column(db.Boolean, nullable=False)
 
 
-
 class Rating(db.Model):
     id = db.Column(db.Integer,primary_key=True, autoincrement=True)
     author = db.Column(db.Integer,db.ForeignKey('user.id'))
-    subject = db.Column(db.String(100))
     content = db.Column(db.String(200))
     rate    = db.Column(db.Integer)
-    accepted = db.Column(db.Boolean, nullable=False)
-
+    guide   = db.Column(db.Integer,db.ForeignKey('guide.id'))
 
 
 class Tool(db.Model):

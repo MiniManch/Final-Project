@@ -8,7 +8,7 @@
     <button class="btn  btn-primary btn-block"><span class="bg-float"></span><span class="text">Add new Tool!</span></button>
 </a>
 {% endif %}
-
+{% if form %}
 <!--Search Bar-->
 <div class="row mb-5">
     <div class="col-lg-8 mx-auto ">
@@ -30,6 +30,7 @@
         </div>
     </div>
 </div>
+{% endif %}
 
 <!--tools-->
 <div class="container">
@@ -46,6 +47,9 @@
                   <h4 class="blog-card-caption">
                       {{tool.usage}}
                   </h4>
+                    {% if accepting %}
+                  <a href="{{url_for('main_bp.accept',what='tool',its_id=tool.id)}}">to Accept!</a>
+                    {% endif %}
               </div>
             </div>
     </div>

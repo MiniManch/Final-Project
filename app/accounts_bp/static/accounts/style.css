@@ -1,18 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Assistant:wght@300&display=swap');
 
-body{
+body,html{
     z-index:1;
-    width:100%;
+    background-color:#e8e8e8;
+/*    overflow-x: hidden;*/
 }
 
+
 nav,.alert{
-    z-index:2;
+    z-index:2 !important;
 }
 .form{
 width : 50vw;
 margin:auto;
 }
-
 
 #post_container{
     margin:auto;
@@ -177,7 +178,6 @@ main{
     left:35vw;
 }
 
-
 nav{
   width:100vw;
 }
@@ -185,4 +185,91 @@ nav{
 .user_image{
   padding:0 !important;
   margin-left: 2vw;
+}
+
+
+.tool_added{
+    border:1px solid blue;
+}
+
+.alert{
+    width:100%;
+    left:0;
+    position:absolute;
+    top:10vh;
+}
+
+
+/*Guide page */
+
+
+#guide-container{
+    margin-left:10vw;
+    width:80vw;
+    height:100vh;
+}
+
+#guide-container>.col-12{
+    height: 70%;
+    border:1px solid RGB(190 190 190);
+}
+
+#guide-title{
+    font-size:4rem;
+    font-style:italic;
+    margin-top:2vh;
+}
+
+#guide-image{
+    border:1px solid RGB(190 190 190);
+    max-height:100%;
+    max-width:50%;
+}
+
+#guide-container>.col-12>.row{
+   position:relative;
+   left:3vw;
+   top:10vh;
+}
+
+#guide-content{
+    width:80%;
+    position:relative;
+    left:5vw;
+    margin:0;
+    font-weight: normal;
+}
+
+.step-container{
+    height:70%;
+    border:1px solid RGB(190 190 190);
+    border-top:none;
+}
+
+.step-container>.row{
+    position:relative;
+    top:5vh;
+    left:5vw;
+}
+
+.step-image-container{
+    max-height:600px;
+    max-width:600px;
+    margin-left:5vw;
+}
+
+.step-image-container>img{
+    transition: transform 0.2s 0.05s;
+    border:1px solid RGB(190 190 190);
+    max-height:100%;
+    max-width:100%;
+}
+
+.step-image-container>img:hover{
+    transform: scale(1.8);
+    transition-delay: 0s;
+}
+
+.step-info-container{
+    text-align: center;
 }

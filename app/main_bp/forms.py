@@ -35,7 +35,13 @@ class New_Item(FlaskForm):
 	fixed               = BooleanField('')
 	submit              = SubmitField('Submit')
 
+
 class Search(FlaskForm):
 	text = StringField('Search')
 	submit           = SubmitField()
 
+
+class Rating(FlaskForm):
+	description         = StringField('description')
+	rating               = IntegerField('')
+	submit              = SubmitField('Submit')

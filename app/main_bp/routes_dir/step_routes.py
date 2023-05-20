@@ -34,8 +34,11 @@ def newstep(guide_id):
 				image = upload_image(image)
 
 			tools = []
-			for tool in form.tools.data.split(','):
-				tools.append(models.Tool.query.filter_by(id=int(tool)).first())
+			tools_from_form = form.tools.data.split(',')
+
+			if tools_from_form[0] != '':
+				for tool in form.tools.data.split(','):
+					tools.append(models.Tool.query.filter_by(id=int(tool)).first())
 
 			step = models.Step(
 				subject=form.subject.data,
@@ -45,6 +48,7 @@ def newstep(guide_id):
 				accepted=is_admin,
 				tools=tools
 			)
+			
 			db.session.add(step)
 			db.session.commit()
 			flask.flash(f'New Step was created!')
@@ -84,14 +88,14 @@ def step(step_id):
 def editstep(step_id):
 	try:
 		form = New_Step()
-
+		search = Search()
 		this_step = models.Step.query.filter_by(id=step_id).first()
 		this_guide = models.Guide.query.filter_by(id=this_step.guide).first()
 
 		is_author = this_guide.author == current_user.id
 		is_admin = current_user.username == 'admin'
 
-		if not is_admin or not is_author:
+		if not is_admin and not is_author:
 			flask.flash('You cannot change this step.')
 			return flask.redirect(flask.url_for('main_bp.index'))
 
@@ -103,11 +107,24 @@ def editstep(step_id):
 			db.session.commit()
 
 			flask.flash('Step was changed successfully')
-			return flask.redirect(flask.url_for('main_bp.step',step_id = this_step.id))
+			return flask.redirect(flask.url_for('main_bp.step', step_id = this_step.id))
 
 		form.subject.data = this_step.subject
 		form.content.data = this_step.content
-		return flask.render_template('/step/new_step.html',edit = get_image(this_step.image), form=form, step=this_step, style='main/guide.css')
+
+		tools = []
+		for tool in models.Tool.query.filter_by(accepted=True):
+			t_dict = tool.__dict__
+			t_dict.pop('_sa_instance_state')
+			tools.append(t_dict)
+		return flask.render_template('/step/new_step.html',
+		                             edit=get_image(this_step.image),
+		                             tools=tools,
+		                             search=search,
+		                             form=form,
+		                             step=this_step,
+		                             style='main/guide.css',
+		                             title="Edit Step")
 	except Exception as e:
 		print(e)
 		flask.flash('the Step you are trying to reach is unavailable at this moment')

@@ -39,6 +39,8 @@ def newguide():
 				author=current_user.id,
 				subject=form.subject.data,
 				content=form.description.data,
+				rating=0,
+				num_of_ratings=0,
 				image=image,
 				category = category.id,
 				steps=[],
@@ -60,12 +62,14 @@ def newguide():
 def guide(guide_id):
 	try:
 		this_guide = models.Guide.query.filter_by(id=guide_id).first()
-		is_author = this_guide.author == current_user.id
-		is_admin = current_user.username == 'admin'
+		is_author = False
+		is_admin = False
+		if current_user.is_authenticated:
+			is_author = this_guide.author == current_user.id
+			is_admin = current_user.username == 'admin'
 		is_accepted = this_guide.accepted
 		if is_author or is_admin or is_accepted:
 			return flask.render_template('/guide/guide.html', guide=this_guide, users=User, style='main/guide.css')
-		# return this_guide.author
 	except Exception as e:
 		print(e)
 		flask.flash('the Guide you are trying to reach is unavailable at this moment')

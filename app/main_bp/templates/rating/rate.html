@@ -1,0 +1,30 @@
+{% extends 'partials/main/base.html' %}
+
+{% block content %}
+{% include "partials/main/navbar.html" %}
+
+
+<main  class="col-md-8 shadow bg-white rounded">
+    <form id="regForm" class='form' method="POST" action="#" enctype="multipart/form-data">
+    {{ form.hidden_tag()}}
+      <div id="form-container">
+          <h1 class="title">{{title}}</h1>
+          {{form.description(class="form-control",id='description',placeholder='This is the content of your review!')}}
+          {{form.rating(class="form-control disabled second",id='rating-input')}}
+             <div class=" ratings-container">
+                <div class="ratings" style="margin-top:2vh;">
+                    <i class="fa-regular fa-star no-color"></i>
+                    <i class="fa-regular fa-star no-color"></i>
+                    <i class="fa-regular fa-star no-color"></i>
+                    <i class="fa-regular fa-star no-color"></i>
+                    <i class="fa-regular fa-star no-color"></i>
+                </div>
+            </div>
+          {{form.submit(class="btn btn-success ")}}
+      </div>
+    </form>
+</main>
+
+
+
+{% endblock %}

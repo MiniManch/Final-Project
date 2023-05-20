@@ -5,7 +5,6 @@ from app import db
 import app.main_bp.models as models
 from app.accounts_bp.models import User
 
-
 # Admin routes
 @main_bp.route("/guides_to_accept")
 @login_required
@@ -13,6 +12,17 @@ def guides_to_accept():
 	if current_user.username == 'admin':
 		guides_list = list(models.Guide.query.filter_by(accepted=False))
 		return flask.render_template('/guide/guides.html', guides=guides_list, users=User, accepting=True, style='main/guides.css')
+	else:
+		flask.flash('The page you are trying to view is restricted')
+		return flask.redirect(flask.url_for('main_bp.index'))
+
+
+@main_bp.route("/tools_to_accept")
+@login_required
+def tools_to_accept():
+	if current_user.username == 'admin':
+		tools_list = list(models.Tool.query.filter_by(accepted=False))
+		return flask.render_template('/tools/tools.html', tools=tools_list, form=False, style='main/tools.css', accepting=True)
 	else:
 		flask.flash('The page you are trying to view is restricted')
 		return flask.redirect(flask.url_for('main_bp.index'))
@@ -32,7 +42,7 @@ def accept(what, its_id):
 			# 	check if its steps are accepted
 			if len(to_accept.steps) == 0:
 				flask.flash(f'This guide has no steps')
-				return flask.redirect(flask.url_for('main_b.index'))
+				return flask.redirect(flask.url_for('main_bp.index'))
 
 			for index, step in enumerate(to_accept.steps):
 				if not step.accepted:
@@ -58,8 +68,7 @@ def accept(what, its_id):
 			to_accept.accepted = True
 			db.session.commit()
 			flask.flash('Tool was accepted successfully!')
-			print('Yello')
-			return flask.redirect(flask.url_for('main_bp.tool', step_id=to_accept.id))
+			return flask.redirect(flask.url_for('main_bp.tools'))
 
 	except Exception as e:
 		print(e)

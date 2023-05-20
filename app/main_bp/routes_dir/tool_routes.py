@@ -82,3 +82,18 @@ def edittool(tool_id):
 		print(e)
 		flask.flash('the Tool you are trying to reach is unavailable at this moment')
 		return flask.redirect(flask.url_for('main_bp.index'))
+
+
+@main_bp.route("/tool/<int:tool_id>")
+def tool(tool_id):
+	try:
+		tool = models.Tool.query.filter_by(id=tool_id).first()
+		if tool is None:
+			flask.flash('Could not find what you were looking for, Sorry!')
+			return flask.redirect(flask.url_for('main_bp.tools'))
+	except Exception as e:
+		print(e)
+		flask.flash('Could not find what you were looking for, Sorry!')
+		return flask.redirect(flask.url_for('main_bp.tools'))
+	return flask.render_template('/tools/tool.html', tool=tool, style='main/tools.css')
+
