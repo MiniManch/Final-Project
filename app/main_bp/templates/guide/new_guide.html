@@ -4,26 +4,51 @@
 {% include "partials/main/navbar.html" %}
 <!--    {{form.subject(class='form-control')}}-->
 
-<main  class="col-md-8 shadow bg-white rounded">
-      <img id='prev-btn' class='disabled' src="https://img.icons8.com/glyph-neue/64/back.png" alt="back"/>
-      <img id='next-btn' src="https://img.icons8.com/glyph-neue/64/forward--v1.png" alt="back"/>
+<main id ='container-of-all' class="col-md-8 shadow bg-white rounded">
+      <div id="progress-bar"></div>
+
+<h1 class="title">{{title}}</h1>
+
+      
     <form id="regForm" class='form' method="POST" action="#" enctype="multipart/form-data">
     {{ form.hidden_tag()}}
-      <div id="form-container">
-          <h1 class="title">{{title}}</h1>
+      <div id="form-container" class=' d-flex justify-content-between '>
+          <!-- <img id='prev-btn' class='disabled' src="https://img.icons8.com/glyph-neue/64/back.png" alt="next"/> -->
+          <i id='prev-btn' class=" disabled fa-solid fa-left-long fa-2xl" ></i>
 
-          {{form.subject(class="form-control active first",id='subject')}}
-          {{form.description(class="form-control disabled second",id='description',placeholder='This is a basic description of your Guide!')}}
-          {{form.category(class="form-control disabled second")}}
-          {{form.image(class="form-control disabled third",id='image')}}
-          {{form.submit(class="btn btn-success disabled",id='submit')}}
-          <div id="progress-bar"></div>
+
+          <div class="form-input active">
+            <h3>SUBJECT</h3>
+            {{form.subject(class="form-control guide-input",id='subject')}}
+          </div>
+          <div class="form-input disabled">
+            <h3>DESCRIPTION</h3>
+
+          {{form.description(class="form-control guide-input ",id='description',placeholder='This is a basic description of your Guide!')}}
+            
+          </div>
+          <div class="form-input disabled">
+            <h3>CATEGORY</h3>
+
+          {{form.category(class="form-control guide-input  ")}}
+            
+          </div>
+          <div class="form-input disabled">
+            <h3>IMAGE</h3>
+
+          {{form.image(class="form-control guide-input  ",id='image')}}
+            
+          </div>
+          <div class="form-input disabled">
+          {{form.submit(class="btn btn-success  ",id='submit')}}
+          </div>
+          <i id='next-btn' class="fa-solid fa-right-long fa-2xl" ></i>
+          <!-- <img  src="https://img.icons8.com/glyph-neue/64/forward--v1.png" alt="back"/> -->
       </div>
     </form>
 </main>
 
 
-<!--Perhaps create a div for each of the inputs, like i did in the active disabled thingi-->
 
 <script src="{{url_for('main_bp.static',filename='main/scripts/new_guide.js')}}"></script>
 {% if edit %}
@@ -56,6 +81,8 @@ function getImgURL(url, callback){
 if(edit){
     loadURLToInputFiled('{{edit}}')
 }
+
+
 </script>
 {% endif %}
 {% endblock %}

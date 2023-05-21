@@ -3,34 +3,6 @@
 {% block content %}
 {% include "partials/main/navbar.html" %}
 
-<!-- <div class="container">
-      <div class="col-md-2 guide-card ">
-        <div class="blog-card blog-card-blog">
-          <div class="blog-card-image">
-              <img class="img" src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{guide.image}}">
-              <div class="ripple-cont"></div>
-          </div>
-          <div class="blog-table">
-              <h6 class="blog-category blog-text-success"><i class="far fa-newspaper"></i> {{guide.subject}}</h6>
-              <h4 class="blog-card-caption">
-                  <a href="#">Lorem Ipsum is simply dummy text of the printing and</a>
-              </h4>
-              <p class="blog-card-description">{{guide.content[0:20]}}...</p>
-              <div class="ftr">
-                  <div class="author">
-                      <a href="#"> <img src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{users.query.filter_by(id=guide.author).first().image}}" alt="..." class="avatar img-raised"> </a>
-                  </div>
-              </div>
-                <h4>
-                    <a href="{{url_for('main_bp.newstep',guide_id=guide.id)}}">add steps!</a>
-                </h4>
-          </div>
-        </div>
-    </div>
-</div>
-
- -->
-
  <div id='guide-container' class="row" >
 
     <!-- Guide part -->
@@ -95,6 +67,8 @@
       </div>
    </div>
    {% endfor %}
+
+
    <!-- Steps part END -->
 
 
@@ -133,11 +107,15 @@
             </div>
             <h5 class="review-count">{{guide.num_of_ratings}} Reviews</h5>
       </div>
-
     </div>
-    
   </div>
    <!-- Footer End -->
+   {% if current_user.id == guide.author %}
+  
+      <a href="{{url_for('main_bp.newstep',guide_id=guide.id)}}">
+        <h1 class='button-paper' style='margin-left:45%;'>Add a new Step!</h1>
+      </a>
+    {% endif %}
  </div>
 
 {% endblock %}

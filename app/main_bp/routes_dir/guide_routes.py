@@ -12,14 +12,15 @@ from app.utils import  upload_image, get_image , create_category_list
 @main_bp.route("/guides")
 def guides():
 	guides_list = list(models.Guide.query.filter_by(accepted=True))
-	return flask.render_template('/guide/guides.html', guides=guides_list, users=User, style='main/guides.css')
+	print(guides_list)
+	return flask.render_template('/guide/guides.html', guides=guides_list,categories=models.Category, users=User, style='main/guides.css')
 
 
 @main_bp.route("/my_guides")
 @login_required
 def my_guides():
 	guides_list = list(models.Guide.query.filter_by(author=current_user.id))
-	return flask.render_template('/guide/guides.html', guides=guides_list, users=User, style='main/guides.css')
+	return flask.render_template('/guide/guides.html', guides=guides_list, users=User,categories=models.Category, style='main/guides.css')
 
 
 @main_bp.route('/new_guide', methods=['GET', 'POST'])

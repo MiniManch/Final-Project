@@ -13,6 +13,7 @@ from app.utils import  upload_image, get_image , create_category_list
 def rate(guide_id,num_of_stars):
 	try:
 		guide = models.Guide.query.filter_by(id=guide_id).first()
+		author = User.query.filter_by(id=guide.author).first()
 		if current_user.id == guide.author:
 			flask.flash('You cant review your own guide :)')
 			return flask.redirect(flask.url_for('main_bp.index'))
@@ -33,6 +34,7 @@ def rate(guide_id,num_of_stars):
 			guide.num_of_ratings = guide.num_of_ratings + 1
 			guide.rating = guide.rating + form.rating.data/guide.num_of_ratings
 			guide.reviews.append(new_rate)
+
 
 			db.session.add(new_rate)
 			db.session.commit()

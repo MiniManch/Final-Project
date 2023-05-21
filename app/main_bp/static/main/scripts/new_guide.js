@@ -11,12 +11,14 @@ const nextBtn = document.querySelector('#next-btn');
 var position = 0;
 const inputs  = document.querySelectorAll('.form-control');
 const progress = document.querySelector('#progress-bar');
+const title = document.querySelector('.title');
+const nav = document.querySelector('nav');
 
-console.log(inputs)
 // FUNCTIONS
 function nextQuestion(){
   if (position != inputs.length){
-    let questions = document.querySelectorAll('input.disabled,select.disabled');
+    // let questions = document.querySelectorAll('input.disabled,select.disabled');
+    let questions = document.querySelectorAll('.form-input.disabled');
     let active    = document.querySelector('.active');
 
     // Here should be a data checker, if empty/data doesn't fit
@@ -37,8 +39,10 @@ function nextQuestion(){
 
         position+=1;
 
-        progress.style.width = (position * 50) / questions.length + '%';
-        console.log(progress);
+        progress.style.width = (position * 50) / questions.length + 5 + '%';
+
+        console.log(container.style.width);
+
       }
     // If its the submit then display-none on the next button
     if (submit.classList.contains('active')){
@@ -53,7 +57,7 @@ function prevQuestion(){
     prevBtn.classList.add('disabled');
   }
   if (position != 0){
-    let questions = document.querySelectorAll('input.disabled,select.disabled');
+    let questions = document.querySelectorAll('.form-input.disabled');
     let active    = document.querySelector('.active');
 
     // Here should be a data checker, if empty/data doesn't fit
@@ -79,7 +83,7 @@ function prevQuestion(){
 
 
 function dataValidator(){
-  let active    = document.querySelector('.active');
+  let active    = document.querySelector('.active').children[1];
 
   if(active.type == 'file'){
     var validFileExtensions = ["jpg", "jpeg", "png"];    
@@ -90,7 +94,7 @@ function dataValidator(){
       extensionName = extensionName[extensionName.length - 1];
       if (!validFileExtensions.includes(extensionName)){
         console.log(extensionName);
-        alert('File type must be jpg,jpeg or png, please upload a different file.')
+        alertMessage('File type must be jpg,jpeg or png, please upload a different file.')
         return false;
       }
     }
@@ -99,33 +103,47 @@ function dataValidator(){
     text = active.value;
     active.value = text.replace( '/[^\x20-\x7E]+/g', '' );
     if (active.value.length == 0){
-      alert('This is a mandatory field.')
+      alertMessage('This is a mandatory field.')
       return false;
     }
   } 
   else if(active.id == 'category'){
     if (active.value == '-Category-'){
-      alert('This is a mandatory field.')
+      alertMessage('This is a mandatory field.')
       return false;
     }
   }
   return true;
 }
 
+function alertMessage(message){
+  alert = document.querySelector('#alert');
+
+  if (alert == null){
+    parentDiv = document.createElement('div');
+    parentDiv.id = 'alert';
+
+    parentDiv.className = ('alert alert-warning alert-dismissible fade show');
+    parentDiv.setAttribute('role','alert')
+
+    text = document.createTextNode(message);
+
+    button = document.createElement('button');
+    button.classList.add('btn-close');
+    button.setAttribute('data-bs-dismiss','alert');
+    button.setAttribute('aria-label','Close');
+
+    parentDiv.appendChild(text);
+    parentDiv.appendChild(button);
+
+
+    title.after(parentDiv)
+  }else{
+    return false;
+  }
+};
+
 // EVENTS
 nextBtn.addEventListener('click',nextQuestion);
 prevBtn.addEventListener('click',prevQuestion);
 
-
-
-
-
-// create step checker variable DONE
-// if were on step one no back button.
-// if were on last step no next button but submit button DONE
-
-// create data validator function
-// create next question function DONE
-// create previous question function DONE
-// create shaker just like they did it was awesome probably should just copy that
-// create progress bar

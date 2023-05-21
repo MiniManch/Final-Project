@@ -1,124 +1,92 @@
-main{
-	text-align: center;
-	margin:auto;
-	margin-top:15vh;
-	width:50vw;
-	height:60vh;
+main.rounded{
+  height:60vh;
+  width:55vw;
+  background-image:url(https://res.cloudinary.com/drzcke4vu/image/upload/v1684667197/nature-blurred-background.jpg) ;
+   background-position: center; 
+  background-repeat: no-repeat; 
+  background-size: cover; 
 }
 
-#form-container>input,#form-container>select{
-	width:80%;
-	margin-left:5vw;
-	margin-top:3vh;	
+.title{
+  color:white;
+  font-family: 'Wix Madefor Display', sans-serif;
+  text-transform: uppercase;
+  padding-top: 1vh;
 }
 
-
-#prev-btn,#next-btn{
-	height:7vh;
-	width:3vw;
-	position:relative;
+.form-control.guide-input {
+  align-self: center;
+   background-color: rgba(255,255,255,0.3);
+   color:white;
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-style: solid;
+  border-width: 2.5px;
+  box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Neucha, sans-serif;
+  font-size: 1rem;
+  line-height: 23px;
+  outline: none;
+  padding: .75rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width:30vw !important;
+  display: inline-block;
 }
 
-#next-btn{
-	top:17vh;
-	right:-20vw;
+.form-control.active:hover {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
 }
 
-#prev-btn{
-	top:17vh;
-	left:-20vw;
+.form-control.active:focus {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
 }
+
+.active>h3{
+  margin-bottom:5vh;
+  color:white !important;
+}
+
 
 #form-container{
-	margin-top:3vh;
-	z-index:2;
-}
 
-/*navbar thingi*/
-nav{
-  width:100vw;
-}
-
-.user_image{
-  position: fixed;
-  top:2vh;
-  margin:0;
-  padding:0 !important;
-}
-
-.with-drop{
-  /* height:5vh; */
-  height:100%;
-}
-
-#main {
-  position: relative;
-  top:2vh;
-  list-style: none;
-  font-weight: 400;
-  font-size: 0;
-  text-transform: uppercase;
-  display: inline-block;
-  padding: 0;
-  padding-bottom: 2vh;
-  width:100%;
-}
-
-#main li {
-  font-size: 0.8rem;
-  display: inline-block;
-  position: relative;
-  padding: 15px 20px;
+   border-style: solid;
+  border-width: 2.5px;
+  box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+  box-sizing: border-box;
   cursor: pointer;
-  z-index: 5;
-  min-width: 80px;
-  margin: 0;
-  padding-bottom:0 !important;
+  display: inline-block;
+  font-family: Neucha, sans-serif;
+  font-size: 1rem;
+  line-height: 23px;
+  outline: none;
+  padding: .75rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px; 
+  border-color:white;
+  padding:8vh;
 }
 
 
-.drop {
-  overflow: hidden;
-  list-style: none;
-  position: absolute;
-  padding: 0;
-  top:8vh;
-  width: 100%;
-  left: 0;
-}
-
-.drop div {
-  -webkit-transform: translate(0, -100%);
-  -moz-transform: translate(0, -100%);
-  -ms-transform: translate(0, -100%);
-  transform: translate(0, -100%);
-  -webkit-transition: all 0.5s 0.1s;
-  -moz-transition: all 0.5s 0.1s;
-  -ms-transition: all 0.5s 0.1s;
-  transition: all 0.5s 0.1s;
-  position: relative;
+.disabled{
+  color:grey !important;
+  pointer-events: none;
 
 }
-.drop li {
-  display: block;
-  padding: 0;
-  width: 100%;
-  background-color:white;
-
-}
-
-
-#main li:nth-child(3):hover ul div {
-  -webkit-transform: translate(0, 0);
-  -moz-transform: translate(0, 0);
-  -ms-transform: translate(0, 0);
-  transform: translate(0, 0);
-}
-
-#main li:nth-child(2):hover ul div {
-  -webkit-transform: translate(0, 0);
-  -moz-transform: translate(0, 0);
-  -ms-transform: translate(0, 0);
-  transform: translate(0, 0);
-}
-

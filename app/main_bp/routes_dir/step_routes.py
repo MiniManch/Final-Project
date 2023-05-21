@@ -48,7 +48,7 @@ def newstep(guide_id):
 				accepted=is_admin,
 				tools=tools
 			)
-			
+
 			db.session.add(step)
 			db.session.commit()
 			flask.flash(f'New Step was created!')

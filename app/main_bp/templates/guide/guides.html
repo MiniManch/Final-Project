@@ -4,53 +4,73 @@
 {% include "partials/main/navbar.html" %}
 
 <!--add new post button-->
-{% if current_user.is_authenticated %}
 <a href="{{url_for('main_bp.newguide')}}">
-    <button class="btn  btn-primary btn-block"><span class="bg-float"></span><span class="text">Add new post!</span></button>
+    <button id='new-guide-button' class="button-paper "><span class="bg-float"></span><span class="text">Add new post!</span></button>
 </a>
-{% endif %}
-<!--title if no posts-->
-{% if guides|length < 1 %}
-<h3> no guides yet! </h3>
 
-<!--posts-->
-<div class="container">
-  <div class="row">
-      {% else %}
-      {% for guide in guides%}
-      <div class="col-md-4">
-        <div class="blog-card blog-card-blog">
-          <div class="blog-card-image">
-              <img class="img" src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{guide.image}}">
-              <div class="ripple-cont"></div>
-          </div>
-          <div class="blog-table">
-              <h6 class="blog-category blog-text-success"><i class="far fa-newspaper"></i> <a href="{{url_for('main_bp.guide',guide_id=guide.id)}}">{{guide.subject}}</a></h6>
-              <h4 class="blog-card-caption">
-                  {{guide.content[0:20]}}...
+<div id='search-and-filter' class="row">
+  <input class=" col-6 form-control form-control-underlined form-control-underlined border-primary" id='guide-search-input' type="text" placeholder="Search..">
+
+  <div class="dropdown col-6 " id='filter-dropdown'>
+    <button id='filter-dropdown-icon' class="btn btn-secondary " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <span class="material-symbols-sharp" >
+      tune
+      </span>
+    </button>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#">Action</a></li>
+      <li><a class="dropdown-item" href="#">Another action</a></li>
+      <li><a class="dropdown-item" href="#">Something else here</a></li>
+    </ul>
+  </div>
+</div>
+
+
+{% if guides|length > 0 %}
+<section class="wrapper">
+  <div id='container-of-guides' class="container">
+    <div class="row">
+      {% for guide in guides %}
+      <div class="col-sm-12 col-md-6 col-lg-4 mb-4 guide-container ">
+
+        <div class="card text-white card-has-bg click-col" style="background-image:url('https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{guide.image}}');">
+          <img class="card-img d-none" src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{guide.image}}" alt="#">
+          <div class="card-img-overlay d-flex flex-column">
+            <div class="card-body">
+              
+              <small class="card-meta mb-2">{{categories.query.filter_by(id=guide.category).first().name}}</small>
+              <h4 class="card-title mt-0 ">
+                <a class="text-white" href="{{url_for('main_bp.guide',guide_id=guide.id)}}">{{guide.subject}}</a>
               </h4>
-              <div class="ftr">
-                  <div class="author">
-                      <a href="#"> <img src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{users.query.filter_by(id=guide.author).first().image}}" alt="..." class="avatar img-raised"> </a>
-                  </div>
-              </div>
-              {% if not guide.accepted%}
+              <small>
+                <i class="far fa-clock"></i> October 15, 2020 </small>
+            </div>
+            <div class="card-footer">
+              <div class="media">
+                <img class="mr-3 rounded-circle" src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{users.query.filter_by(id=guide.author).first().image}}" alt="Generic placeholder image" style="max-width:50px">
+                <div class="media-body">
+                  <h6 class="my-0 text-white d-block">{{users.query.filter_by(id=guide.author).first().username}}</h6>
+                  {% if not guide.accepted%}
                   {% if accepting %}
                       <div>
                           <a href="{{url_for('main_bp.accept',what='guide',its_id=guide.id)}}">To Accept</a>
                       </div>
                   {% else %}
-                      <div>
-                          Not accepted by Admin yet!
-                      </div>
+                  <small> Not accepted by Admin yet!</small>
+                         
                   {% endif %}
               {% endif %}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
+  {% endfor %}
     </div>
-      {% endfor %}
   </div>
-</div>
+</section>
+  
 {% endif %}
 
 {% endblock %}
