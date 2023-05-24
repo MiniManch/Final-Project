@@ -22,7 +22,7 @@ login_manager.login_view = 'accounts_bp.login'
 login_manager.init_app(flask_app)
 
 from app.accounts_bp.models import User
-from app.main_bp.models import Category
+from app.main_bp.models import Category,Tool
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -41,4 +41,4 @@ flask_app.register_blueprint(main_bp)
 with flask_app.app_context():
 	# db.drop_all()
 	db.create_all()
-	# app.utils.populate_categories(database=db,model=Category)
+	# app.utils.populateDatabase(database=db, UserModel=User, ToolModel=Tool, CategoryModel=Category)

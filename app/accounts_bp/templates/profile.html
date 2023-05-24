@@ -2,38 +2,51 @@
 {% block content %}
 {% include "partials/accounts/navbar.html" %}
 
-<div class="container rounded bg-white mt-5 mb-5">
-    <div class="row">
-        <div class="col-md-3 border-right">
-            <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img class="rounded-circle mt-5" width="150px" src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{current_user.image}}">
-                <span class="font-weight-bold">{{current_user.username}}</span><span class="text-black-50">{{current_user.email}}</span>
-            </div>
-            <a href="{{url_for('main_bp.my_guides')}}"><button class="btn btn-primary">My Guides</button></a>
+
+<div class="row py-5 px-4" >
+  <div class="col-md-5  cl-sm-12 mx-auto">
+    <!-- Profile widget -->
+    <div class="bg-white shadow rounded overflow-hidden p-3" id='user-container'>
+      <div class="px-4 pt-0 pb-4 cover">
+        <div class="media align-items-end profile-head " >
+            {% if current_user.username == user.username %}
+            <a href="{{url_for('accounts_bp.edit_profile',user_id=user.id)}}" class="btn btn-outline-dark btn-sm btn-block mt-3 edit-button ">Edit profile</a>
+            {% endif %}
+
+          <div class="profile mr-3 d-flex justify-content-start">
+            <img src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{user.image}}" alt="..." width="130" class="rounded mb-2 mt-2 ">
+            <h3 class=" mb-0 mt-5 ms-3">{{user.username}}</h3>
+          </div>
         </div>
-        <div class="col-md-5 border-right">
-            <div class="p-3 py-5">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h4 class="text-right">Update Profile </h4>
+      </div>
+      <div class="px-4 py-3">
+        <h3 class="mb-0  ">ABOUT</h3>
+        <div class="p-5 mt-3" id='about'>
+          <!-- <p class="font-italic mb-0">{{current_user.about}}</p> -->
+        </div>
+      </div>
+      <div class="py-4 px-4">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <h3 class="mb-0">GUIDES</h3>
+          <!-- <a href="#" class="btn btn-link text-muted">Show all</a> -->
+        </div>
+        <div class="row">
+            {% if user.guides|length == 0 and user.username == current_user.username %}
+            <a href="{{url_for('main_bp.newguide')}}" class='button-paper' style='width:fit-content;'> Create a Guide!</a>
+            {%endif%}
+        {% for guide in user.guides %}
+          <div class="col-lg-6 mb-2 pr-lg-1">
+            <a class='user-guide-link-container' href="{{url_for('main_bp.guide',guide_id=guide.id)}}">
+                <div class='g-fluid rounded shadow-sm user-guides-image' style='background-image: url("https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{guide.image}}") ;'>
+                    <h4>{{guide.subject}}</h4>
                 </div>
-                    <form `class='form' method="POST" action="#" enctype="multipart/form-data">
-                    {{ form.hidden_tag()}}
-                    <div class="row mt-3">
-                        <div class="col-md-12 mb-3">
-                            {{ form.email.label(class="form-label ")}}{{form.email(class='form-control',value=current_user.email)}}
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            {{ form.username.label(class="form-label ")}}{{form.username(class='form-control',value=current_user.username)}}
-                        </div>
-                        <div class="col-md-12 mb-3">
-                            {{ form.image.label(class="form-label ")}}{{form.image(class='form-control')}}
-                        </div>
-                    </div>
-                        <br>
-                    {{form.submit(class="btn btn-success",value='Save Profile')}}
-                </form>
-            </div>
+            </a>
+          </div>
+        {% endfor %}
         </div>
+      </div>
     </div>
+  </div>
 </div>
 {% endblock %}
 

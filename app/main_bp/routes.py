@@ -9,9 +9,9 @@ from app.utils import get_image, upload_image
 
 
 @main_bp.route("/")
-@main_bp.route("/homepage")
 def index():
-	return flask.render_template('index.html')
+	guides = list(models.Guide.query.filter_by(accepted=True))[0:6];
+	return flask.render_template('index.html', guides=guides, categories=models.Category, users=User)
 
 
 import app.main_bp.routes_dir.guide_routes

@@ -3,47 +3,41 @@
 {% block content %}
 {% include "partials/main/navbar.html" %}
 
-<main  class="col-md-8 shadow bg-white rounded">
-      <img id='prev-btn' class='disabled' src="https://img.icons8.com/glyph-neue/64/back.png" alt="back"/>
-      <img id='next-btn' src="https://img.icons8.com/glyph-neue/64/forward--v1.png" alt="back"/>
+<main id ='container-of-all' class="col-md-8 shadow bg-white rounded animate__animated">
+      <div id="progress-bar"></div>
+
+<h1 class="title">{{title}}</h1>
+
+      
     <form id="regForm" class='form' method="POST" action="#" enctype="multipart/form-data">
     {{ form.hidden_tag()}}
-      <div id="form-container">
-          <div id="progress-bar"></div>
-
-          <h1 class="title">{{title}}</h1>
+      <div id="form-container" class=' d-flex justify-content-between '>
+          <i id='prev-btn' class=" disabled fa-solid fa-left-long fa-2xl" ></i>
 
 
-          {{form.subject(class="form-control active",id='subject')}}
-          {{form.content(class="form-control disabled",id='content',placeholder='This is the content of this step!')}}
+          <div class="form-input active">
+            <h3>SUBJECT</h3>
+            {{form.subject(class="form-control guide-input",id='subject')}}
+          </div>
 
-          <div id="tools" class='disabled'>
-              <!-- Tools Search Bar-->
-              <div class="row mb-5">
-                <div class="col-lg-8 mx-auto ">
-                    <div class="bg-white p-1 rounded shadow">
-                    <!-- Custom rounded search bars with input group -->
-                        <form class='form' method="POST"  onsubmit="event.preventDefault();" action="#" >
-                        {{ search.hidden_tag()}}
-                                <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
-                                    <div class="input-group">
-                                    {{search.text(class="form-control border-0 bg-light",id='search' ,**{'placeholder':"What're you searching for?", 'aria-describedby':"button-addon1"})}}
-                                    <div class="input-group-append">
-                                    <div id="button-addon3"  class="btn btn-link text-success"><img src="https://img.icons8.com/fluency-systems-regular/48/null/search--v1.png"/></div>
-                                    </div>
-                                    <div  id='reset_button' class="btn btn-link text-success"><img src="https://img.icons8.com/ios/50/recurring-appointment.png"/></div>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <!-- End of Search Bar -->
+          <div class="form-input disabled">
+            <h3>CONTENT</h3>
+
+          {{form.content(class="form-control guide-input ",id='description',placeholder='This is a basic description of your Guide!')}}
+            
+          </div>
+
+          <div class="form-input disabled">
+            <h3>TOOLS</h3>
+
+              <div id='search-and-filter'>
+                <input class=" col-6 form-control form-control-underlined form-control-underlined border-primary" id='guide-search-input' type="text" placeholder="Search..">
+              </div>
 
             <!--Tool Cards -->
-              <div class="row all_tools">
+             <div class="row all_tools" id='container-of-tools'>
                   {% for tool in tools %}
-                <div class="col-md-4 tool-container">
+                <div class="col-md-4 tool-container" >
                     <div class="blog-card blog-card-blog">
                       <div class="blog-card-image">
                           <img class="img" src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{tool.image}}">
@@ -51,26 +45,37 @@
                       </div>
                       <div class="blog-table">
                           <h6 class="blog-category blog-text-success tool-name">{{tool.name}}</h6>
-                          <h4 class="blog-card-caption ">
+                          <p class="blog-card-caption ">
                               {{tool.usage}}
-                          </h4>
+                          </p>
                           <div  class="btn btn-link text-success add_button"><img src="https://img.icons8.com/ios/50/add--v1.png"/><span class="disabled tool_id">{{tool.id}}</span></div>
                           
                       </div>
                     </div>
                 </div>
                   {% endfor %}
+                  {{form.tools(style='display:none;', id='tools_input')}}
               </div>
-          </div>
-          {{form.tools(style='display:none;', id='tools_input')}}
-          {{form.image(class="form-control disabled third",id='image')}}
 
-          {{form.submit(class="btn btn-success disabled",id='submit')}}
+          </div>
+          <div class="form-input disabled">
+            <h3>IMAGE</h3>
+
+            {{form.image(class="form-control guide-input  ",id='image')}}
+            
+          </div>
+          <div class="form-input disabled">
+            {{form.submit(class="button-paper  ",id='submit')}}
+          </div>
+          <i id='next-btn' class="fa-solid fa-right-long fa-2xl" ></i>
+      </div>
+
+          
       </div>
     </form>
 </main>
 
-<script src="{{url_for('main_bp.static',filename='main/scripts/new_newtool.js')}}"></script>
+<script src="{{url_for('main_bp.static',filename='main/scripts/new.js')}}"></script>
 <script>
     // re enters image into image input if its edit
 

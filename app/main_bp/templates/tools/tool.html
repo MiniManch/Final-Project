@@ -4,22 +4,16 @@
 {% include "partials/main/navbar.html" %}
 
 
-<div class="container">
-      <div class="col-md-2 guide-card ">
-        <div class="blog-card blog-card-blog">
-          <div class="blog-card-image">
-              <img class="img" src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{tool.image}}">
-              <div class="ripple-cont"></div>
-          </div>
-          <div class="blog-table">
-              <h6 class="blog-category blog-text-success"><i class="far fa-newspaper"></i> {{tool.subject}}</h6>
-              <h4 class="blog-card-caption">
-                {{tool.usage}}
-              </h4>
-          </div>
-        </div>
+<div class="col-lg-3 col-md-6 col-sm-12 mb-4 mb-lg-0 tool-card tool-page">
+  <div class="card rounded shadow-sm border-0">
+    <div class="card-body p-4"><img src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{tool.image}}" alt="" class="img-fluid d-block mx-auto mb-3">
+      <h5> <a href="#" class="text-dark">{{tool.name}}</a></h5>
+      <p class="small text-muted font-italic">{{tool.usage}}</p>
+      {% if current_user.username=='admin' and tool.accepted is false %}
+              <a href="{{url_for('main_bp.accept',what='tool',its_id=tool.id)}} " class='button-paper'>to Accept!</a>
+      {% endif %}
     </div>
+  </div>
 </div>
-
 
 {% endblock %}

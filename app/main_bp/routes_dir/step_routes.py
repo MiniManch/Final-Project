@@ -63,24 +63,7 @@ def newstep(guide_id):
 		t_dict.pop('_sa_instance_state')
 		tools.append(t_dict)
 
-	return flask.render_template('/step/new_step.html', form=form, tools=tools, style='main/guides.css', search=search, title="New Step")
-
-
-@main_bp.route('/step/<int:step_id>', methods=['GET', 'POST'])
-def step(step_id):
-	try:
-		this_step = models.Step.query.filter_by(id=step_id).first()
-		this_guide = models.Guide.query.filter_by(id=this_step.guide).first()
-
-		is_author = this_guide.author == current_user.id
-		is_admin = User.query.filter_by(id=current_user.id).first().username == 'admin'
-		is_accepted = this_guide.accepted and this_step.accepted
-		if is_accepted or is_author or is_admin :
-			return flask.render_template('/step/step.html', guide=this_guide, step=this_step, style='main/guide.css')
-	except Exception as e:
-		print(e)
-		flask.flash('the Step you are trying to reach is unavailable at this moment')
-		return flask.redirect(flask.url_for('main_bp.index'))
+	return flask.render_template('/step/new_step.html', form=form, tools=tools, style='main/new.css', title="New Step")
 
 
 @main_bp.route('/step/edit/<int:step_id>', methods=['GET', 'POST'])
@@ -88,7 +71,6 @@ def step(step_id):
 def editstep(step_id):
 	try:
 		form = New_Step()
-		search = Search()
 		this_step = models.Step.query.filter_by(id=step_id).first()
 		this_guide = models.Guide.query.filter_by(id=this_step.guide).first()
 
@@ -120,10 +102,9 @@ def editstep(step_id):
 		return flask.render_template('/step/new_step.html',
 		                             edit=get_image(this_step.image),
 		                             tools=tools,
-		                             search=search,
 		                             form=form,
 		                             step=this_step,
-		                             style='main/guide.css',
+		                             style='main/new.css',
 		                             title="Edit Step")
 	except Exception as e:
 		print(e)

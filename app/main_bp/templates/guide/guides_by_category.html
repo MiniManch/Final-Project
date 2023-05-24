@@ -7,26 +7,11 @@
 
 <div id='search-and-filter' class="row">
   <input class=" col-6 form-control form-control-underlined form-control-underlined border-primary" id='guide-search-input' type="text" placeholder="Search..">
-
-  <div class="dropdown col-6 " id='filter-dropdown'>
-    <button id='filter-dropdown-icon' class="btn btn-secondary " type="button" data-bs-toggle="dropdown" aria-expanded="false">
-      <span class="material-symbols-sharp" >
-      tune
-      </span>
-    </button>
-    <i id='clear-search' class="fa-solid fa-broom fa-lg"></i>
-    <ul class="dropdown-menu">
-      {% for category in categories.query.all() %}
-      <li><a class="dropdown-item filter-category" href="#">{{category.name}}</a></li>
-      {% endfor %}
-      
-    </ul>
-  </div>
   <a href="{{url_for('main_bp.newguide')}}" >
     <button id='new-guide-button' class="button-paper "><span class="bg-float"></span><span class="text">Create Guide!</span></button>
   </a>
 </div>
- 
+
 
 
 {% if guides|length > 0 %}
@@ -41,7 +26,6 @@
           <div class="card-img-overlay d-flex flex-column">
             <div class="card-body">
               
-              <small class="card-meta mb-2">{{categories.query.filter_by(id=guide.category).first().name}}</small>
               <h4 class="card-title mt-0 ">
                 <a class="text-white" href="{{url_for('main_bp.guide',guide_id=guide.id)}}">{{guide.subject}}</a>
               </h4>

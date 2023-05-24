@@ -3,26 +3,50 @@
 {% block content %}
 {% include "partials/main/navbar.html" %}
 
-<main  class="col-md-8 shadow bg-white rounded">
-      <img id='prev-btn' class='disabled' src="https://img.icons8.com/glyph-neue/64/back.png" alt="back"/>
-      <img id='next-btn' src="https://img.icons8.com/glyph-neue/64/forward--v1.png" alt="back"/>
+
+<main id ='container-of-all' class="col-md-8 shadow bg-white rounded animate__animated">
+      <div id="progress-bar"></div>
+
+<h1 class="title">{{title}}</h1>
+
+      
     <form id="regForm" class='form' method="POST" action="#" enctype="multipart/form-data">
     {{ form.hidden_tag()}}
-      <div id="form-container">
-          <div id="progress-bar"></div>
-          <h1 class="title">{{title}}</h1>
+      <div id="form-container" class=' d-flex justify-content-between '>
+          <i id='prev-btn' class=" disabled fa-solid fa-left-long fa-2xl" ></i>
 
-          {{form.name(class="form-control active first",id='name')}}
-          {{form.usage(class="form-control disabled second",id='usage',placeholder='To nail stuff to other stuff')}}
-          {{form.image(class="form-control disabled",id='image')}}
-          {{form.submit(class="btn btn-success disabled",id='submit')}}
 
+          <div class="form-input active">
+
+            <h3>NAME</h3>
+            {{form.name(class="form-control  first",id='name',placeholder='Name')}}
+
+          </div>
+          <div class="form-input disabled">
+
+            <h3>USAGE</h3>
+            {{form.usage(class="form-control  second",id='usage',placeholder='To nail stuff to other stuff')}}
+            
+          </div>
+  
+          <div class="form-input disabled">
+            <h3>IMAGE</h3>
+
+          {{form.image(class="form-control guide-input  ",id='image')}}
+            
+          </div>
+          <div class="form-input disabled">
+          {{form.submit(class="button-paper  ",id='submit')}}
+          </div>
+          <i id='next-btn' class="fa-solid fa-right-long fa-2xl" ></i>
       </div>
     </form>
 </main>
 
 
-<script src="{{url_for('main_bp.static',filename='main/scripts/new_tool.js')}}"></script>
+
+<script src="{{url_for('main_bp.static',filename='main/scripts/new.js')}}"></script>
+{% if edit %}
 <script>
 
 
@@ -52,5 +76,8 @@ function getImgURL(url, callback){
 if(edit){
     loadURLToInputFiled('{{edit}}')
 }
+
+
 </script>
+{% endif %}
 {% endblock %}

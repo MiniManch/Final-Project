@@ -4,14 +4,21 @@
 {% include "partials/main/navbar.html" %}
 
 
-<main  class="col-md-8 shadow bg-white rounded">
+
+
+<main id ='container-of-all' class="col-md-8  shadow bg-white rounded ">
     <form id="regForm" class='form' method="POST" action="#" enctype="multipart/form-data">
-    {{ form.hidden_tag()}}
-      <div id="form-container">
-          <h1 class="title">{{title}}</h1>
-          {{form.description(class="form-control",id='description',placeholder='This is the content of your review!')}}
-          {{form.rating(class="form-control disabled second",id='rating-input')}}
-             <div class=" ratings-container">
+        {{ form.hidden_tag()}}
+        <div class="row mt-5" id="form-container">
+            <h1 class="title mb-5 pt-0">{{title}}</h1>
+
+            <div class="col-md-12 mb-3 ">
+              {{form.description(class="form-control guide-input ",id='description',placeholder='This is the content of your review!')}}
+            </div>
+            <br>
+            {{form.rating(class="form-control disabled second",id='rating-input')}}
+
+            <div class=" ratings-container">
                 <div class="ratings" style="margin-top:2vh;">
                     <i class="fa-regular fa-star no-color"></i>
                     <i class="fa-regular fa-star no-color"></i>
@@ -20,11 +27,11 @@
                     <i class="fa-regular fa-star no-color"></i>
                 </div>
             </div>
-          {{form.submit(class="btn btn-success ")}}
-      </div>
+            <br>
+            
+            {{form.submit(class="button-paper",style='width:10vw')}}
+        </div>
     </form>
 </main>
-
-
 
 {% endblock %}

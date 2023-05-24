@@ -2,17 +2,76 @@
 
 {% block content %}
 {% include "partials/main/navbar.html" %}
-<div class="row homepage">
-  <div class="col-lg-4">
+
+<div class="homepage">
+    <div id="overlay"></div>
     <video autoplay muted loop id="myVideo">
-      <source src="https://res.cloudinary.com/drzcke4vu/video/upload/v1684618171/landing-video-1.mp4" type="video/mp4">
+      <source src="https://res.cloudinary.com/drzcke4vu/video/upload/v1684859889/landing-video-1.mp4" type="video/mp4">
     </video>
+
+  <div class="homepage-jumbo">
+    <img src="https://res.cloudinary.com/drzcke4vu/image/upload/v1684844114/logo_cbx9ai.png" alt="logo" id="homepage-logo">
+    <h2>DO IT YOURSELF<br><span>TOGETHER <i class="fa-regular fa-handshake" style="color: #ffffff;"></i></span></h2>
   </div>
-  <div class="col-lg-8 homepage-text">
-    <h2>DO IT YOURSELF!</h2>
-    <h4>WE WILL PROVIDE THE HOW</h4>
-  </div>
+
 </div>
 
+<div id="homepage-guides">
+<h1>SOME OF THE BEST</h1>  
+{% if guides|length > 0 %}
+<section class="wrapper">
+  <div id='container-of-guides' class="container">
+    <div class="row">
+      {% for guide in guides %}
+      <div class="col-sm-12 col-md-6 col-lg-4 mb-4 guide-container ">
 
+        <div class="card text-white card-has-bg click-col" style="background-image:url('https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{guide.image}}');">
+          <img class="card-img d-none" src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{guide.image}}" alt="#">
+          <div class="card-img-overlay d-flex flex-column">
+            <div class="card-body">
+              
+              <small class="card-meta mb-2">{{categories.query.filter_by(id=guide.category).first().name}}</small>
+              <h4 class="card-title mt-0 ">
+                <a class="text-white" href="{{url_for('main_bp.guide',guide_id=guide.id)}}">{{guide.subject}}</a>
+              </h4>
+              <small>
+                <i class="far fa-clock"></i> October 15, 2020 </small>
+            </div>
+            <div class="card-footer">
+              <div class="media">
+                <img class="mr-3 rounded-circle" src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{users.query.filter_by(id=guide.author).first().image}}" alt="Generic placeholder image" style="max-width:50px">
+                <div class="media-body">
+                  <h6 class="my-0 text-white d-block">{{users.query.filter_by(id=guide.author).first().username}}</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  {% endfor %}
+    </div>
+  </div>
+</section>
+  
+{% endif %}
+</div>
+
+<div class="homepage-guide-categories row ">
+
+<h1>CATEGORIES</h1>  
+
+{% for category in categories.query.all() %}
+  <div class=" rounded-circle card text-white card-has-bg click-col homepage-guide-category" style="background-image:url('https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{category.image}}');">
+    <img class="card-img d-none" src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{category.image}}" alt="#">
+    <div class="card-img-overlay d-flex flex-column">
+      <div class="card-body">
+        
+        <h4 class="card-title mt-0 homepage-category-text">
+          <a class="text-white" href="{{url_for('main_bp.guides_by_category',category_name=category.name)}}">{{category.name}}</a>
+        </h4>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+</div>
 {% endblock %}

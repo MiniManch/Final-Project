@@ -27,7 +27,7 @@ def signup():
 
         flask.flash('User already exists, try again')
         return flask.redirect(flask.url_for('accounts_bp.signup'))
-    return flask.render_template("signup.html", form=form, title='Sign up')
+    return flask.render_template("signup.html", form=form, title='Sign up', style='accounts/new.css')
 
 
 @accounts_bp.route("/login", methods=['GET', 'POST'])
@@ -47,7 +47,7 @@ def login():
             else:
                 flask.flash('Wrong password, try again')
                 return flask.redirect(flask.url_for('accounts_bp.login'))
-    return flask.render_template("login.html", form=form, title='Login')
+    return flask.render_template("login.html", form=form, title='Login',style='accounts/new.css')
 
 
 @accounts_bp.route('/logout')
@@ -57,15 +57,34 @@ def logout():
     return flask.redirect(flask.url_for('main_bp.index'))
 
 
-@accounts_bp.route('/profile',methods=['GET', 'POST'])
+@accounts_bp.route('/profile')
 @login_required
 def profile():
+    return flask.render_template('profile.html',user=current_user,style='accounts/user.css')
+
+
+@accounts_bp.route('/view/profile/<int:user_id>')
+def view_profile(user_id):
+    user = models.User.query.filter_by(id=user_id).first()
+    if user is None:
+        flask.flash('Cannot find this user try again')
+        return flask.redirect(flask.url_for('main_bp.index'))
+    return flask.render_template('profile.html', user=user, style='accounts/user.css')
+
+
+@accounts_bp.route('edit/profile/<int:user_id>',methods=['GET', 'POST'])
+@login_required
+def edit_profile(user_id):
+    if user_id is not current_user.id:
+        flask.flash('You cannot access this page')
+        return flask.redirect(flask.url_for('main_bp.index'))
+
     form = Update_User()
     if form.validate_on_submit():
         user_by_email = models.User.query.filter_by(email=form.email.data).first()
         user_by_username = models.User.query.filter_by(username=form.username.data).first()
         image = flask.request.files['image']
-        if image.filename is not '':
+        if image.filename is not 'Your  Picture.jpg':
             image = upload_image(image)
             current_user.image = image
         checker = 0
@@ -81,7 +100,4 @@ def profile():
             return flask.redirect(flask.url_for('accounts_bp.profile'))
         flask.flash('Cant update those details, they already exist, try again')
         return flask.redirect(flask.url_for('accounts_bp.profile'))
-    return flask.render_template('profile.html', form = form)
-
-
-
+    return flask.render_template('edit_profile.html', form=form, style='accounts/new.css', title='Edit Profile', edit=get_image(current_user.image),)

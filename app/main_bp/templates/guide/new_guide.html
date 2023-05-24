@@ -4,7 +4,7 @@
 {% include "partials/main/navbar.html" %}
 <!--    {{form.subject(class='form-control')}}-->
 
-<main id ='container-of-all' class="col-md-8 shadow bg-white rounded">
+<main id ='container-of-all' class="col-md-8 shadow bg-white rounded animate__animated">
       <div id="progress-bar"></div>
 
 <h1 class="title">{{title}}</h1>
@@ -40,17 +40,16 @@
             
           </div>
           <div class="form-input disabled">
-          {{form.submit(class="btn btn-success  ",id='submit')}}
+          {{form.submit(class="button-paper  ",id='submit')}}
           </div>
           <i id='next-btn' class="fa-solid fa-right-long fa-2xl" ></i>
-          <!-- <img  src="https://img.icons8.com/glyph-neue/64/forward--v1.png" alt="back"/> -->
       </div>
     </form>
 </main>
 
 
 
-<script src="{{url_for('main_bp.static',filename='main/scripts/new_guide.js')}}"></script>
+<script src="{{url_for('main_bp.static',filename='main/scripts/new.js')}}"></script>
 {% if edit %}
 <script>
 

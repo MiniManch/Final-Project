@@ -3,7 +3,6 @@
 
 const stars = document.querySelectorAll('.no-color');
 
-
 function changeColorRating(){
   stars_array = Array.from(stars)
   for (let x = 0; x-1 < stars_array.indexOf(this); x++){
@@ -42,7 +41,6 @@ function selectRating(){
     var clicked_on_stars = Array.from(document.querySelectorAll('.star-clicked-on'));
     if (ratings_input!= null){
       ratings_input.value = clicked_on_stars.length
-      console.log(ratings_input.value)
     }
   }
 
@@ -50,15 +48,12 @@ function selectRating(){
 }
 
 for (star of stars){
-  console.log(stars)
   star.addEventListener('mouseover',changeColorRating);
   star.addEventListener('mouseout',removeColorRating);
   star.addEventListener('click',selectRating)
 
 }
 
-
-// Sidebar open and close
 
 function onAnimationEnd(){
   var sidebar = document.querySelector('#sidebar');
@@ -98,6 +93,7 @@ for (toggler of sidebar_togglers){
 var icons = document.querySelectorAll('.nav-link.link-dark');
 
 function toggleBounce(){ 
+  console.log(this.children[1].tagName)
   if (this.children[1].tagName == 'I'){
     this.children[1] .classList.toggle('fa-bounce');
   }
@@ -109,21 +105,28 @@ for (icon of icons){
 
 }
 
+// Animate How botton border on homepage
 
-// Change sidebar toggler color after scroll only on index page
-var sidebar_toggler = document.querySelector('.sidebar-drop-toggler')
-var path = window.location.pathname;
+var how = document.querySelector('#how');
+var how_span = document.querySelector('how-span');
 
-function changeTogglerColor(){
-  console.log(sidebar_toggler.classList.contains('changed-navbar-toggler') && $(window).scrollTop() > screen.height);
-  if (path == '/'){
-    if(sidebar_toggler.classList.contains('changed-navbar-toggler') && $(window).scrollTop() < screen.height-10){
-      sidebar_toggler.classList.toggle('changed-navbar-toggler');
-    }
-    else if (!sidebar_toggler.classList.contains('changed-navbar-toggler') && $(window).scrollTop() > screen.height){
-      sidebar_toggler.classList.toggle('changed-navbar-toggler');
-    }
-  }
+function addEffectToHow(){
+  how_span.classList.add('animate__zoomIn');
+  
+  how_span.addEventListener('animationend',function(){
+    how_span.classList.remove('animate__zoomIn');
+    how_span.classList.add('how');
+  });
 }
 
-window.onscroll = function() {changeTogglerColor()};
+function removeEffectToHow(){
+  how_span.classList.add('animate__zoomOut');
+  
+  how_span.addEventListener('animationend',function(){
+    how_span.classList.remove('animate__zoomOut');
+    how_span.classList.remove('how');
+  });
+}
+
+how.addEventListener("mouseover",addEffectToHow);
+how.addEventListener('mouseout',removeEffectToHow);

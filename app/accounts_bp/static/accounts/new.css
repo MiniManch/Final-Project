@@ -21,8 +21,8 @@ main.rounded{
 
 .form-control.guide-input {
   align-self: center;
-   background-color: rgba(255,255,255,0.3);
-   color:white;
+  background-color: rgba(255,255,255,0.3);
+  color:white;
   background-image: none;
   background-position: 0 90%;
   background-repeat: repeat no-repeat;
@@ -48,7 +48,7 @@ main.rounded{
   -webkit-user-select: none;
   touch-action: manipulation;
   width:30vw !important;
-  display: inline-block;
+  /* display: inline-block; */
 }
 
 .form-control.active:hover {
@@ -68,27 +68,25 @@ font-family: 'Wix Madefor Display', sans-serif;
 
 
 #form-container{
-
-   border-style: solid;
-  border-width: 2.5px;
-  box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
-  box-sizing: border-box;
-  cursor: pointer;
-  display: inline-block;
-  font-family: Neucha, sans-serif;
-  font-size: 1rem;
-  line-height: 23px;
-  outline: none;
-  padding: .75rem;
-  text-decoration: none;
-  transition: all 235ms ease-in-out;
-  border-bottom-left-radius: 15px 255px;
-  border-bottom-right-radius: 225px 15px;
-  border-top-left-radius: 255px 15px;
-  border-top-right-radius: 15px 225px; 
-  border-color:white;
-  padding:8vh;
-
+border-style: solid;
+border-width: 2.5px;
+box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+box-sizing: border-box;
+cursor: pointer;
+display: inline-block;
+font-family: Neucha, sans-serif;
+font-size: 1rem;
+line-height: 23px;
+outline: none;
+padding: .75rem;
+text-decoration: none;
+transition: all 235ms ease-in-out;
+border-bottom-left-radius: 15px 255px;
+border-bottom-right-radius: 225px 15px;
+border-top-left-radius: 255px 15px;
+border-top-right-radius: 15px 225px;
+border-color:white;
+padding:8vh;
 }
 
 
@@ -228,10 +226,6 @@ h1{
 .blog-card-caption {
     font-weight: 400;
 }
-
-.blog-card-image{
-    width:fit-content;
-}
 .fa {
     display: inline-block;
     font: normal normal normal 14px/1 FontAwesome;
@@ -306,3 +300,34 @@ p {
   --animate-duration: 0.7s;
 }
 
+
+.accounts-form{
+    height:fit-content;
+    width:50vw;
+    border:1px solid red;
+}
+
+.accounts-form>form>input{
+    width:25vw;
+    margin-left: 15vw;
+}
+
+#submit{
+    margin-left: 10vw;
+    width:10vw;
+}
+
+#form-container>*{
+    display: block;
+}
+
+.title{
+    margin-bottom: 0;
+
+}
+
+
+#container-of-all{
+    height:fit-content;
+    padding-bottom: 10vh;
+}

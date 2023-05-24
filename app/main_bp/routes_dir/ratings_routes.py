@@ -25,6 +25,9 @@ def rate(guide_id,num_of_stars):
 		rating = num_of_stars
 		form  = Rating()
 		if flask.request.method == 'POST':
+			if form.rating.data is None:
+				flask.flash('You have to choose atleast 1 stars :)')
+				return flask.redirect(flask.url_for('main_bp.index'))
 			new_rate = models.Rating(
 				author=current_user.id,
 				content=form.description.data,
@@ -45,5 +48,5 @@ def rate(guide_id,num_of_stars):
 		flask.flash('Error has occurred')
 		return flask.redirect(flask.url_for('main_bp.index'))
 
-	return flask.render_template('/rating/rate.html',title=f'You are rating {guide.subject}', form = form, style='main/guides.css')
+	return flask.render_template('/rating/rate.html',title=f'You are rating: \n {guide.subject}', form = form, style='main/new.css')
 

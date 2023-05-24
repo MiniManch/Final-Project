@@ -4,21 +4,34 @@ body,html{
     z-index:1;
     background-color:#f5f5ef;
     overflow-x: hidden;
+    overflow-x: visible;
+
 }
 
 
 nav,.alert{
     z-index:2 !important;
 }
+
+.alert{
+    width:100%;
+    left:0;
+    position:absolute;
+    top:15vh;
+    display: inline;
+}
+
+.alert.message{
+    position: absolute !important;
+    top:0;
+}
+
 .form{
 width : 50vw;
 margin:auto;
 }
 
-.message{
-    position: absolute;
-    top:10vh;
-}
+
 #post_container{
     margin:auto;
     width:85vw;
@@ -81,8 +94,10 @@ margin:auto;
 
 /* Create New Guide Part */
 
-input.disabled,select.disabled,div.disabled,ul.disabled{
+input.disabled,select.disabled,div.disabled,ul.disabled,.sidebar-drop-toggler.disabled{
   display: none !important;
+  visibility: hidden;
+  width:0;
 }
 
 
@@ -108,6 +123,7 @@ input.disabled,select.disabled,div.disabled,ul.disabled{
   top:-30vh;
   width: 100vw;
   height:fit-content;
+  /* z-index: 1; */
 }
 
 .homepage{
@@ -140,12 +156,6 @@ main{
     height:40vh;
 }
 
-/*#form-container>input,#form-container>select{
-    width:80%;
-    margin-left:5vw;
-    margin-top:3vh;
-}
-*/
 
 #prev-btn,#next-btn{
     height:7vh;
@@ -161,29 +171,46 @@ main{
 }
 /*Navbar*/
 
-#logo{
-    height:8vh;
-    width:4vw;
-    paddding:0;
-    display: inline-block;
-    position: absolute;
-    top:2vh;
-    left:35vw;
-}
 
 nav{
   width:100vw;
 }
 
+#sidebar-container{
+    position: fixed;
+    top:0;
+    left:0;
+    height:100vh;
+    transition: width 2s;
+    z-index: 5;
+    
+
+}
+
+#sidebar-container>i{
+
+}
 .user_image{
   padding:0 !important;
   margin-left: 2vw;
 }
 
 
-.tool_added{
-    border:1px solid blue;
+#sidebar{
+    height:100%;
+    width:20vw;
+    background-color: black;
+    display: block;
+    opacity: 1;
+    transition: opacity 200ms, display 200ms;
+    
 }
+
+#sidebar.disabled{
+      display: none;
+      opacity: 0;
+}
+
 .alert{
     width:100%;
     left:0;
@@ -191,6 +218,15 @@ nav{
     top:10vh;
 }
 
+.sidebar-drop-toggler{
+    cursor: pointer;
+    
+}
+.sidebar-drop-toggler:first-child{
+    margin-top: 7vh !important;
+    margin-left: 3vw;
+    z-index: 5;
+}
 
 
 /*Guide page */
@@ -203,7 +239,9 @@ nav{
     width:80vw;
     height:100vh;
 }
-
+.tool_added{
+    border:1px solid blue;
+}
 #guide-container>.col-12{
     height: 70%;
        border-width: 5px 3px 3px 5px;

@@ -12,21 +12,40 @@ from app.utils import  upload_image, get_image , create_category_list
 @main_bp.route("/guides")
 def guides():
 	guides_list = list(models.Guide.query.filter_by(accepted=True))
-	print(guides_list)
 	return flask.render_template('/guide/guides.html', guides=guides_list,categories=models.Category, users=User, style='main/guides.css')
+
+
+@main_bp.route("/guides/<category_name>")
+def guides_by_category(category_name):
+	try:
+		category_name = category_name.lower().capitalize()
+		category = models.Category.query.filter_by(name=category_name)
+
+		if category is None:
+			flask.flash('Cannot find what you were looking for.')
+			return flask.redirect(flask.url_for('main_bp.index'))
+
+		guides_list = list(models.Guide.query.filter_by(category=category.first().id))
+
+		return flask.render_template('/guide/guides_by_category.html', guides=guides_list, categories=category, users=User, style='main/guides.css')
+	except Exception as e:
+			print(e)
+			flask.flash('Error has occurred')
+			return flask.redirect(flask.url_for('main_bp.index'))
 
 
 @main_bp.route("/my_guides")
 @login_required
 def my_guides():
 	guides_list = list(models.Guide.query.filter_by(author=current_user.id))
-	return flask.render_template('/guide/guides.html', guides=guides_list, users=User,categories=models.Category, style='main/guides.css')
+	return flask.render_template('/guide/guides.html', guides=guides_list, users=User, categories=models.Category, style='main/guides.css')
 
 
 @main_bp.route('/new_guide', methods=['GET', 'POST'])
 @login_required
 def newguide():
 	form = New_Guide()
+	is_admin = current_user.username == 'admin'
 	if flask.request.method == 'POST':
 		try:
 			image = form.image.data
@@ -45,7 +64,7 @@ def newguide():
 				image=image,
 				category = category.id,
 				steps=[],
-				accepted=False
+				accepted=is_admin
 			)
 			db.session.add(guide)
 			db.session.commit()

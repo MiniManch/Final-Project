@@ -1,0 +1,65 @@
+{% extends 'partials/accounts/base.html' %}
+{% block content %}
+{% include "partials/accounts/navbar.html" %}
+
+
+<main id ='container-of-all' class="col-md-8  shadow bg-white rounded ">
+    <form id="regForm" class='form' method="POST" action="#" enctype="multipart/form-data">
+        {{ form.hidden_tag()}}
+        <div class="row mt-5" id="form-container">
+            <h1 class="title mb-5 pt-0">{{title}}</h1>
+
+            <div class="col-md-12 mb-3 ">
+                {{form.email(class='form-control guide-input',placeholder='Email' ,value=current_user.email)}}
+            </div>
+            <br>
+
+            <div class="col-md-12 mb-3">
+                {{form.username(class='form-control guide-input',placeholder='Username', value=current_user.username)}}
+            </div>
+            <br>
+
+            <div class="col-md-12 mb-3">
+                {{form.image(class='form-control guide-input')}}
+            </div>
+            <br>
+            
+            {{form.submit(class="button-paper",value='Save Profile')}}
+        </div>
+    </form>
+</main>
+
+<script>
+    // re enters image into image input if its edit
+
+function loadURLToInputFiled(url){
+  getImgURL(url, (imgBlob)=>{
+    // Load img blob to input
+    // WIP: UTF8 character error
+    let fileName = 'Your  Picture.jpg'
+    let file = new File([imgBlob], fileName,{type:"image/jpeg", lastModified:new Date().getTime()}, 'utf-8');
+    let container = new DataTransfer();
+    container.items.add(file);
+    document.querySelector('#image').files = container.files;
+  })
+}
+
+// xmlHTTP return blob respond
+function getImgURL(url, callback){
+  var xhr = new XMLHttpRequest();
+  xhr.onload = function() {
+      callback(xhr.response);
+  };
+  xhr.open('GET', url);
+  xhr.responseType = 'blob';
+  xhr.send();
+}
+
+if ('{{edit}}' !== ''){
+
+    loadURLToInputFiled('{{edit}}');
+}
+
+</script>
+{% endblock %}
+

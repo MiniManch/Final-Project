@@ -1,108 +1,107 @@
-
-<nav class="navbar navbar-expand-sm   navbar-light bg-light  ">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse d-flex justify-content-center" id="navbarTogglerDemo03">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0 ">
+<div id='sidebar-container'>
+      <i class="fa-solid fa-toolbox fa-2xl sidebar-drop-toggler" style="color: #000000;"></i>
+  <div id='sidebar' class=" disabled d-flex flex-column flex-shrink-0 p-3 bg-light animate__animated">
+      <i class="fa-solid fa-minimize sidebar-drop-toggler"  style="color: #000000;"></i>
+    <hr>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <a href="{{url_for('main_bp.index')}}" class="nav-link link-dark " aria-current="page">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
+          <i class="fa-solid fa-warehouse" style="color: #000000; margin-right: 1vh;"></i>
+          Home
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="{{url_for('main_bp.guides')}}" class="nav-link link-dark " aria-current="page">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#guide-home"></use></svg>
+          <i class="fa-solid fa-hammer" style="color: #000000; margin-right: 1vh;"></i>
+          Guides
+        </a>
+      </li>
+      <li>
+        <a href="{{url_for('main_bp.tools')}}" class="nav-link link-dark">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#tools"></use></svg>
+          <i class="fa-solid fa-wrench" style="color: #000000; margin-right: 1vh;"></i>  
+          Tools
+        </a>
+      </li>
+      <li>
+        <a href="#" class="nav-link link-dark">
+          <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
+          <i class="fa-solid fa-cart-shopping" style="color: #000000; margin-right: 1vh;"></i> 
+          Store
+        </a>
+      </li>
+    </ul>
+    <hr>
+    {% if current_user.is_authenticated%}
+    <ul class="nav nav-pills flex-column mb-auto">
           <li class="nav-item">
-            <a class="nav-link" href="{{url_for('main_bp.index')}}">Home <span class="sr-only">(current)</span></a>
-          </li>
-
-          <!-- dropdown start -->
-          <li class="nav-item dropdown dmenu">
-            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-              Guides & More!
+            <a href="{{url_for('accounts_bp.profile')}}" class="nav-link link-dark " aria-current="page">
+              <svg class="bi me-2" width="16" height="16"><use xlink:href="#profile"></use></svg>
+              <i class="fa-solid fa-user" style="color: #000000; margin-right: 1vh;"></i> 
+              Profile
             </a>
-            <div class="dropdown-menu sm-menu">
-
-              <!-- start of dropend -->
-              <div class="btn-group dropend">
-                <a type="button" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                  Guides
-                </a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a class="nav-link" href="{{url_for('main_bp.my_guides')}}">My Guides</a>
-                  </li>
-                  <li>
-                    <a class="nav-link" href="{{url_for('main_bp.guides')}}">All Guides</a>
-                  </li>
-                  <li>
-                    <a class="nav-link" href="{{url_for('main_bp.newguide')}}">Create a Guide!</a>
-                  </li>
-                </ul>
-              </div>
-              <!-- end of dropend -->
-
-              <br>
-
-              <!-- start of dropend -->
-              <div class="btn-group dropend">
-                <a type="button" class=" dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                  Tools
-                </a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a class="nav-link" href="{{url_for('main_bp.tools')}}">Tools</a>
-                  </li>
-                  <li>
-                    <a class="nav-link" href="{{url_for('main_bp.newtool')}}">Create a Tool!</a>
-                  </li>
-                </ul>
-              </div>
-              <!-- end of dropend -->
-              {% if current_user.username == 'admin' %}
-              <!-- start of dropend -->
-              <br>
-              <div class="btn-group dropend">
-                <a type="button" class=" dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                  Admin Links
-                </a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a class="nav-link" href="{{url_for('main_bp.tools_to_accept')}}">Tools to accept</a>
-                  </li>
-                  <li>
-                    <a class="nav-link" href="{{url_for('main_bp.guides_to_accept')}}">Guides to accept</a>
-                  </li>
-                </ul>
-              </div>
-              {% endif %}
-              <!-- end of dropend -->
-            </div>
           </li>
-          <!-- dropdown end -->
-        {% if current_user.is_authenticated%}
-        <li class="nav-item dropdown dmenu">
-          <a class=" user_image nav-link dropdown-toggle" href="{{url_for('accounts_bp.profile')}}"  data-toggle="dropdown">
-            <img class="rounded-circle  " width="40px" src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{current_user.image}}">
-          </a>
-
-          <div class="dropdown-menu sm-menu">
-            <a class="nav-link" href="{{url_for('accounts_bp.profile')}}">Profile</a>
-            <a class="nav-link" href="{{url_for('accounts_bp.logout')}}">Log Out</a>
-          </div>
-        </li>
+          <li class="nav-item">
+            <a href="{{url_for('accounts_bp.logout')}}" class="nav-link link-dark " aria-current="page">
+              <svg class="bi me-2" width="16" height="16"><use xlink:href="#logout"></use></svg>
+              <i class="fa-solid fa-arrow-right-from-bracket" style="color: #000000; margin-right: 1vh;"></i> 
+              Log Out
+            </a>
+          </li>
+          <li class="nav-item d-flex justify-content-start ms-3 mt-3">
+            <img  src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{current_user.image}}" alt="user Image"
+              class='rounded pb-5' style='max-width: 60px; display:inline-block;'> 
+            <a href="#" class="nav-link link-dark mt-2 " aria-current="page">
+              <strong>{{current_user.username}}</strong>
+            </a>
+            
+          </li>
+        </ul>
 
         {% else %}
-         <li class="nav-item">
-          <a class="nav-link" href="{{url_for('accounts_bp.login')}}">Log In</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{url_for('accounts_bp.signup')}}">Signup</a>
-        </li>
+        <ul class="nav nav-pills flex-column mb-auto">
+          <li class="nav-item">
+            <a href="{{url_for('accounts_bp.login')}}" class="nav-link link-dark " aria-current="page">
+              <svg class="bi me-2" width="16" height="16"><use xlink:href="#login"></use></svg>
+              <i class="fa-solid fa-arrow-right-to-bracket" style="color: #000000; margin-right: 1vh;"></i> 
+              Log In
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url_for('accounts_bp.signup')}}" class="nav-link link-dark " aria-current="page">
+              <svg class="bi me-2" width="16" height="16"><use xlink:href="#signup"></use></svg>
+              <i class="fa-solid fa-user-plus" style="color: #000000; margin-right: 1vh;"></i> 
+              Sign Up
+            </a>
+          </li>
+        </ul>
         {% endif %}
-           
-    </ul>
-    
+      {% if current_user.username == 'admin' %}
+
+      <div class="btn-group dropend nav-link">
+        <a type="button"  data-bs-toggle="dropdown" aria-expanded="false">
+          Admin Links
+        </a>
+        <ul class="dropdown-menu">
+          <li>
+            <a class="nav-link" href="{{url_for('main_bp.tools_to_accept')}}">Tools to accept</a>
+          </li>
+          <li>
+            <a class="nav-link" href="{{url_for('main_bp.guides_to_accept')}}">Guides to accept</a>
+          </li>
+        </ul>
+      </div>
+      {% endif %}
+
   </div>
-</nav>
+</div>
+
 {% with messages = get_flashed_messages() %}
   {% if messages %}
   {% for message in messages %}
-      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <div class=" alert message alert-warning alert-dismissible fade show" role="alert">
           {{message}}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>

@@ -36,7 +36,7 @@ def newtool():
 			print(e)
 			flask.flash('Error has occurred')
 			return flask.redirect(flask.url_for('main_bp.index'))
-	return flask.render_template('/tools/new_tool.html', form=form, title="New Tool")
+	return flask.render_template('/tools/new_tool.html', form=form, title="New Tool",style='main/new.css')
 
 
 @main_bp.route("/tools",methods=['GET','POST'])
@@ -77,7 +77,7 @@ def edittool(tool_id):
 
 		form.name.data = this_tool.name
 		form.usage.data = this_tool.usage
-		return flask.render_template('/tools/new_tool.html', edit=get_image(this_tool.image), form=form, tool=this_tool, style='main/guide.css')
+		return flask.render_template('/tools/new_tool.html', edit=get_image(this_tool.image), form=form, tool=this_tool, style='main/new.css')
 	except Exception as e:
 		print(e)
 		flask.flash('the Tool you are trying to reach is unavailable at this moment')
