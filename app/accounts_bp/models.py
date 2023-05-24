@@ -1,5 +1,7 @@
 from flask_login import UserMixin
 from app import db
+import time
+import jwt
 
 
 class User(UserMixin, db.Model):
@@ -14,7 +16,27 @@ class User(UserMixin, db.Model):
 	tools   = db.relationship('Tool', backref='tool-creator')
 	items_on_sale = db.relationship('Item', backref='items')
 
+	def get_reset_password_token(self, app, expires_in=600):
+		timeout = time.time() + expires_in
+		payload = {
+			'reset_password': self.id,
+			'exp': timeout
+		}
 
-# from app.main_bp.models import Card
+		# Get the secret key from config
+		secret_key = app.config['SECRET_KEY']
 
-# after image is uploaded to cloudinary, we want to save the public id of it
+		# Create the token
+		token = jwt.encode(payload, secret_key, algorithm="HS256")
+		print(type(token))
+
+
+		return token
+
+	def verify_reset_password_token(self, token, app):
+		try:
+			id = jwt.decode(token, app.config['SECRET_KEY'],
+			                algorithms=['HS256'])['reset_password']
+		except:
+			return
+		return User.query.get(id)

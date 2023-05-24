@@ -118,7 +118,7 @@ p {
 .tool_added{
     border:1px solid blue;
 }
-#guide-container>.col-12{
+#guide{
     height: 70%;
        border-width: 5px 3px 3px 5px;
   border-radius:95% 4% 97% 5%/4% 94% 3% 95%;
@@ -137,6 +137,7 @@ p {
     border: solid black;
     max-height:100%;
     max-width:50%;
+    display: inline-block;
 }
 
 #guide-container>.col-12>.row{
@@ -149,10 +150,15 @@ p {
     width:80%;
     position:relative;
     left:5vw;
-    margin:0;
+    /* margin:0; */
     font-weight: normal;
+    display: inline-block;
 }
 
+#guide-image-container{
+    width:33%;
+    float:right;
+}
 .step-container{
     height:70%;
     border-width: 5px 3px 3px 5px;
@@ -253,16 +259,24 @@ p {
     height:15%;
 }
 
-#guide-footer>.col-6{
+.author-column{
    border-width: 5px 3px 3px 5px;
-  border-radius:95% 4% 97% 5%/4% 94% 3% 95%;
-  border: solid black;
+   border-radius:95% 4% 97% 5%/4% 94% 3% 95%;
+   border: solid black;
+   display: inline-block;
+    width:fit-content;
+    padding:1vw;
+    padding-right: 3vw;
+
+
+
+}
+.author-column:nth-child(2){
+    float:right;
 }
 
 
-#author{
-    padding-top: 1vw;
-}
+
 #author>a>img{
     max-width:100px;
     max-height: 100px;
@@ -275,15 +289,95 @@ p {
     margin-left:2vw;
 }
 
-@media screen and (max-width:792px){
+@media screen and (max-width:600px){
+
+    #guide{
+        max-height: fit-content;
+        padding-bottom: 5vh;
+        max-height:fit-content;
+        margin-bottom: 5vh;
+    }
     #guide-container{
         margin-top: 10vh;
         height:100vh;
+        padding-bottom: 5vh;
+        max-height:fit-content;
     }
+
     #guide-info>h1{
         font-size: 2rem;
     }
+
     #guide-info>h2{
         font-size: 1rem;
     }
+
+    #guide-info-container{
+        padding-top:3vh;
+        width:100%;
+        margin-left: 7vw;
+    }
+
+    #guide-image-container{
+        margin-left:10vw;
+        width: 100%;
+        float:none;
+        padding-top: 3vh;
+    }
+
+    .step-container{
+        max-height: fit-content;
+        padding-top: 5vh;
+        padding-left: vw;
+        width:100%;
+        margin-bottom: 5vh;
+    
+    }
+
+    .step-info-container>h2{
+        width:100%; 
+    }
+
+    .image-div{
+        width:100%;
+    }
+
+    .step-image-container{
+        margin-left: 0;
+    }
+
+    .step-info-container{
+        width:100%;
+    }
+
+    #author{
+        padding-top: 1vw;
+    }
+    .author-column{
+        margin-bottom: 5vh;
+    width:100%;
+    padding:5vw;
+    padding-right: 3vw;
+
+    }
+    .author-column:nth-child(2){
+        float:right;
+    }
+    #guide-footer{
+        width:100%;
+        left:0;
+    }
+    
+    .ratings{
+        margin-top: 0;
+    }
+    .ratings i{
+        font-size: 1rem !important; 
+    }
+    .review-count{
+        font-size: 1rem !important;
+    }
+
+
+
 }

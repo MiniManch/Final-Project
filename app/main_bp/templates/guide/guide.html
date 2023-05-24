@@ -6,7 +6,7 @@
  <div id='guide-container' class="row" >
 
     <!-- Guide part -->
-   <div class='col-12'>
+   <div  id='guide'>
 
      <div class="flex-sm-column flex-md-row" id='guide-info-container'>
 
@@ -15,7 +15,7 @@
           <h2 id="guide-content">{{guide.content}}</h2>
         </div>
 
-        <div class="col-4">
+        <div id='guide-image-container'>
           <img class='step-or-guide-image' id='guide-image' src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{guide.image}}" alt="#">  
         </div>
 
@@ -28,15 +28,15 @@
    {% for step in guide.steps %}
    <div class='col-12 step-container'>
 
-      <div class="row" >
+      <div class="flex-sm-column flex-md-row" >
 
-        <div class="col-5">
+        <div class="col-5  order-sm-2 image-div">
           <div class="step-image-container">
             <img class='step-or-guide-image' src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{step.image}}" alt="">  
           </div>
         </div>
 
-        <div class="col-7 step-info-container">
+        <div class="col-7  step-info-container">
           {% if current_user.id == guide.author %}
 
           <h2><a href="{{url_for('main_bp.editstep',step_id=step.id)}}">{{step.subject}}</a></h2>
@@ -78,17 +78,17 @@
 
 
    <!-- Footer -->
-  <div class="row" id="guide-footer">
+  <div class="flex-sm-column flex-md-row" id="guide-footer">
 
-    <div class="col-6" id='author'>
+    <div class="col-6 author-column " id='author'>
 
       <a href="{{url_for('accounts_bp.view_profile',user_id=guide.author)}}"> <img src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{users.query.filter_by(id=guide.author).first().image}}" alt="..." class="avatar img-raised"></a>
       <h6 id='author-name'>{{users.query.filter_by(id=guide.author).first().username}}</h6>
     </div>
 
-    <div id='reputation' class="col-6">
+    <div id='reputation' class="col-6 author-column ">
 
-      <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex justify-content-lg-between align-items-center">
             <div class="ratings">
                 {% if guide.rating == 0 %}
 
