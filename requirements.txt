@@ -16,3 +16,4 @@ uuid
 cloudinary
 python-dotenv
 itsdangerous
+psycopg2-binary

@@ -8,7 +8,8 @@ from app.accounts_bp.models import User
 from app.utils import get_image, upload_image
 import requests
 
-@main_bp.route('/new_item', methods=['GET', 'POST'])
+
+@main_bp.route('/store/new_item', methods=['GET', 'POST'])
 @login_required
 def newitem():
 	is_admin = current_user.username == 'admin'
@@ -25,9 +26,9 @@ def newitem():
 			item = models.Item(
 				name=form.name.data,
 				seller=current_user.id,
-				description=form.description.data,
+				# description=form.description.data,
 				image=image,
-				guide=form.guide.data,
+				guide=form.guides.data,
 				fixed=form.fixed.data,
 				price=form.price.data,
 			)
@@ -39,21 +40,26 @@ def newitem():
 			print(e)
 			flask.flash('Error has occurred')
 			return flask.redirect(flask.url_for('main_bp.index'))
-	return flask.render_template('/store/new_item.html', form=form, title="New Item")
+	guides = models.Guide.query.filter_by(accepted=True)
+	return flask.render_template('/store/new_item.html', form=form,guides=guides, title="New Item",style='main/new.css')
 
 
-@main_bp.route('/item/<int:item_id>', methods=['GET', 'POST'])
+@main_bp.route('/store/item/<int:item_id>', methods=['GET', 'POST'])
 def item(item_id):
 	try:
 		this_item = models.Item.query.filter_by(id=item_id).first()
-		return flask.render_template('/store/item.html', item=this_item, style='main/guide.css')
+		guides    = models.Guide.query.all()
+		if this_item is None:
+			flask.flash('Cannot access that item')
+			return flask.redirect(flask.url_for('main_bp.index'))
+		return flask.render_template('/store/item.html', item=this_item, guides=guides, style='main/tools.css')
 	except Exception as e:
 		print(e)
 		flask.flash('the Item you are trying to reach is unavailable at this moment')
 		return flask.redirect(flask.url_for('main_bp.index'))
 
 
-@main_bp.route('/item/edit/<int:item_id>', methods=['GET', 'POST'])
+@main_bp.route('/store/item/edit/<int:item_id>', methods=['GET', 'POST'])
 @login_required
 def edititem(item_id):
 	try:
@@ -94,12 +100,14 @@ def edititem(item_id):
 
 @main_bp.route("/store/items")
 def items():
-	items_list = list(models.Item.query.filter_by(sold=False))
-	return flask.render_template('/store/items.html', items=items_list, users=User, style='main/guides.css')
+	items_list = list(models.Item.query.all())
+	print(items_list)
+	return flask.render_template('/store/items.html', items=items_list, users=User, style='main/tools.css')
 
 
 @main_bp.route("/store/my_items")
 @login_required
 def myitems():
+
 	items_list = list(models.Item.query.filter_by(seller=current_user.id))
-	return flask.render_template('/store/items.html', items=items_list, users=User, style='main/guides.css')
+	return flask.render_template('/store/items.html', items=items_list, users=User, style='main/tools.css')

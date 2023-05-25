@@ -1,5 +1,4 @@
 
-
 //SELECTORS and VARIABLES
 const form    = document.querySelector('#regForm');
 const subject = document.querySelector('#subject');
@@ -14,6 +13,7 @@ const progress = document.querySelector('#progress-bar');
 const title = document.querySelector('.title');
 const nav = document.querySelector('nav');
 const container = document.querySelector('#container-of-all');
+var guide_form_input     = document.querySelector('#guide_input');
 
 
 
@@ -58,6 +58,12 @@ function dataValidator(){
   } 
   else if(active.id == 'category'){
     if (active.value == '-Category-'){
+      alertMessage('This is a mandatory field.')
+      return false;
+    }
+  }
+  else if(active.id == 'search-and-filter'){
+    if(guide_form_input.value == ''){
       alertMessage('This is a mandatory field.')
       return false;
     }
@@ -192,75 +198,52 @@ function prevQuestion(){
   }
 }
 
-
 // EVENTS
 nextBtn.addEventListener('click',nextQuestion);
 prevBtn.addEventListener('click',prevQuestion);
 
 
 
-
-// Select tools in New step
+// Select guides in New Item
 var add_buttons          = document.querySelectorAll('.add_button');
-var tools_form_input     = document.querySelector('#tools_input');
-var tools_to_submit        = [];
+var guide_form_input     = document.querySelector('#guide_input');
 var plus = 'https://img.icons8.com/ios/50/add--v1.png';
 var minus = 'https://img.icons8.com/ios/50/minus.png';
+var guide_cards = document.querySelectorAll('.blog-card');
 
-
-function getParents(element){
-    var els = [];
-    while (element) {
-      if(element.tagName == undefined){
-        break;
-      }
-      els.push(element);
-      element = element.parentNode;
-  }
-  return els;
+function getGuideId(guide){
+  return guide.children[1].innerHTML;
 }
 
-function getToolId(tool){
-  return tool.children[1].innerHTML;
-}
-
-function addOrRemoveTool(){
+function addOrRemoveGuide(){
   parents = getParents(this);
   for(var parent of parents){
     if(parent.classList.contains('blog-card')){
-      parent.classList.toggle('tool_added');
+      parent.classList.toggle('guide_added');
       if (this.children[0].src == plus){
-        tools_to_submit.push(getToolId(this));  
         this.children[0].setAttribute('src',minus);
-        tools_form_input.value = tools_to_submit.toString();
-      }else if(this.children[0].src == minus){
-        tools_to_submit.pop(getToolId(this));  
+        guide_form_input.value = getGuideId(this).toString();
+
+        for (guide of guide_cards){
+          if(!guide.classList.contains('guide_added')){
+            guide.classList.add('disabled-guide');         
+          }
+        }
+      }
+      else if(this.children[0].src == minus){
+        guide_form_input.value = '';
         this.children[0].setAttribute('src',plus);
-        tools_form_input.value = tools_to_submit.toString();
+
+        for (guide of guide_cards){
+          if(guide.classList.contains('disabled-guide')){
+              guide.classList.remove('disabled-guide');         
+          }
+        }
       }
     }
   }
 }
 
 for(var button of add_buttons){
-  button.addEventListener('click',addOrRemoveTool);
+  button.addEventListener('click',addOrRemoveGuide);
 }
-
-// Search tools in New Step
-
-
-// search for guides
-$(document).ready(function(){
-  $("#guide-search-input").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#container-of-tools *").filter(function() {
-      if (this.classList.contains('tool-container')){
-        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-      }
-    });
-  });
-});
-
-
-
-

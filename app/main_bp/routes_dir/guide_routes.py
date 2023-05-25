@@ -41,6 +41,19 @@ def my_guides():
 	return flask.render_template('/guide/guides.html', guides=guides_list, users=User, categories=models.Category, style='main/guides.css')
 
 
+@main_bp.route("/guides/user/<int:user_id>")
+@login_required
+def user_guides(user_id):
+	guides_list = models.Guide.query.filter_by(author=user_id)
+
+	if guides_list.first() is None:
+		flask.flash('Cannot find what you were looking for.')
+		return flask.redirect(flask.url_for('main_bp.index'))
+	guides_list = list(guides_list)
+
+	return flask.render_template('/guide/guides.html', guides=guides_list, users=User, categories=models.Category, style='main/guides.css')
+
+
 @main_bp.route('/new_guide', methods=['GET', 'POST'])
 @login_required
 def newguide():

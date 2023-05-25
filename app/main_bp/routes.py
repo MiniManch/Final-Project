@@ -19,3 +19,4 @@ import app.main_bp.routes_dir.tool_routes
 import app.main_bp.routes_dir.step_routes
 import app.main_bp.routes_dir.admin_routes
 import app.main_bp.routes_dir.ratings_routes
+import app.main_bp.routes_dir.store_routes

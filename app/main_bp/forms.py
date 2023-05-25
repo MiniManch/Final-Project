@@ -31,8 +31,8 @@ class New_Item(FlaskForm):
 	description         = StringField('description', validators=[InputRequired()])
 	image               = FileField('Image')
 	price               = IntegerField('Price')
-	guide               = SelectField('Guide')
-	fixed               = BooleanField('')
+	guides              = StringField('Guide')
+	fixed               = BooleanField('Has this item been fixed?')
 	submit              = SubmitField('Submit')
 
 

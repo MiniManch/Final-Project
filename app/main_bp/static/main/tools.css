@@ -78,8 +78,11 @@
 
 
 #new-tool-button{
+    position: relative;
     width:fit-content;
-    margin-left:5vw;
+    /* margin-left:5vw; */
+    /* float: right; */
+    left: 42vw;
 }
 
 #new-tool-link{

@@ -60,6 +60,7 @@ class Item(db.Model):
     id = db.Column(db.Integer,primary_key=True, autoincrement=True)
     seller = db.Column(db.Integer, db.ForeignKey('user.id'))
     name = db.Column(db.String(200))
+    # description = db.Column(db.String(200))
     guide =  db.Column(db.Integer, db.ForeignKey('guide.id'))
     fixed = db.Column(db.Boolean)
     price = db.Column(db.Integer)

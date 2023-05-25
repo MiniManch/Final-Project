@@ -127,3 +127,18 @@ function changeTogglerColor(){
 }
 
 window.onscroll = function() {changeTogglerColor()};
+
+
+// Hover Store on homepage
+var store_jumbo = document.querySelector('#homepage-store-jumbo');
+
+function addAnimationToStore(){
+  this.classList.add('animate__heartBeat');
+  
+}
+
+function removeAnimationToStore(){
+  this.classList.remove('animate__heartBeat');
+}
+store_jumbo.addEventListener('mouseover',addAnimationToStore);
+store_jumbo.addEventListener('mouseout',removeAnimationToStore);

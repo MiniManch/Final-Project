@@ -5,8 +5,12 @@
 
 <div class="homepage">
     <div id="overlay"></div>
-    <video autoplay muted loop id="myVideo">
+    <video autoplay muted loop id="myVideo" class='full-screen'>
       <source src="https://res.cloudinary.com/drzcke4vu/video/upload/v1684859889/landing-video-1.mp4" type="video/mp4">
+    </video>
+
+      <video autoplay muted loop id="myVideoForPhone" class='small-screen'>
+      <source src="https://res.cloudinary.com/drzcke4vu/video/upload/v1685029229/pexels-alena-darmel-7730592-2160x3840-25fps_i8o3uh.mp4">
     </video>
 
   <div class="homepage-jumbo">
@@ -23,7 +27,7 @@
   <div id='container-of-guides' class="container">
     <div class="row">
       {% for guide in guides %}
-      <div class="col-sm-12 col-md-6 col-lg-4 mb-4 guide-container ">
+      <div class=" mb-4 guide-container ">
 
         <div class="card text-white card-has-bg click-col" style="background-image:url('https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{guide.image}}');">
           <img class="card-img d-none" src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{guide.image}}" alt="#">
@@ -35,6 +39,7 @@
                 <a class="text-white" href="{{url_for('main_bp.guide',guide_id=guide.id)}}">{{guide.subject}}</a>
               </h4>
               <small>
+
                 <i class="far fa-clock"></i> October 15, 2020 </small>
             </div>
             <div class="card-footer">
@@ -56,22 +61,33 @@
 {% endif %}
 </div>
 
-<div class="homepage-guide-categories row ">
+<div class="homepage-guide-categories  ">
 
-<h1>CATEGORIES</h1>  
+  <h1 id='categories-title'>CATEGORIES</h1>  
+  <div class=>
+    {% for category in categories.query.all() %}
+    <div class=" rounded-circle card text-white card-has-bg click-col homepage-guide-category" style="background-image:url('https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{category.image}}');">
 
-{% for category in categories.query.all() %}
-  <div class=" rounded-circle card text-white card-has-bg click-col homepage-guide-category" style="background-image:url('https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{category.image}}');">
-    <img class="card-img d-none" src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{category.image}}" alt="#">
-    <div class="card-img-overlay d-flex flex-column">
-      <div class="card-body">
-        
-        <h4 class="card-title mt-0 homepage-category-text">
-          <a class="text-white" href="{{url_for('main_bp.guides_by_category',category_name=category.name)}}">{{category.name}}</a>
-        </h4>
+      <img class="card-img d-none" src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{category.image}}" alt="#">
+      <div class="card-img-overlay d-flex flex-column">
+        <div class="card-body homepage-category-text-container">
+          
+          <h4 class="card-title mt-0 homepage-category-text">
+            <a class="text-white" href="{{url_for('main_bp.guides_by_category',category_name=category.name)}}">{{category.name}}</a>
+          </h4>
+        </div>
       </div>
+      
     </div>
-  </div>
-{% endfor %}
+  {% endfor %}
 </div>
+
+<div id="homepage-store-jumbo" class="rounded animate__animated" >
+  <h1 id="homepage-store-title">
+    <a href="{{url_for('main_bp.items')}}">STORE!</a>
+  </h1>
+
+</div>
+
+
 {% endblock %}

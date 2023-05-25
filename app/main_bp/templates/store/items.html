@@ -1,0 +1,45 @@
+{% extends 'partials/main/base.html' %}
+
+{% block content %}
+{% include "partials/main/navbar.html" %}
+<!--add new tool button-->
+{% if current_user.is_authenticated %}
+
+{% endif %}
+
+
+<div id='search-and-filter' class="row">
+  
+  <input class=" col-6 form-control form-control-underlined form-control-underlined border-primary" id='guide-search-input' type="text" placeholder="Search..">
+  <div class="dropdown col-6 " id='filter-dropdown'>
+    <i id='clear-search' class="fa-solid fa-broom fa-lg"></i>
+  </div>
+  
+</div>
+<a id='new-tool-button'  class="button-paper " href="{{url_for('main_bp.newitem')}}">
+    Sell a new Item!
+</a>  
+<!--tools-->
+<div class="container" id='container-of-tools'>
+  <div class="row">
+      {% for item in items%}
+    <div class="col-lg-3 col-md-6 col-sm-12 mb-4 mb-lg-0 tool-card">
+        <!-- Card-->
+      <div class="card rounded shadow-sm border-0">
+
+        <div class="card-body p-4"><img src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{item.image}}" alt="" class="img-fluid d-block mx-auto mb-3">
+          <small><a class='button-paper' href="{{url_for('accounts_bp.view_profile',user_id=item.seller)}}">{{users.query.filter_by(id=item.seller).first().username}}</a></small>
+          <h5> <a href="{{url_for('main_bp.item',item_id=item.id)}}" class="text-dark">{{item.name}}</a></h5>
+          <p class="small text-muted font-italic"><strong>Price: </strong>{{item.price}}</p>
+          <p class="small text-muted font-italic"><a class='button-paper' href="{{url_for('main_bp.guide',guide_id=item.guide)}}">Guide</a></p>
+
+        </div>
+      </div>
+    </div>
+      {% endfor %}
+  </div>
+</div>
+
+<script type="text/javascript" src="{{url_for('main_bp.static',filename='main/scripts/guides.js')}}"></script> 
+ 
+{% endblock %}

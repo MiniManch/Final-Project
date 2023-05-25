@@ -306,3 +306,24 @@ p {
   --animate-duration: 0.7s;
 }
 
+.guide-name-new-item{
+    padding:1vw;
+}
+
+.guide-new-item-container{
+    height:fit-content;
+    width:fit-content;
+}
+
+.guide_added{
+    border:1px solid blue;
+}
+
+.disabled-guide{
+    opacity: 0.5;
+
+}
+
+.disabled-guide>div>.add_button{
+    pointer-events: none;
+}
