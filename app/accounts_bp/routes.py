@@ -100,7 +100,7 @@ def edit_profile(user_id):
 		user_by_email = models.User.query.filter_by(email=form.email.data).first()
 		user_by_username = models.User.query.filter_by(username=form.username.data).first()
 		image = flask.request.files['image']
-		if image.filename is not 'Your  Picture.jpg':
+		if image.filename != 'Your  Picture.jpg':
 			image = upload_image(image)
 			current_user.image = image
 		checker = 0
