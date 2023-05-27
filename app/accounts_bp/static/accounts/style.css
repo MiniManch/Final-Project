@@ -228,6 +228,21 @@ nav{
     z-index: 5;
 }
 
+/*Footer*/
+
+footer{
+    margin-top: 20vh;
+    font-family: 'Wix Madefor Display', sans-serif !important;
+    height:fit-content;
+    color:white;
+
+}
+
+.footer-group{
+    margin-left:5vw;
+    color:white;
+}
+
 
 /*Guide page */
 

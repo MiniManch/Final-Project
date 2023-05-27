@@ -28,7 +28,7 @@ class New_Step(FlaskForm):
 
 class New_Item(FlaskForm):
 	name                = StringField('name', validators=[InputRequired()], render_kw={"placeholder": 'Name'})
-	description         = StringField('description', validators=[InputRequired()])
+	description         = StringField('description')
 	image               = FileField('Image')
 	price               = IntegerField('Price')
 	guides              = StringField('Guide')

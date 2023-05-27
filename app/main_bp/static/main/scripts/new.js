@@ -30,6 +30,18 @@ function getParents(element){
   return els;
 }
 
+function ifToolsSetFooter(){
+  href = window.location.href
+  if (href.includes('new_step')){
+      var toolsText = document.querySelector('#form-container>.active>h3');
+      var footer    = document.querySelector('footer');
+      if (toolsText.innerHTML == 'TOOLS'){
+      footer.classList.add('footer-when-tools');
+    }else{
+      footer.classList.remove('footer-when-tools');
+    }
+  }
+}
 
 function dataValidator(){
   let active    = document.querySelector('.active').children[1];
@@ -42,7 +54,6 @@ function dataValidator(){
       extensionName = filename.split('.');
       extensionName = extensionName[extensionName.length - 1];
       if (!validFileExtensions.includes(extensionName)){
-        console.log(extensionName);
         alertMessage('File type must be jpg,jpeg or png, please upload a different file.')
         return false;
       }
@@ -136,6 +147,9 @@ function changeInterfacePrevious(){
 
   position-=1;
   progress.style.width = (position * 50) / questions.length + '%';
+
+  ifToolsSetFooter()
+
 }
 
 
@@ -146,7 +160,7 @@ function changingInterfaceNext(){
   active.classList.toggle('active');
   active.classList.toggle('disabled');
 
-  // Here should be a checker if its submit button there shouldn't be a next button
+  
 
   // inabling the next disabled question
   question = questions[position];
@@ -157,6 +171,9 @@ function changingInterfaceNext(){
   position+=1;
 
   progress.style.width = (position * 50) / questions.length + 5 + '%';
+
+  ifToolsSetFooter()
+  
 }
 
 

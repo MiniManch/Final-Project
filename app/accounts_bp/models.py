@@ -9,6 +9,7 @@ class User(UserMixin, db.Model):
 	email = db.Column(db.String(100), unique=True)
 	password = db.Column(db.String(100))
 	username = db.Column(db.String(100), unique=True)
+	about = db.Column(db.String(300))
 	guides   = db.relationship('Guide', backref='guide-creator')
 	reputation = db.Column(db.Float)
 	ratings   = db.relationship('Rating', backref='rater')

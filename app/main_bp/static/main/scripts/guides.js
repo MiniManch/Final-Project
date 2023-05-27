@@ -42,13 +42,14 @@ function clearSearch(){
 		 guide.style.display = 'block';
 	}
 }
+if(guide_containers.length != 0){
+  clear_search.addEventListener('click',clearSearch);
+}
 
-clear_search.addEventListener('click',clearSearch);
 
 // Search for tools
 $(document).ready(function(){
   $("#guide-search-input").on("keyup", function() {
-    console.log('hey')
     var value = $(this).val().toLowerCase();
     $("#container-of-tools *").filter(function() {
       if (this.classList.contains('tool-card')){
@@ -57,3 +58,42 @@ $(document).ready(function(){
     });
   });
 });
+
+const tool_container = document.querySelectorAll('.tool-card');
+
+function clearSearchTools(){
+  search.value = '';
+  for (tool of tool_container){
+     tool.style.display = 'block';
+  }
+}
+
+if (tool_container.length != 0){
+  clear_search.addEventListener('click',clearSearchTools);
+}
+
+// Search for Items
+$(document).ready(function(){
+  $("#guide-search-input").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#items-container *").filter(function() {
+      if (this.classList.contains('item-card')){
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      }
+    });
+  });
+});
+
+
+const item_container = document.querySelectorAll('.item-card');
+
+function clearSearchItems(){
+  search.value = '';
+  for (item of item_container){
+     item.style.display = 'block';
+  }
+}
+
+if (item_container.length != 0){
+  clear_search.addEventListener('click',clearSearchItems);
+}

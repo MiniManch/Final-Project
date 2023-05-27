@@ -176,6 +176,8 @@ p {
     max-height:400px;
     max-width:400px;
     margin-left:5vw;
+    margin-top: 10vh;
+    display: inline-block;
 }
 
 .step-image-container>img{
@@ -183,8 +185,8 @@ p {
     max-height:100%;
     max-width:100%;
     border-width: 5px 3px 3px 5px;
-  border-radius:95% 4% 97% 5%/4% 94% 3% 95%;
-  border: solid black;
+    border-radius:95% 4% 97% 5%/4% 94% 3% 95%;
+    border: solid black;
 }
 
 .step-image-container>img:hover{
@@ -194,7 +196,9 @@ p {
  
 .step-info-container{
     text-align: center;
-    padding-right:5vw;
+    padding-right: 15vw;
+    float: right;
+    padding-top: 15vh;
 }
 
 .tool-image{
@@ -276,7 +280,10 @@ p {
 }
 
 
-
+#image-div{
+        width:50%;
+        float:left;
+    }
 #author>a>img{
     max-width:100px;
     max-height: 100px;
@@ -338,8 +345,9 @@ p {
         width:100%; 
     }
 
-    .image-div{
+    #image-div{
         width:100%;
+        float:left;
     }
 
     .step-image-container{

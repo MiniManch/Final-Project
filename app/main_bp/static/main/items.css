@@ -1,0 +1,209 @@
+
+
+.product-grid{
+        font-family: 'Wix Madefor Display', sans-serif !important;
+
+    text-align: center;
+}
+.product-grid .product-image{
+    overflow: hidden;
+    position: relative;
+}
+.product-grid .product-image a.image{ display: block; }
+.product-grid .product-image img{
+    width: 100%;
+    height: auto;
+    transition: all 0.5s ease 0s;
+}
+.product-grid:hover .product-image img{ transform: scale(1.1); }
+.product-grid .product-links{
+    background: #fff;
+    width: 150px;
+    padding: 10px 20px;
+    margin: 0;
+    list-style: none;
+    border-radius: 30px;
+    box-shadow: 1px 0 30px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateX(-50%) translateY(-150%);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transition: all .35s ease;
+}
+.product-grid:hover .product-links{
+    opacity: 1;
+    transform: translateX(-50%) translateY(-50%);
+}
+.product-grid .product-links li{
+    width: 48%;
+    margin: 10px 0;
+    display: inline-block;
+}
+.product-grid .product-links li a{
+    color: #788090;
+    font-size: 18px;
+    transition: all .3s;
+}
+.product-grid .product-links li a:hover{
+    color: #341f97;
+    text-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+}
+.product-grid .product-content{ padding: 15px; }
+.product-grid .price{
+    color: #333;
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0 0 10px;
+}
+.product-grid .price span{
+    color: #999;
+    font-weight: 400;
+    margin: 0 0 0 5px;
+    text-decoration: line-through;
+}
+
+.price{
+    font-size: 2rem !important;
+}
+.product-grid .title{
+    font-size: 15px;
+    font-weight: 500;
+    text-transform: capitalize;
+    margin: 0 0 12px;
+}
+.product-grid .title a{
+    color: #333;
+    transition: all 0.3s ease 0s;
+}
+.product-grid .title a:hover{
+    color: #341f97;
+    text-decoration: underline;
+}
+.product-grid .rating{
+    color: #fbb230;
+    font-size: 13px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.product-grid .rating li.far{ color: #999; }
+@media screen and (max-width: 990px){
+    .product-grid{ margin-bottom: 30px; }
+}
+
+.sidebar-drop-toggler:first-child{
+    color:black;
+}
+
+#guide-search-input{
+    width:20vw;
+    display: inline-block;
+    margin-bottom: 5vh;
+  /*  position: relative;
+    left:35vw;*/
+}
+
+
+.button-paper:hover {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+  transform: translate3d(0, 2px, 0);
+}
+
+.button-paper:focus {
+  box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+}
+
+.button-paper {
+  align-self: center;
+  background-color: transparent;
+  background-image: none;
+  background-position: 0 90%;
+  background-repeat: repeat no-repeat;
+  background-size: 4px 3px;
+  border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+  box-sizing: border-box;
+  color: #41403e;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Neucha, sans-serif;
+  font-size: 1rem;
+  line-height: 23px;
+  outline: none;
+  padding: .75rem;
+  text-decoration: none;
+  transition: all 235ms ease-in-out;
+  border-bottom-left-radius: 15px 255px;
+  border-bottom-right-radius: 225px 15px;
+  border-top-left-radius: 255px 15px;
+  border-top-right-radius: 15px 225px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+
+#search-and-filter{
+    margin-left: 35vw;
+    margin-top: 10vh;
+}
+
+.form-control-underlined {
+  border-width: 0;
+  border-bottom-width: 1px;
+  border-radius: 0;
+  padding-left: 0;
+  background-color: transparent !important;
+}
+
+
+#new-tool-button{
+    position: relative;
+    width:fit-content;
+    left: 42vw;
+}
+
+#new-tool-link{
+    width:fit-content;
+}
+
+#clear-search{
+  cursor: pointer;
+}
+
+#items-container{
+    width:80%;
+    margin-left: 10vw;
+}
+
+.single-item{
+    width:40vw;
+    padding: 2vw;
+    position: relative;
+    left:30vw;
+    top:10vh;
+    background-image:url(https://res.cloudinary.com/drzcke4vu/image/upload/v1684667197/nature-blurred-background.jpg) ;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.single-item>div>div>a>img{
+    max-width: 15vw;    
+}
+
+.single-item>.product-grid>.product-content>*{
+    color: white;
+}
+
+.single-item>.product-grid>.product-content>*>a{
+    color: white;
+}
+
+@media screen and (max-width:600px){
+    #new-tool-button{
+        left:35vw;
+    }
+}

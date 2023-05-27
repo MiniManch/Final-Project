@@ -140,5 +140,8 @@ function addAnimationToStore(){
 function removeAnimationToStore(){
   this.classList.remove('animate__heartBeat');
 }
-store_jumbo.addEventListener('mouseover',addAnimationToStore);
-store_jumbo.addEventListener('mouseout',removeAnimationToStore);
+
+if (store_jumbo != null){
+  store_jumbo.addEventListener('mouseover',addAnimationToStore);
+  store_jumbo.addEventListener('mouseout',removeAnimationToStore);
+}

@@ -34,6 +34,7 @@ def signup():
 			new_user = models.User(email=form.email.data,
 			                       password=generate_password_hash(form.password.data, method='sha256'),
 			                       username=form.username.data,
+			                       about=form.about.data,
 			                       image='default_user_image.png'
 			                       )
 			db.session.add(new_user)
@@ -103,6 +104,7 @@ def edit_profile(user_id):
 		if image.filename != 'Your  Picture.jpg':
 			image = upload_image(image)
 			current_user.image = image
+		current_user.about = form.about.data
 		checker = 0
 		if user_by_email is None or user_by_email.email == current_user.email:
 			current_user.email = form.email.data
@@ -154,3 +156,7 @@ def reset_password_request():
         flask.flash('An email has been sent')
         return flask.redirect(flask.url_for('accounts_bp.login'))
     return flask.render_template('reset_password_request.html', style='accounts/new.css', title='Reset Password', form=form)
+
+
+
+

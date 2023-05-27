@@ -14,6 +14,16 @@ def index():
 	return flask.render_template('index.html', guides=guides, categories=models.Category, users=User)
 
 
+@main_bp.route('/credits')
+def contributions():
+	return flask.render_template('credits.html')
+
+
+@main_bp.route('/about')
+def about():
+	return flask.render_template('about.html')
+
+
 import app.main_bp.routes_dir.guide_routes
 import app.main_bp.routes_dir.tool_routes
 import app.main_bp.routes_dir.step_routes

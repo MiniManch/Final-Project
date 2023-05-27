@@ -1,7 +1,6 @@
 {% extends 'partials/main/base.html' %}
 
 {% block content %}
-{% include "partials/main/navbar.html" %}
 
 <div class="homepage">
     <div id="overlay"></div>
@@ -76,18 +75,19 @@
             <a class="text-white" href="{{url_for('main_bp.guides_by_category',category_name=category.name)}}">{{category.name}}</a>
           </h4>
         </div>
-      </div>
-      
+      </div>   
     </div>
   {% endfor %}
+  
+
+  </div>
+  
 </div>
 
 <div id="homepage-store-jumbo" class="rounded animate__animated" >
-  <h1 id="homepage-store-title">
-    <a href="{{url_for('main_bp.items')}}">STORE!</a>
-  </h1>
-
+    <h1 id="homepage-store-title">
+      <a href="{{url_for('main_bp.items')}}">STORE!</a>
+    </h1>
 </div>
-
 
 {% endblock %}

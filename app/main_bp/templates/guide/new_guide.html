@@ -2,7 +2,6 @@
 
 {% block content %}
 {% include "partials/main/navbar.html" %}
-<!--    {{form.subject(class='form-control')}}-->
 
 <main id ='container-of-all' class="col-md-8 shadow bg-white rounded animate__animated">
       <div id="progress-bar"></div>
@@ -13,8 +12,7 @@
     <form id="regForm" class='form' method="POST" action="#" enctype="multipart/form-data">
     {{ form.hidden_tag()}}
       <div id="form-container" class=' d-flex justify-content-between '>
-          <!-- <img id='prev-btn' class='disabled' src="https://img.icons8.com/glyph-neue/64/back.png" alt="next"/> -->
-          <i id='prev-btn' class=" disabled fa-solid fa-left-long fa-2xl" ></i>
+          <i id='prev-btn' class="  form-button disabled fa-solid fa-left-long fa-2xl" ></i>
 
 
           <div class="form-input active">
@@ -42,7 +40,7 @@
           <div class="form-input disabled">
           {{form.submit(class="button-paper  ",id='submit')}}
           </div>
-          <i id='next-btn' class="fa-solid fa-right-long fa-2xl" ></i>
+          <i id='next-btn' class=" form-button fa-solid fa-right-long fa-2xl" ></i>
       </div>
     </form>
 </main>

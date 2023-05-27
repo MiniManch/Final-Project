@@ -225,6 +225,21 @@ nav{
 }
 
 
+/*FOOTER*/
+
+footer{
+    position: relative;
+    bottom: -20vh;
+    margin-top: 20vh;
+    font-family: 'Wix Madefor Display', sans-serif !important;
+    height:fit-content;
+    color:white;
+}
+
+.footer-group{
+    margin-left:5vw;
+    color:white;
+}
 /*Guide page */
 
 
@@ -307,7 +322,7 @@ nav{
 }
 
 .title{
-    padding-top: 6vh;
+    /* padding-top: 6vh; */
 }
 
 .ratings-container{
@@ -452,11 +467,12 @@ h1{
     background-size: cover;
     background-repeat: no-repeat;
     background-image: url('https://res.cloudinary.com/drzcke4vu/image/upload/v1685031926/Untitled_design_1_qnpsf8.jpg');
-    width:80%;
+    width: 60%;
     height:60vh;
-    position: relative;
-     top:7vh; 
-    left:10%;
+/*    position: relative;*/
+/*    top: 50vh;*/
+    margin-top: 80vh;
+    margin-left: 22.5vw;
     margin-bottom: 10vh;
 }
 
@@ -473,6 +489,37 @@ h1{
     text-decoration: none;
 }
 
+/*credits page*/
+.credits-container{
+    font-family: 'Wix Madefor Display', sans-serif;
+    background-color: purple;
+    height:50vh;
+    width:50vw;
+    margin-left:25vw;
+    margin-top: 10vh;
+}
+
+.credits-container>table{
+    position: relative;
+    bottom: -20vh
+}
+.credits-container>div{
+    margin-left: 6vw;
+    margin-right: 3vw;
+    padding-bottom: 2vh;
+    position: relative;
+    top:15vh;
+}
+
+#about{
+    position: initial;
+    padding-top: 5vh;
+    font-size: 2rem;
+}
+
+#about>small{
+    font-size: 0.8rem;
+}
 @media screen and (max-width:600px){
     
     .full-screen{
@@ -523,9 +570,18 @@ h1{
     .homepage-guide-categories{
         top: 0;
     }
+    #homepage-guides>h1{
+        font-size: 3.5rem;
+    }
     #categories-title{
-        margin-left: 15vw;
+        margin-left: 0vw;
+/*        margin-right: 10vw;*/
         margin-bottom: 0;
+        position: relative;
+        right:5vw;
+        font-size: 3.5rem;
+
+
     }
     .card.homepage-guide-category{
         width:20vw;
@@ -537,8 +593,17 @@ h1{
         width:15vw;
         margin-left: 0;
         padding-left: 0;
+        font-size: 0.8rem;
     }
     .homepage-category-text-container{
         padding-left: 0;
+    }
+    #homepage-store-jumbo{
+        margin: 0;
+        margin-top:10vh;
+        margin-left: 10vw;
+        height:35vh;
+        width: 80% !important;
+/*        width:35vw !important; */
     }
 }

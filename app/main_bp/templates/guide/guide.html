@@ -1,7 +1,6 @@
 {% extends 'partials/main/base.html' %}
 
 {% block content %}
-{% include "partials/main/navbar.html" %}
 
  <div id='guide-container' class="row" >
 
@@ -28,15 +27,15 @@
    {% for step in guide.steps %}
    <div class='col-12 step-container'>
 
-      <div class="flex-sm-column flex-md-row" >
+      <div class="" >
 
-        <div class="col-5  order-sm-2 image-div">
+        <div id="image-div">
           <div class="step-image-container">
             <img class='step-or-guide-image' src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{step.image}}" alt="">  
           </div>
         </div>
 
-        <div class="col-7  step-info-container">
+        <div class="step-info-container">
           {% if current_user.id == guide.author %}
 
           <h2><a href="{{url_for('main_bp.editstep',step_id=step.id)}}">{{step.subject}}</a></h2>

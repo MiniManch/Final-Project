@@ -26,7 +26,7 @@ def newitem():
 			item = models.Item(
 				name=form.name.data,
 				seller=current_user.id,
-				# description=form.description.data,
+				description=form.description.data,
 				image=image,
 				guide=form.guides.data,
 				fixed=form.fixed.data,
@@ -52,7 +52,7 @@ def item(item_id):
 		if this_item is None:
 			flask.flash('Cannot access that item')
 			return flask.redirect(flask.url_for('main_bp.index'))
-		return flask.render_template('/store/item.html', item=this_item, guides=guides, style='main/tools.css')
+		return flask.render_template('/store/item.html', item=this_item, guides=guides, style='main/items.css')
 	except Exception as e:
 		print(e)
 		flask.flash('the Item you are trying to reach is unavailable at this moment')
@@ -102,7 +102,7 @@ def edititem(item_id):
 def items():
 	items_list = list(models.Item.query.all())
 	print(items_list)
-	return flask.render_template('/store/items.html', items=items_list, users=User, style='main/tools.css')
+	return flask.render_template('/store/items.html', items=items_list, users=User, style='main/items.css')
 
 
 @main_bp.route("/store/my_items")
