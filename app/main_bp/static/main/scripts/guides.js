@@ -97,3 +97,5 @@ function clearSearchItems(){
 if (item_container.length != 0){
   clear_search.addEventListener('click',clearSearchItems);
 }
+
+

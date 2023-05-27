@@ -93,7 +93,7 @@ margin:auto;
     padding-right:1vw;
 }
 
-input.disabled,select.disabled,div.disabled,ul.disabled,.sidebar-drop-toggler.disabled{
+footer.disabled,input.disabled,select.disabled,div.disabled,ul.disabled,.sidebar-drop-toggler.disabled{
   display: none !important;
   visibility: hidden;
   width:0;
@@ -228,7 +228,7 @@ nav{
 /*FOOTER*/
 
 footer{
-    position: relative;
+    /* position: relative; */
     bottom: -20vh;
     margin-top: 20vh;
     font-family: 'Wix Madefor Display', sans-serif !important;

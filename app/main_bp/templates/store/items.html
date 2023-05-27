@@ -25,6 +25,16 @@
             <div class="product-image">
                 <a href="{{url_for('main_bp.item',item_id=item.id)}}" class="image">
                     <img class="img-1" src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{item.image}}">
+                        {%if item.fixed %}
+                        <div class="badge fixed-badge" >
+                            FIXED
+                        </div>
+                        {% else %}
+                        <div class="badge broken-badge" >
+                            NEEDS A FIX
+                        </div>
+                        {% endif %}
+
                 </a>
                 <ul class="product-links">
                     <li><a href="#"><i class="fa-solid fa-cart-shopping"></i></a></li>

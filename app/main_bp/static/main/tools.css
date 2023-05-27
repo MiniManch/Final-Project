@@ -80,9 +80,10 @@
 #new-tool-button{
     position: relative;
     width:fit-content;
+    right:25vw;
+    top:-2vh;
     /* margin-left:5vw; */
     /* float: right; */
-    left: 42vw;
 }
 
 #new-tool-link{
@@ -91,4 +92,16 @@
 
 #clear-search{
   cursor: pointer;
+}
+
+@media screen and (max-width:600px){
+    #new-tool-button{
+        position: relative;
+        width:fit-content;
+        left: 0;
+        /* margin-left:5vw;*/
+        /* float: right; */
+        /* left: 42vw; */
+    }
+
 }

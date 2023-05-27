@@ -177,6 +177,7 @@
 #items-container{
     width:80%;
     margin-left: 10vw;
+    margin-top: 5vh;
 }
 
 .single-item{
@@ -185,13 +186,13 @@
     position: relative;
     left:30vw;
     top:10vh;
-    background-image:url(https://res.cloudinary.com/drzcke4vu/image/upload/v1684667197/nature-blurred-background.jpg) ;
+    background-image:url(https://res.cloudinary.com/drzcke4vu/image/upload/v1684667197/nature-blurred-background.jpg);
     background-size: cover;
     background-repeat: no-repeat;
 }
 
 .single-item>div>div>a>img{
-    max-width: 15vw;    
+    max-width: 15vw;
 }
 
 .single-item>.product-grid>.product-content>*{
@@ -202,8 +203,33 @@
     color: white;
 }
 
+.badge{
+    background-color: purple;
+    position: relative;
+    top:0;
+}
+
+.fixed-badge{
+    background-color: green;
+}
+
+
+
+.item-card{
+    min-height:60vh;
+}
 @media screen and (max-width:600px){
     #new-tool-button{
         left:35vw;
     }
+    .single-item{
+        width:60vw;
+        left:20vw;
+        top:20vh;
+    }
+    .single-item>div>div>a>img{
+        width:30vw !important;
+        max-width: 30vw;
+    }
 }
+ 

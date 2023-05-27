@@ -1,4 +1,5 @@
 from werkzeug.security import generate_password_hash
+import requests
 # Set your Cloudinary credentials
 # ==============================
 from dotenv import load_dotenv
@@ -122,9 +123,10 @@ def populate_tools(database, model, author):
 		database.session.add(new)
 	database.session.commit()
 
-
 def populateDatabase(database, UserModel, ToolModel, CategoryModel):
 	populate_categories(database=database, model=CategoryModel)
 	populate_tools(database=database, model=ToolModel, author=populate_admin_user(database=database, model=UserModel))
+
+
 
 

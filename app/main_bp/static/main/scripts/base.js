@@ -1,6 +1,5 @@
 
 
-
 const stars = document.querySelectorAll('.no-color');
 
 

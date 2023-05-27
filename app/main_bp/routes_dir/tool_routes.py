@@ -39,7 +39,7 @@ def newtool():
 	return flask.render_template('/tools/new_tool.html', form=form, title="New Tool",style='main/new.css')
 
 
-@main_bp.route("/tools",methods=['GET','POST'])
+@main_bp.route("/tools",methods=['GET', 'POST'])
 def tools():
 	form = Search()
 	tools_list = list(models.Tool.query.filter_by(accepted=True))

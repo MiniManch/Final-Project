@@ -1,21 +1,21 @@
 {% extends 'partials/main/base.html' %}
 {% block content %}
 
-<!-- <div class="col-lg-3 col-md-6 col-sm-12 mb-4 mb-lg-0 tool-card tool-page">
-  <div class="card rounded shadow-sm border-0">
-    <div class="card-body p-4"><img src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{item.image}}" alt="" class="img-fluid d-block mx-auto mb-3">
-      <h5> <a href="#" class="text-dark">{{item.name}}</a></h5>
-      <p class="small text-muted font-italic"><strong>Price: </strong>{{item.price}}$</p>
-      <p class="small text-muted font-italic"><a class='button-paper' href="{{url_for('main_bp.guide',guide_id=item.guide)}}">Guide</a></p>
-    </div>
-  </div>
-</div> -->
 
 <div class="col-md-3 col-sm-6 item-card single-item rounded">
     <div class="product-grid">
         <div class="product-image">
             <a href="{{url_for('main_bp.item',item_id=item.id)}}" class="image">
                 <img class="img-1" src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{item.image}}">
+                {%if item.fixed %}
+                        <div class="badge fixed-badge" >
+                            FIXED
+                        </div>
+                        {% else %}
+                        <div class="badge broken-badge" >
+                            NEEDS A FIX
+                        </div>
+                        {% endif %}
             </a>
         </div>
         <div class="product-content">

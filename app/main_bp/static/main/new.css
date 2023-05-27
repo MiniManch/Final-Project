@@ -1,3 +1,4 @@
+
 .sidebar-drop-toggler:first-child{
     color:black;
 }
@@ -284,7 +285,7 @@ p {
 }
 
 .footer-when-tools{
-    bottom:-110vh;
+    /* bottom:-110vh; */
 }
 
 .tool-name{
@@ -347,7 +348,7 @@ p {
 
     }
     .footer-when-tools{
-        bottom:-400vh;
+        /* bottom:-400vh; */
     }
 
 

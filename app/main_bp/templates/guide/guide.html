@@ -2,50 +2,49 @@
 
 {% block content %}
 
- <div id='guide-container' class="row" >
 
-    <!-- Guide part -->
-   <div  id='guide'>
 
-     <div class="flex-sm-column flex-md-row" id='guide-info-container'>
+<main id ='container-of-all' class="col-md-8 shadow bg-white rounded animate__animated">
 
-        <div class="col-8 " id='guide-info' >
-          <h1 id='guide-title'>{{guide.subject}}</h1>
-          <h2 id="guide-content">{{guide.content}}</h2>
-        </div>
+  <div id="guide-container" class='d-flex justify-content-between'>
 
-        <div id='guide-image-container'>
-          <img class='step-or-guide-image' id='guide-image' src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{guide.image}}" alt="#">  
-        </div>
+    <i id='prev-btn' class=" disabled fa-solid fa-left-long fa-2xl" ></i>
 
-      </div>
+    <div class="active step">
+      <h1 class="title">{{guide.subject}}</h1>
 
-   </div>
-   <!-- Guide part END -->
+      <div class='step-container'>
 
-   <!-- Steps part -->
-   {% for step in guide.steps %}
-   <div class='col-12 step-container'>
+        <div class="guide-image" >
+          <img src="https://res.cloudinary.com/drzcke4vu/image/upload/v1684844114/{{guide.image}}" alt="">
+          <div id='author'>
 
-      <div class="" >
-
-        <div id="image-div">
-          <div class="step-image-container">
-            <img class='step-or-guide-image' src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{step.image}}" alt="">  
+            <a href="{{url_for('accounts_bp.view_profile',user_id=guide.author)}}"> <img src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{users.query.filter_by(id=guide.author).first().image}}" alt="..." class="avatar img-raised"></a>
+            <h6 id='author-name'>{{users.query.filter_by(id=guide.author).first().username}}</h6>
           </div>
+
         </div>
 
-        <div class="step-info-container">
-          {% if current_user.id == guide.author %}
+        <div class="guide-content">
+            {{guide.content}}
+          
+        </div>
+      </div>
+    </div>
 
-          <h2><a href="{{url_for('main_bp.editstep',step_id=step.id)}}">{{step.subject}}</a></h2>
-          {% else %}
-          <h2>{{step.subject}}</h2>
-          {%endif%}
-          <h4> {{step.content}}</h4>  
+    {% for step in guide.steps %}
+      <div class="disabled step">
+        <h1 class="title">{{step.subject}}</h1>
 
-           <!-- Tools -->
-        {% if step.tools|length > 0 %}
+        <div class='step-container row'>
+
+          <div class="guide-image col-6" >
+            <img src="https://res.cloudinary.com/drzcke4vu/image/upload/v1684844114/{{step.image}}" alt="">
+          </div>
+
+          <div class="guide-content col-6">
+              {{step.content}}
+              {% if step.tools|length > 0 %}
             <div class="dropdown">
 
               <button class="button-paper" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -57,7 +56,7 @@
                   {% for tool in step.tools%}
                     <li class="d-flex justifiy-content-between tools-dropdown">
                       <img src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{tool.image}}" class='tool-image' alt="">
-                      <h6><a href="{{url_for('main_bp.tool',tool_id=tool.id)}}" style='text-decoration:none; color:black;'>{{tool.name}}</a></h6>
+                      <h6><a href="{{url_for('main_bp.tool',tool_id=tool.id)}}" style='text-decoration:none; color:white;'>{{tool.name}}</a></h6>
                     </li>
 
                   {% endfor %}
@@ -65,61 +64,106 @@
               </ul>
 
             </div>
-        <!-- End of tools -->
-        {% endif %}
-         </div>  
+              <!-- End of tools -->
+              {% endif %}
+
+          </div>
+
+        </div>
       </div>
-   </div>
-   {% endfor %}
+    {% endfor %}
 
+    <i id='next-btn' class="fa-solid fa-right-long fa-2xl" ></i>
 
-   <!-- Steps part END -->
-
-
-   <!-- Footer -->
-  <div class="flex-sm-column flex-md-row" id="guide-footer">
-
-    <div class="col-6 author-column " id='author'>
-
-      <a href="{{url_for('accounts_bp.view_profile',user_id=guide.author)}}"> <img src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{users.query.filter_by(id=guide.author).first().image}}" alt="..." class="avatar img-raised"></a>
-      <h6 id='author-name'>{{users.query.filter_by(id=guide.author).first().username}}</h6>
-    </div>
-
-    <div id='reputation' class="col-6 author-column ">
-
-      <div class="d-flex justify-content-lg-between align-items-center">
-            <div class="ratings">
-                {% if guide.rating == 0 %}
-
-                <a href="{{url_for('main_bp.rate',guide_id=guide.id,num_of_stars=1)}}"><i class="fa-regular fa-star no-color"></i></a>
-                <a href="{{url_for('main_bp.rate',guide_id=guide.id,num_of_stars=2)}}"><i class="fa-regular fa-star no-color"></i></a>
-                <a href="{{url_for('main_bp.rate',guide_id=guide.id,num_of_stars=3)}}"><i class="fa-regular fa-star no-color"></i></a>
-                <a href="{{url_for('main_bp.rate',guide_id=guide.id,num_of_stars=4)}}"><i class="fa-regular fa-star no-color"></i></a>
-                <a href="{{url_for('main_bp.rate',guide_id=guide.id,num_of_stars=5)}}"><i class="fa-regular fa-star no-color"></i></a>
-
-                {% else %}
-                <!-- Get the full numbers by moduling, if not whole number, add half star with label of how much the difference is -->
-                  {% for x in range(0,guide.rating|int) %}
-                  <a href="{{url_for('main_bp.rate',guide_id=guide.id,num_of_stars=1)}}"><i class="fa-regular fa-star rating-color"></i></a>
-
-                  {% endfor%}
-                  {% for x in range(0,5 - guide.rating|int ) %}
-                  <a href="{{url_for('main_bp.rate',guide_id=guide.id,num_of_stars=1)}}"><i class="fa-regular fa-star no-color"></i></a>
-
-                  {% endfor %}
-                {% endif %}
-            </div>
-            <h5 class="review-count">{{guide.num_of_ratings}} Reviews</h5>
-      </div>
-    </div>
   </div>
-   <!-- Footer End -->
-   {% if current_user.id == guide.author %}
+
+</main>
+
+
+ {% if current_user.id == guide.author %}
   
       <a href="{{url_for('main_bp.newstep',guide_id=guide.id)}}">
-        <h1 class='button-paper' style='margin-left:45%;'>Add a new Step!</h1>
+        <h1 class='button-paper' style='margin-left:45%; color:black'>Add a new Step!</h1>
       </a>
     {% endif %}
- </div>
+
+<script src="{{url_for('main_bp.static',filename='main/scripts/guide.js')}}"></script>
+
 
 {% endblock %}
+
+
+<main id ='container-of-all' class="col-md-8 shadow bg-white rounded animate__animated">
+
+  <div id="guide-container" class='d-flex justify-content-between'>
+
+    <i id='prev-btn' class=" disabled fa-solid fa-left-long fa-2xl" ></i>
+
+    <div class="active step">
+      <h1 class="title">{{guide.subject}}</h1>
+
+      <div class='step-container'>
+
+        <div class="guide-image" >
+          <img src="https://res.cloudinary.com/drzcke4vu/image/upload/v1684844114/{{guide.image}}" alt="">
+          <div id='author'>
+
+            <a href="{{url_for('accounts_bp.view_profile',user_id=guide.author)}}"> <img src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{users.query.filter_by(id=guide.author).first().image}}" alt="..." class="avatar img-raised"></a>
+            <h6 id='author-name'>{{users.query.filter_by(id=guide.author).first().username}}</h6>
+          </div>
+
+        </div>
+
+        <div class="guide-content">
+            {{guide.content}}
+          
+        </div>
+      </div>
+    </div>
+
+    {% for step in guide.steps %}
+      <div class="disabled step">
+        <h1 class="title">{{step.subject}}</h1>
+
+        <div class='step-container row'>
+
+          <div class="guide-image" >
+            <img src="https://res.cloudinary.com/drzcke4vu/image/upload/v1684844114/{{step.image}}" alt="">
+          </div>
+
+          <div class="guide-content">
+              {{step.content}}
+              {% if step.tools|length > 0 %}
+            <div class="dropdown">
+
+              <button class="button-paper" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Tools List!
+              </button>
+
+              <ul class="dropdown-menu tools-dropdown">
+                <!-- Dropdown menu links -->
+                  {% for tool in step.tools%}
+                    <li class="d-flex justifiy-content-between tools-dropdown">
+                      <img src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{tool.image}}" class='tool-image' alt="">
+                      <h6><a href="{{url_for('main_bp.tool',tool_id=tool.id)}}" style='text-decoration:none; color:white;'>{{tool.name}}</a></h6>
+                    </li>
+
+                  {% endfor %}
+
+              </ul>
+
+            </div>
+              <!-- End of tools -->
+              {% endif %}
+
+          </div>
+
+        </div>
+      </div>
+    {% endfor %}
+
+    <i id='next-btn' class="fa-solid fa-right-long fa-2xl" ></i>
+
+  </div>
+
+</main>
