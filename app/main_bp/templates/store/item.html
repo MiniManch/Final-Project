@@ -9,11 +9,11 @@
                 <img class="img-1" src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{item.image}}">
                 {%if item.fixed %}
                         <div class="badge fixed-badge" >
-                            FIXED
+                            <a href="{{url_for('main_bp.guide',guide_id=item.guide)}}">FIXED</a>
                         </div>
                         {% else %}
                         <div class="badge broken-badge" >
-                            NEEDS A FIX
+                            <a href="{{url_for('main_bp.guide',guide_id=item.guide)}}">NEEDS A FIX</a>
                         </div>
                         {% endif %}
             </a>

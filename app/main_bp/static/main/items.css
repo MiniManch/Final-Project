@@ -213,6 +213,10 @@
     background-color: green;
 }
 
+.badge>a{
+    text-decoration: none;
+    color:white;
+}
 
 
 .item-card{
