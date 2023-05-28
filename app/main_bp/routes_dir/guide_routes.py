@@ -3,7 +3,7 @@ from app.main_bp import main_bp
 from flask_login import current_user, login_required
 from app import db
 import app.main_bp.models as models
-from app.main_bp.forms import New_Guide,Search
+from app.main_bp.forms import New_Guide
 from app.accounts_bp.models import User
 from app.utils import  upload_image, get_image , create_category_list
 

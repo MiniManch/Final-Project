@@ -117,13 +117,11 @@ input.disabled,select.disabled,div.disabled,ul.disabled,.sidebar-drop-toggler.di
 
 /* Style for homepage video */
 
-/* Style the video: 100% width and height to cover the entire window */
 #myVideo {
   position: absolute;
   top:-30vh;
   width: 100vw;
   height:fit-content;
-  /* z-index: 1; */
 }
 
 .homepage{

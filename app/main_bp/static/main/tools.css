@@ -63,8 +63,6 @@
     width:20vw;
     display: inline-block;
     margin-bottom: 5vh;
-  /*  position: relative;
-    left:35vw;*/
 }
 
 
@@ -82,8 +80,6 @@
     width:fit-content;
     right:25vw;
     top:-2vh;
-    /* margin-left:5vw; */
-    /* float: right; */
 }
 
 #new-tool-link{
@@ -99,9 +95,5 @@
         position: relative;
         width:fit-content;
         left: 0;
-        /* margin-left:5vw;*/
-        /* float: right; */
-        /* left: 42vw; */
     }
-
 }

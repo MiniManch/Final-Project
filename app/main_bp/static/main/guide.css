@@ -92,8 +92,6 @@ main.rounded{
 
 .guide-content{
     float:right;
-    /* margin-top:5vh; */
-    /* margin-right: 5vw; */
     color:white;
     font-family: 'Wix Madefor Display', sans-serif !important;
 }
@@ -113,10 +111,7 @@ main.rounded{
   font-size: 1.5rem;
 
 }
-.guide-image{
-        /* margin-top: 10vh; */
-        /* margin-left: 15vw; */
-}
+
 #author{
     float:right;
 }
@@ -149,13 +144,6 @@ main.rounded{
         align-content: center;
         padding-left: 5vh;
         padding-top:5vh;
-    }
-    .guide-image{
-        /* display: flex !important; */
-        /* flex-direction: row; */
-        /* justify-content: center; */
-        /* width:100%; */
-        /* margin-left: 0; */
     }
     .step-container{
         margin-top: 12vh;

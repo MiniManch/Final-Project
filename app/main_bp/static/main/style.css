@@ -320,9 +320,6 @@ footer{
     margin-bottom:2px;
 }
 
-.title{
-    /* padding-top: 6vh; */
-}
 
 .ratings-container{
     margin:0;
@@ -468,8 +465,6 @@ h1{
     background-image: url('https://res.cloudinary.com/drzcke4vu/image/upload/v1685031926/Untitled_design_1_qnpsf8.jpg');
     width: 60%;
     height:60vh;
-/*    position: relative;*/
-/*    top: 50vh;*/
     margin-top: 80vh;
     margin-left: 22.5vw;
     margin-bottom: 10vh;
@@ -574,7 +569,6 @@ h1{
     }
     #categories-title{
         margin-left: 0vw;
-/*        margin-right: 10vw;*/
         margin-bottom: 0;
         position: relative;
         right:5vw;
@@ -603,6 +597,5 @@ h1{
         margin-left: 10vw;
         height:35vh;
         width: 80% !important;
-/*        width:35vw !important; */
     }
 }

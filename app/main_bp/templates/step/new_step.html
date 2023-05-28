@@ -80,8 +80,6 @@
 
 function loadURLToInputFiled(url){
   getImgURL(url, (imgBlob)=>{
-    // Load img blob to input
-    // WIP: UTF8 character error
     let fileName = 'Your  Picture.jpg'
     let file = new File([imgBlob], fileName,{type:"image/jpeg", lastModified:new Date().getTime()}, 'utf-8');
     let container = new DataTransfer();

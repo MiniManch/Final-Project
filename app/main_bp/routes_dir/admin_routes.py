@@ -5,7 +5,7 @@ from app import db
 import app.main_bp.models as models
 from app.accounts_bp.models import User
 
-# Admin routes
+
 @main_bp.route("/guides_to_accept")
 @login_required
 def guides_to_accept():

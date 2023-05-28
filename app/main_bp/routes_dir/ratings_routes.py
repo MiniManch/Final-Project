@@ -5,7 +5,6 @@ from app import db
 import app.main_bp.models as models
 from app.main_bp.forms import Rating
 from app.accounts_bp.models import User
-from app.utils import  upload_image, get_image , create_category_list
 
 
 @main_bp.route("/rate/<int:guide_id>/<int:num_of_stars>",methods=['GET','POST'])

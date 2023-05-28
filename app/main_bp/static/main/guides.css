@@ -95,8 +95,6 @@ h1{
 }
 
 
-
-
 #new-guide-button{
     margin-top:5vh;
     margin-left: 6vw;
@@ -194,8 +192,6 @@ h1{
 #guide-search-input{
     width:20vw;
     display: inline-block;
-  /*  position: relative;
-    left:35vw;*/
 }
 
 #filter-dropdown{

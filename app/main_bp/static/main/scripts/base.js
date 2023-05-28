@@ -45,7 +45,6 @@ function selectRating(){
     }
   }
 
-  // remove the event listeners of mouse out, but if you hover over 2 stars and its 3 stars clicked on i
 }
 
 for (star of stars){
@@ -71,7 +70,6 @@ function toggleSideBar(){
   var sidebar = document.querySelector('#sidebar');
   var toggler = document.querySelector('.fa-toolbox');
 
-  // if sidebar.classlist.contains(animate__slideOutLeft) then remove that classlist and add the other one.
   if (sidebar.classList.contains('disabled')){
     sidebar.classList.add('animate__slideInLeft');
     sidebar.classList.toggle('disabled');

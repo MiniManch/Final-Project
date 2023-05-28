@@ -3,7 +3,7 @@ from app.main_bp import main_bp
 from flask_login import current_user, login_required
 from app import db
 import app.main_bp.models as models
-from app.main_bp.forms import  New_Step, Search
+from app.main_bp.forms import  New_Step
 from app.accounts_bp.models import User
 from app.utils import get_image, upload_image
 import requests
@@ -23,7 +23,6 @@ def newstep(guide_id):
 		return flask.redirect(flask.url_for('main_bp.index'))
 
 	form = New_Step()
-	search = Search()
 
 	if flask.request.method == 'POST':
 		try:

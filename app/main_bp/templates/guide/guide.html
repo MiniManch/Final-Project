@@ -32,7 +32,7 @@
                         <a href="{{url_for('main_bp.rate',guide_id=guide.id,num_of_stars=5)}}"><i class="fa-regular fa-star no-color"></i></a>
 
                         {% else %}
-                        <!-- Get the full numbers by moduling, if not whole number, add half star with label of how much the difference is -->
+                        
                           {% for x in range(0,guide.rating|int) %}
                           <a href="{{url_for('main_bp.rate',guide_id=guide.id,num_of_stars=1)}}"><i class="fa-regular fa-star rating-color"></i></a>
 

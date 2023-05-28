@@ -6,14 +6,11 @@ import app.main_bp.models as models
 from app.main_bp.forms import New_Item
 from app.accounts_bp.models import User
 from app.utils import get_image, upload_image
-import requests
 
 
 @main_bp.route('/store/new_item', methods=['GET', 'POST'])
 @login_required
 def newitem():
-	is_admin = current_user.username == 'admin'
-
 	form = New_Item()
 	if flask.request.method == 'POST':
 		try:

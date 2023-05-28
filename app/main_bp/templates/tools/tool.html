@@ -3,19 +3,6 @@
 {% block content %}
 
 
-<!-- <div class="col-lg-3 col-md-6 col-sm-12 mb-4 mb-lg-0 tool-card tool-page">
-  <div class="card rounded shadow-sm border-0">
-    <div class="card-body p-4"><img src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{tool.image}}" alt="" class="img-fluid d-block mx-auto mb-3">
-      <h5> <a href="#" class="text-dark">{{tool.name}}</a></h5>
-      <p class="small text-muted font-italic">{{tool.usage}}</p>
-      {% if current_user.username=='admin' and tool.accepted is false %}
-              <a href="{{url_for('main_bp.accept',what='tool',its_id=tool.id)}} " class='button-paper'>to Accept!</a>
-      {% endif %}
-    </div>
-  </div>
-</div>
- -->
-
 <div class="container" id='container-of-tools'>
   <div class="row">
     <div class="col-lg-3 col-md-6 col-sm-12 mb-4 mb-lg-0 tool-card">

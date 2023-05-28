@@ -93,7 +93,6 @@ for (toggler of sidebar_togglers){
 var icons = document.querySelectorAll('.nav-link.link-dark');
 
 function toggleBounce(){ 
-  console.log(this.children[1].tagName)
   if (this.children[1].tagName == 'I'){
     this.children[1] .classList.toggle('fa-bounce');
   }

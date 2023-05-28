@@ -11,7 +11,6 @@
     <form id="regForm" class='form' method="POST" action="#" enctype="multipart/form-data">
     {{ form.hidden_tag()}}
       <div id="form-container" class=' d-flex justify-content-between '>
-          <!-- <img id='prev-btn' class='disabled' src="https://img.icons8.com/glyph-neue/64/back.png" alt="next"/> -->
           <i id='prev-btn' class=" disabled fa-solid fa-left-long fa-2xl" ></i>
 
 
@@ -86,8 +85,6 @@
 
 function loadURLToInputFiled(url){
   getImgURL(url, (imgBlob)=>{
-    // Load img blob to input
-    // WIP: UTF8 character error
     let fileName = 'Your  Picture.jpg'
     let file = new File([imgBlob], fileName,{type:"image/jpeg", lastModified:new Date().getTime()}, 'utf-8');
     let container = new DataTransfer();
