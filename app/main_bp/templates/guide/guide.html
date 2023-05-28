@@ -21,6 +21,30 @@
 
             <a href="{{url_for('accounts_bp.view_profile',user_id=guide.author)}}"> <img src="https://res.cloudinary.com/drzcke4vu/image/upload/v1683294873/{{users.query.filter_by(id=guide.author).first().image}}" alt="..." class="avatar img-raised"></a>
             <h6 id='author-name'>{{users.query.filter_by(id=guide.author).first().username}}</h6>
+            <div class="d-flex justify-content-lg-between align-items-center ms-4">
+                    <div class="ratings">
+                        {% if guide.rating == 0 %}
+
+                        <a href="{{url_for('main_bp.rate',guide_id=guide.id,num_of_stars=1)}}"><i class="fa-regular fa-star no-color"></i></a>
+                        <a href="{{url_for('main_bp.rate',guide_id=guide.id,num_of_stars=2)}}"><i class="fa-regular fa-star no-color"></i></a>
+                        <a href="{{url_for('main_bp.rate',guide_id=guide.id,num_of_stars=3)}}"><i class="fa-regular fa-star no-color"></i></a>
+                        <a href="{{url_for('main_bp.rate',guide_id=guide.id,num_of_stars=4)}}"><i class="fa-regular fa-star no-color"></i></a>
+                        <a href="{{url_for('main_bp.rate',guide_id=guide.id,num_of_stars=5)}}"><i class="fa-regular fa-star no-color"></i></a>
+
+                        {% else %}
+                        <!-- Get the full numbers by moduling, if not whole number, add half star with label of how much the difference is -->
+                          {% for x in range(0,guide.rating|int) %}
+                          <a href="{{url_for('main_bp.rate',guide_id=guide.id,num_of_stars=1)}}"><i class="fa-regular fa-star rating-color"></i></a>
+
+                          {% endfor%}
+                          {% for x in range(0,5 - guide.rating|int ) %}
+                          <a href="{{url_for('main_bp.rate',guide_id=guide.id,num_of_stars=1)}}"><i class="fa-regular fa-star no-color"></i></a>
+
+                          {% endfor %}
+                        {% endif %}
+                    </div>
+                    <h5 class="review-count text-white">{{guide.num_of_ratings}} Reviews</h5>
+              </div>
           </div>
 
         </div>
